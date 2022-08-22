@@ -1,10 +1,198 @@
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+/* Убираем внешние отступы */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
 body {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: darkslategrey;
-  color: white;
-  text-transform: uppercase;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
 }
+
+/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.body {
+  // min-height: 100vh;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  // background-color: darkslategrey;
+  // color: white;
+  // text-transform: uppercase;
+}
+.container{
+  max-width: 1280px;
+  margin:0 auto;
+  padding: 0 15px;
+}
+.header {
+  width: 100%;
+  background: #0295DB;
+  &-inner{
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-logo{
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 82px;
+    text-align: center;
+    color: #FFFFFF;
+    border: 1px solid #696969;
+  }
+  &-user{
+  // background: #000000;
+  }
+}
+
+
+.main{
+  width: 100%;
+  height: auto;
+
+  #main_word-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  &_word-item{
+    width: 300px;
+    height: 485px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 5px;
+  }
+  &_word-item img{
+    width: 125px;
+    height: 125px;
+  }
+  span{
+    font-size: 20px;
+
+
+
+  }
+}
+
+#pagination {
+	display: flex;
+	padding: 0;
+	list-style: none;
+ li {
+	margin-right: 5px;
+	padding: 10px;
+	border: 1px solid black;
+   }
+ li:hover, li.active {
+	cursor: pointer;
+	color: red;
+	border: 1px solid red;
+  }
+ }
+
+ .footer{
+  background: #0295DB;
+
+  &-inner{
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-github{
+    display: flex;
+    flex-direction: column;
+    div {
+      width: 150px;
+      height: 30px;
+      padding: 5px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  &-logo img{
+    width: 150px;
+  }
+}
+
