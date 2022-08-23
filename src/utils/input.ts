@@ -1,5 +1,5 @@
 import { Component } from './component';
-import './input.scss';
+// import './input.scss';
 
 export class UIInput extends Component {
   getInputValue: (event: Event) => void = () => {};

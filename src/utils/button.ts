@@ -1,4 +1,4 @@
-import './button.scss';
+// import './button.scss';
 import { Component } from './component';
 
 export class UIButton extends Component {
