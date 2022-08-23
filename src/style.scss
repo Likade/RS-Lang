@@ -1,157 +1,237 @@
-/* Указываем box sizing */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
+	box-sizing: border-box;
+	user-select: none;
+	margin: 0;
 }
 
-/* Убираем внутренние отступы */
-ul[class],
-ol[class] {
-  padding: 0;
+@font-face {
+	font-family: "GilroyBold";
+	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
-
-/* Убираем внешние отступы */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-ul[class],
-ol[class],
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-  margin: 0;
+@font-face {
+	font-family: "GilroyHeavy";
+	src: url("./assets/fonts/Gilroy-Heavy.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
-
-/* Выставляем основные настройки по-умолчанию для body */
-body {
-  min-height: 100vh;
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+@font-face {
+	font-family: "GilroyMedium";
+	src: url("./assets/fonts/Gilroy-Medium.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
-
-/* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/
-ul[class],
-ol[class] {
-  list-style: none;
+@font-face {
+	font-family: "GilroyRegular";
+	src: url("./assets/fonts/Gilroy-Regular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
-
-/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Упрощаем работу с изображениями */
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* Указываем понятную периодичность в потоке данных у article*/
-article > * + * {
-  margin-top: 1em;
-}
-
-/* Наследуем шрифты для инпутов и кнопок */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+@font-face {
+	font-family: "GilroySemibold";
+	src: url("./assets/fonts/Gilroy-Semibold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
 }
 
 .body {
-  // min-height: 100vh;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  // background-color: darkslategrey;
-  // color: white;
-  // text-transform: uppercase;
-}
-.container{
-  max-width: 1280px;
-  margin:0 auto;
-  padding: 0 15px;
-}
-.header {
-  width: 100%;
-  background: #0295DB;
-  &-inner{
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &-logo{
-    font-family: 'Gilroy';
-    font-style: normal;
-    font-weight: 900;
-    font-size: 64px;
-    line-height: 82px;
-    text-align: center;
-    color: #FFFFFF;
-    border: 1px solid #696969;
-  }
-  &-user{
-  // background: #000000;
-  }
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  overflow-x: hidden;
 }
 
+.wrapper {
+	width: 100vw;
+	height: auto;
+}
+
+.container {
+	width: 1280px;
+	// height: 100%;
+	margin: 0 auto;
+	padding: 0 100px;
+}
+.header {
+	background-color: #0295DB;
+	height: 120px;
+	width: 100vw;
+  display: flex;
+  align-items: center;
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo {
+    width: 225px;
+    height: 83px;
+    margin-right: 10px;
+    transition: .3s;
+    cursor: pointer;
+  }
+  .logo:hover {
+    transform: translateY(5px);
+  }
+}
 
 .main{
   width: 100%;
   height: auto;
+  background: #0B0E1B;
 
-  #main_word-container{
-    display: flex;
-    flex-wrap: wrap;
-  }
   &-inner{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  &_word-item{
-    width: 300px;
-    height: 485px;
-    padding: 5px;
+  .nav {
+    width: 1048px;
+  }
+  .nav-title {
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 82px;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .nav_group {
+    margin: 0px;
+  }
+  .nav_group-list {
+    display: flex;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0px;
+  }
+  .nav_group-list-title {
+    width: 163px;
+    height: 163px;
+    padding: 37.5px;
+    background: #B1A3F9;
+    border-radius: 30px;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 115px;
+    margin: 0 7px;
+  }
+  .group-range {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+  }
+  .group-range-title {
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 82px;
+    color: #FFFFFF;
+    padding: 0 13px;
+  }
+  .group-range-title:last-child {
+    width: 1048px;
+    height: 120px;
+    background: #EE161F;
+    border-radius: 30px;
+    text-align: center;
+    margin: 0 auto;
+  }
+  &-word-block{
+
+  }
+  &-word-block-title{
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 41px;
+    color: #FFFFFF;
+  }
+  &_word-container{
+    width: 928px;
+    display: flex;
+    flex-wrap: wrap;
+    // margin: 0 auto;
+  }
+  &_word-review{
+    width: 928px;
+    height: 374px;
+    margin-top: 28px;
+    background: #F3F4F8;
+    border-radius: 10px;
+  }
+  &_word-items{
+    width: 180px;
+    height: 100px;
+    // padding: 7px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: #F3F4F8;
     border: 2px solid black;
-    border-radius: 10px;
-    margin: 5px;
+    border-radius: 15px;
+    // margin: 5px;
   }
-  &_word-item img{
-    width: 125px;
-    height: 125px;
+
+  &_word-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  &_word-item-text {
+      display: flex;
+      flex-direction: column;
+    }
+  .word {
+    }
+  .wordTranslate {
+    }
+  .transcription {
+    }
+  .textMeaning {
+    }
+  .title-textMeaning {
+    }
+  .title-textMeaningTranslate {
+    }
+  .textExample {
+    }
+  .title-textExample {
+    }
+  .title-textExampleTranslate {
+    }
+    &_word-item-img img{
+    width: 579px;
+    height: 374px;
+}
+
+  .btn_ctrl{
+  }
+  .btn_learned{
+    width: 72px;
+    height: 28px;
+    background: #008D39;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+  }
+  .btn_repeat{
+    width: 72px;
+    height: 28px;
+    background: #FF0744;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
   }
   span{
     font-size: 20px;
-
-
-
   }
 }
 
@@ -162,7 +242,8 @@ select {
  li {
 	margin-right: 5px;
 	padding: 10px;
-	border: 1px solid black;
+	border: 1px solid #FFFFFF;
+  color: #fff;
    }
  li:hover, li.active {
 	cursor: pointer;
@@ -171,28 +252,36 @@ select {
   }
  }
 
- .footer{
-  background: #0295DB;
-
-  &-inner{
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.footer {
+	background-color: #0295DB;
+	height: 200px;
+	width: 100vw;
+  display: flex;
+	align-items: center;
+  &-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
   }
-  &-github{
+  .github-li {
     display: flex;
-    flex-direction: column;
-    div {
-      width: 150px;
-      height: 30px;
-      padding: 5px;
-      display: flex;
-      justify-content: space-between;
-    }
+    height: 27px;
   }
-  &-logo img{
-    width: 150px;
+  .github-logo {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+  }
+  .nickname {
+    font-family: 'GilroyHeavy';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 26px;
+    color: #0B0E1B;;
+  }
+  .rsslogo {
+    max-width: 305px;
+    max-height: 115px;
   }
 }
-
