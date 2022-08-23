@@ -1,10 +1,27 @@
+* {
+  margin: 0;
+}
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: darkslategrey;
+  background: #0295DB;
+  background-image:  url(../assets/index.svg);;
   color: white;
-  text-transform: uppercase;
+  font-family: 'Gilroy';
+}
+
+.main {
+
+}
+@font-face { 
+  font-family: "Gilroy";
+  src: url("./fonst/GilroyRegular.ttf") format("truetype");
+}
+
+@font-face { 
+  font-family: "GilroyBold";
+  src: url("./fonst/GilroyBold.ttf") format("truetype");
 }

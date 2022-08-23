@@ -9,7 +9,9 @@ class App {
     constructor(private rootElement: HTMLElement) {
     //   const header = new Header(this.rootElement);
       this.main = new Component(this.rootElement, 'main', ['main']);
-      //const authirize = new Authorization(this.main.element); ТУТ зачаток страницы авторизации, попрошу пока не трогать
+      
+      const authirize = new Authorization(this.main.element); 
+      //ТУТ зачаток страницы авторизации, попрошу пока не трогать
   
     //   this.router = new Router(this.main.element);
     }
