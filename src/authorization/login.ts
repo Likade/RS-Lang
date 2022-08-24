@@ -1,6 +1,8 @@
 import { Component } from "../utils/component";
 import { UIInput } from "../utils/input";
 import { UIButton } from "../utils/button";
+import { loginUser, dataUser } from "./api";
+
 export class Login extends Component {
     private inputEmail: Component;
     private inputPassword: Component;
@@ -20,9 +22,22 @@ export class Login extends Component {
         after.element.innerHTML = 'Ещё не зарегестрированы?';
         this.linkLog = new Component(this.element, 'span', [], "Зарегестрируйтесь");
 
-        // this.linkLog.element.addEventListener("click", () => {
-        //     this.element.className = ('container-hidden');
-            
-        // })
+        const errMessage = new Component(this.element);
+
+              //кнопка входа
+        this.button.element.addEventListener('click', () => {
+        const email = (this.inputEmail.element as HTMLInputElement).value;;
+        const password = (this.inputPassword.element as HTMLInputElement).value;
+  
+        loginUser({ 'email': email, 'password': password }).then(() => {
+          if (dataUser.errCode != '') {
+            errMessage.element.textContent = 'Неверный адрес электронной почты или пароль!';
+            dataUser.errCode = '';
+          } else {
+            //   changeBtnEntry(); сделать кнопку выхода
+            //  linkToHomePage.click(); ссылка на мэйн страницу
+          }
+        });
+      });
     }
 }
