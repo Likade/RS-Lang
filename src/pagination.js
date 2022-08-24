@@ -22,7 +22,7 @@ var Pagination = {
 
   Add: function(s, f) {
       for (var i = s; i < f; i++) {
-          Pagination.code += '<a>' + i + '</a>';
+          Pagination.code += `<a id=${i} class="page">${i}</a>`;
       }
   },
 
@@ -61,7 +61,7 @@ var Pagination = {
   Bind: function() {
       var a = Pagination.e.getElementsByTagName('a');
       for (var i = 0; i < a.length; i++) {
-          if (+a[i].innerHTML === Pagination.page) a[i].className = 'current';
+          if (+a[i].innerHTML === Pagination.page) a[i].className = 'page current';
           a[i].addEventListener('click', Pagination.Click, false);
       }
   },
@@ -128,7 +128,7 @@ var init = function() {
   Pagination.Init(document.getElementById('pagination'), {
       size: 30, // pages size
       page: 1,  // selected page
-      step: 3   // pages before and after current
+      step: 1   // pages before and after current
   });
 };
 

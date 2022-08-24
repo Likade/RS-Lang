@@ -1,4 +1,5 @@
-const getWords = async (page, group) => {
+
+const getWords = async (group, page = 0) => {
   const response = await fetch(`https://rs-lang-work.herokuapp.com/words?page=${page}&group=${group}`);
   const data = await response.json();
       let wordsHTML ='';
@@ -19,7 +20,7 @@ const getWords = async (page, group) => {
          wordContainer.insertAdjacentHTML('beforeend', wordsHTML);
         });
     }
-    getWords(0,0);
+    getWords(0);
 
 
 const getWord = async (id) => {
@@ -50,6 +51,8 @@ const getWord = async (id) => {
      <img src="https://rs-lang-work.herokuapp.com/${data.image}" alt=""/>
    </div>
    </div>`;
-   wordContainer.insertAdjacentHTML('beforeend', wordHTML);
+   wordContainer.innerHTML = `${wordHTML}`;
+  //  console.log(`${data.id}`);
 };
-getWord("5e9f5ee35eb9e72bc21af4a0");
+
+getWord("5e9f5ee35eb9e72bc21af4b1");
