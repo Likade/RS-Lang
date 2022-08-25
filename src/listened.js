@@ -41,9 +41,9 @@ function showPaginationGroup() {
     // console.log(typeof groupActive);
 
     if (event.target.classList.contains('page')) {
-      let page = event.target.id;
+      let page = event.target.id - 1;
       console.log(page);
-      getWords(page,groupActive);
+      getWords(groupActive, page);
     }
   })
 };

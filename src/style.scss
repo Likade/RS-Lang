@@ -119,6 +119,22 @@
     line-height: 115px;
     margin: 0 7px;
   }
+  .nav_group-list-title:first-child{
+    background: #B1A3F9;
+  }
+  .nav_group-list-title:nth-child(2){
+    background: #0FB9DB;
+  }
+  .nav_group-list-title:nth-child(3){
+    background: #BCCE25;
+  }
+  .nav_group-list-title:nth-child(4){
+    background: #F49838;
+  }
+  .nav_group-list-title:last-child{
+    background: #E870D6;
+  }
+
   .group-range {
     display: flex;
     flex-wrap: wrap;
@@ -131,10 +147,18 @@
     color: #FFFFFF;
     padding: 0 13px;
   }
+
+  .group-range-title:nth-child(2){
+    color: #BABABA;
+  }
+  .group-range-title:nth-child(3){
+    color: #959495;
+  }
   .group-range-title:last-child {
     width: 1048px;
     height: 120px;
     background: #EE161F;
+    color: #000000;
     border-radius: 30px;
     text-align: center;
     margin: 0 auto;
@@ -176,37 +200,71 @@
     // margin: 5px;
   }
 
+  // Карточка слова
   &_word-item {
+    width: 928px;
+    // height: ;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
   }
   &_word-item-text {
+      width: 300px;
+      padding-left: 16px;
       display: flex;
       flex-direction: column;
     }
   .word {
+    font-weight: 600;
+    line-height: 20px;
     }
   .wordTranslate {
+    font-weight: 500;
     }
   .transcription {
+
     }
+    audio {
+      // filter: sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);
+      width: 300px;
+      height: 25px;
+  }
   .textMeaning {
-    }
+    font-weight: 600;
+    line-height: 20px;
+  }
   .title-textMeaning {
+    font-weight: 500;
+    line-height: 19px;
     }
   .title-textMeaningTranslate {
+    font-weight: 500;
+    line-height: 19px;
     }
   .textExample {
+    font-weight: 600;
+    line-height: 20px;
     }
   .title-textExample {
+    font-weight: 500;
+    line-height: 19px;
     }
   .title-textExampleTranslate {
+    font-weight: 500;
+    line-height: 19px;
     }
     &_word-item-img img{
     width: 579px;
     height: 374px;
+    border-radius: 10px;
+      }
 }
 
   .btn_ctrl{
@@ -234,7 +292,7 @@
   span{
     font-size: 20px;
   }
-}
+
 
 .pagination {
 	display: flex;
@@ -242,6 +300,7 @@
   color: #FFFFFF;
   margin-top: 62px;
   margin-bottom: 86px;
+  list-style: none;
   a{
     display: block;
     padding: 0 24px;

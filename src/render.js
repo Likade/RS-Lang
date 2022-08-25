@@ -37,17 +37,19 @@ const getWord = async (id) => {
       <div class="transcription">${data.transcription}</div>
       <audio controls src="https://rs-lang-work.herokuapp.com/${data.audio}"></audio>
       <div class="textMeaning">
+        <h3>Значение</h3>
         <div class="title-textMeaning">${data.textMeaning}</div>
         <div class="title-textMeaningTranslate">${data.textMeaningTranslate}</div>
         <audio controls src="https://rs-lang-work.herokuapp.com/${data.audioMeaning}"></audio>
       </div>
       <div class="textExample">
+        <h3>Пример</h3>
         <div class="title-textExample">${data.textExample}</div>
         <div class="title-textExampleTranslate">${data.textExampleTranslate}</div>
         <audio controls src="https://rs-lang-work.herokuapp.com/${data.audioExample}"></audio>
       </div>
    </div>
-   <div lass="main_word-item-img">
+   <div class="main_word-item-img">
      <img src="https://rs-lang-work.herokuapp.com/${data.image}" alt=""/>
    </div>
    </div>`;
@@ -56,3 +58,4 @@ const getWord = async (id) => {
 };
 
 getWord("5e9f5ee35eb9e72bc21af4b1");
+

@@ -1,12 +1,3 @@
-// let pagination = document.querySelector('#pagination');
-// let items = [];
-// for (let i = 1; i <= 30; i++) {
-// 	let li = document.createElement('li');
-// 	li.innerHTML = i;
-// 	pagination.appendChild(li);
-// 	items.push(li);
-// }
-
 
 var Pagination = {
 
@@ -14,7 +5,7 @@ var Pagination = {
 
   Extend: function(data) {
       data = data || {};
-      Pagination.size = data.size || 300;
+      Pagination.size = data.size || 30;
       Pagination.page = data.page || 1;
       Pagination.step = data.step || 3;
   },
@@ -28,11 +19,11 @@ var Pagination = {
 
 
   Last: function() {
-      Pagination.code += '<i>...</i><a>' + Pagination.size + '</a>';
+      Pagination.code += '<i>...</i><a id="30" class="page">' + Pagination.size + '</a>';
   },
 
   First: function() {
-      Pagination.code += '<a>1</a><i>...</i>';
+      Pagination.code += '<a id="1" class="page">1</a><i>...</i>';
   },
 
   Click: function() {
