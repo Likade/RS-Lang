@@ -48,11 +48,7 @@ module.exports = ({ development }) => ({
       {
         test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
-      },
-			{
-				test: /\.png/,
-				type: 'asset/resource'
-			}
+      }
     ],
   },
   plugins: [
