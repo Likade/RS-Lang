@@ -1,0 +1,694 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "GilroyBold";
+  src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "GilroyHeavy";
+  src: url("./assets/fonts/Gilroy-Heavy.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "GilroyMedium";
+  src: url("./assets/fonts/Gilroy-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "GilroyRegular";
+  src: url("./assets/fonts/Gilroy-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "GilroySemibold";
+  src: url("./assets/fonts/Gilroy-Semibold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+          box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#00c6fb), to(#005bea));
+  background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+
+.wrapper {
+  width: 100vw;
+  height: 1px;
+  background-color: #0ff;
+}
+
+.container {
+  width: 1280px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.btn {
+  background-color: #0B0E1B;
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 26px;
+  color: #FFFFFF;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-color: #FFFFFF;
+  color: #0B0E1B;
+}
+
+.header {
+  background-color: #0295DB;
+  height: 120px;
+  width: 100vw;
+}
+
+.main {
+  background-color: #fff;
+}
+
+.footer {
+  background-color: #0295DB;
+  height: 200px;
+  width: 100vw;
+}
+
+.header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.footer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-information {
+  width: 100vw;
+  min-height: 1080px;
+  height: 1px;
+  background-color: #0B0E1B;
+}
+
+.logo {
+  width: 225px;
+  height: 83px;
+  margin-right: 10px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.logo:hover {
+  -webkit-transform: translateY(5px);
+          transform: translateY(5px);
+}
+
+.login {
+  max-width: 204px;
+  width: 204px;
+  max-height: 67px;
+  height: 67px;
+  border-radius: 34px;
+}
+
+.github-li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 27px;
+}
+
+.github-logo {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.nickname {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 26px;
+  color: #0B0E1B;
+}
+
+.link-on-github {
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.rsslogo {
+  max-width: 305px;
+  max-height: 115px;
+}
+
+.our-benefits {
+  width: 100vw;
+  min-height: 1080px;
+  height: 1px;
+}
+
+.learn-new-words {
+  width: 100vw;
+  min-height: 1080px;
+  height: 1px;
+  background-color: #0B0E1B;
+}
+
+.our-games {
+  width: 100vw;
+  min-height: 1080px;
+  height: 1px;
+}
+
+.our-team {
+  width: 100vw;
+  min-height: 1080px;
+  height: 1px;
+  background-color: #0B0E1B;
+}
+
+.main-information-container {
+  padding-top: 140px;
+}
+
+.main-text {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 780px;
+  margin: 0 auto;
+  margin-bottom: 65px;
+}
+
+.main-text-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  color: #FFFFFF;
+}
+
+.main-text-subtitle {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 61px;
+  color: #FFFFFF;
+}
+
+.our-benefits-container {
+  padding-top: 140px;
+}
+
+.title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-items: center;
+}
+
+.our-benefits-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  color: #0B0E1B;
+  display: inline;
+  margin: 0 auto;
+  margin-bottom: 95px;
+}
+
+.our-benefits-box {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 51px;
+  color: #0B0E1B;
+  display: -ms-grid;
+  display: grid;
+  row-gap: 20px;
+}
+
+.bus {
+  position: absolute;
+  top: 2080px;
+  right: 30px;
+}
+
+.learn-new-words-container {
+  padding-top: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.learn-new-words-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 113px;
+}
+
+.learn-new-words-box {
+  display: -ms-inline-grid;
+  display: inline-grid;
+  -ms-grid-columns: 1fr 140px 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  -webkit-column-gap: 140px;
+     -moz-column-gap: 140px;
+          column-gap: 140px;
+}
+
+.textbook-box, .vocabulary-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 356px;
+  height: 507px;
+  left: 534px;
+  top: 418px;
+  background: #FFFFFF;
+  border-radius: 20px;
+  padding-top: 25px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.textbook-box:hover, .vocabulary-box:hover {
+  -webkit-box-shadow: 2px 2px 2px 2px #0295DB;
+          box-shadow: 2px 2px 2px 2px #0295DB;
+  cursor: pointer;
+}
+
+.textbook-svg, .vocabulary-svg {
+  width: 251px;
+  height: 251px;
+}
+
+.textbook-title, .vocabulary-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  text-align: center;
+  color: #0B0E1B;
+}
+
+.textbook-subtitle, .vocabulary-subtitle {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  color: #0B0E1B;
+}
+
+.rectangle {
+  position: absolute;
+  width: 199px;
+  height: 199px;
+  left: 5px;
+  top: 3160px;
+}
+
+.alphabet {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  left: 124px;
+  top: 2980px;
+}
+
+.our-games-container {
+  padding-top: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.our-games-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  text-align: center;
+  color: #0B0E1B;
+  margin-bottom: 113px;
+}
+
+.our-games-box {
+  display: -ms-inline-grid;
+  display: inline-grid;
+  -ms-grid-columns: 1fr 140px 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  -webkit-column-gap: 140px;
+     -moz-column-gap: 140px;
+          column-gap: 140px;
+  position: relative;
+}
+
+.first-game-box, .second-game-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 356px;
+  height: 507px;
+  left: 534px;
+  top: 418px;
+  background: #0B0E1B;
+  border-radius: 20px;
+  padding-top: 25px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.first-game-box:hover, .second-game-box:hover {
+  -webkit-box-shadow: 2px 2px 2px 2px #0295DB;
+          box-shadow: 2px 2px 2px 2px #0295DB;
+  cursor: pointer;
+}
+
+.first-game-svg, .second-game-svg {
+  width: 251px;
+  height: 251px;
+}
+
+.first-game-title, .second-game-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.first-game-subtitle, .second-game-subtitle {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.uk-flag {
+  position: absolute;
+  width: 161px;
+  height: 161px;
+  left: -120px;
+  top: -112px;
+}
+
+.our-team-container {
+  padding-top: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.our-team-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 82px;
+  color: #FFFFFF;
+}
+
+@media (max-width: 1700px) {
+  .rectangle, .alphabet {
+    display: none;
+  }
+}
+.authentication-container {
+  width: 100vw;
+  height: calc(100vh - 120px);
+  background-color: #0295DB;
+}
+
+.big-ben {
+  position: absolute;
+  bottom: 0;
+  right: 15%;
+  width: 30%;
+  height: 83.5%;
+}
+
+.ellipse {
+  position: absolute;
+  bottom: -7%;
+  width: 100%;
+  height: 15.2%;
+}
+
+.authentication-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  -webkit-transform: translate(-40%, -50%);
+          transform: translate(-40%, -50%);
+}
+
+.auth-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.auth-title {
+  font-family: "GilroyHeavy";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 48px;
+  line-height: 61px;
+  color: #000000;
+}
+
+.auth-subtitle {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 38px;
+  color: #FFFFFF;
+  margin-bottom: 35px;
+}
+
+.text-above-login-btn {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  margin-top: 13px;
+}
+
+.login-btn {
+  width: 555px;
+  height: 45px;
+  background: #0B0E1B;
+  border-radius: 8px;
+  margin-top: 46px;
+}
+
+#name, #email, #password {
+  width: 555px;
+  height: 50px;
+  border: 2px solid #0B0E1B;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 27px;
+  padding-left: 15px;
+  font-family: "GilroySemibold";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+#name::-webkit-input-placeholder, #email::-webkit-input-placeholder, #password::-webkit-input-placeholder {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0B0E1B;
+}
+
+#name::-moz-placeholder, #email::-moz-placeholder, #password::-moz-placeholder {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0B0E1B;
+}
+
+#name:-ms-input-placeholder, #email:-ms-input-placeholder, #password:-ms-input-placeholder {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0B0E1B;
+}
+
+#name::-ms-input-placeholder, #email::-ms-input-placeholder, #password::-ms-input-placeholder {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0B0E1B;
+}
+
+#name::placeholder, #email::placeholder, #password::placeholder {
+  font-family: "GilroyRegular";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #0B0E1B;
+}
+
+#name:focus::-webkit-input-placeholder, #email:focus::-webkit-input-placeholder, #password:focus::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+#name:focus::-moz-placeholder, #email:focus::-moz-placeholder, #password:focus::-moz-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+#name:focus:-ms-input-placeholder, #email:focus:-ms-input-placeholder, #password:focus:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+#name:focus::-ms-input-placeholder, #email:focus::-ms-input-placeholder, #password:focus::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+#name:focus::placeholder, #email:focus::placeholder, #password:focus::placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+.span-change {
+  text-decoration: underline;
+  cursor: pointer;
+  z-index: 2;
+}

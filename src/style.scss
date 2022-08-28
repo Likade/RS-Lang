@@ -1,0 +1,591 @@
+* {
+	box-sizing: border-box;
+	user-select: none; 
+	margin: 0;
+}
+
+@font-face {
+	font-family: "GilroyBold";  
+	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype"); 
+	font-style: normal; 
+	font-weight: normal;
+}
+@font-face {
+	font-family: "GilroyHeavy";  
+	src: url("./assets/fonts/Gilroy-Heavy.ttf") format("truetype"); 
+	font-style: normal; 
+	font-weight: normal;
+}
+@font-face {
+	font-family: "GilroyMedium";  
+	src: url("./assets/fonts/Gilroy-Medium.ttf") format("truetype"); 
+	font-style: normal; 
+	font-weight: normal;
+}
+@font-face {
+	font-family: "GilroyRegular";  
+	src: url("./assets/fonts/Gilroy-Regular.ttf") format("truetype"); 
+	font-style: normal; 
+	font-weight: normal;
+}
+@font-face {
+	font-family: "GilroySemibold";  
+	src: url("./assets/fonts/Gilroy-Semibold.ttf") format("truetype"); 
+	font-style: normal; 
+	font-weight: normal;
+}
+
+$mainColor: #0B0E1B;
+$secondColor: #0295DB;
+
+body {
+	overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+  background-color: #f9f9fd;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+  background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+
+.wrapper {
+	width: 100vw;
+	height: 1px;
+	background-color: #0ff;
+}
+
+.container {
+	width: 1280px;
+	//background-color: #0f0;
+	height: 100%;
+	margin: 0 auto;
+	padding: 0 100px;
+}
+
+.btn {
+	background-color: $mainColor;
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 26px;
+	color: #FFFFFF;
+	transition: .5s;
+}
+
+.btn:hover {
+	background-color: #FFFFFF;
+	color: $mainColor;
+}
+
+.header {
+	background-color: $secondColor;
+	height: 120px;
+	width: 100vw;
+}
+
+.main {
+	background-color: #fff;
+}
+
+.footer {
+	background-color: $secondColor;
+	height: 200px;
+	width: 100vw;
+}
+
+.header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main-container {
+
+}
+
+.footer-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.main-information {
+	width: 100vw;
+	min-height: 1080px;
+	height: 1px;
+	background-color: $mainColor;
+}
+
+// HEADER START
+.logo {
+	width: 225px;
+	height: 83px;
+	margin-right: 10px;
+	transition: .3s;
+	cursor: pointer;
+}
+
+.logo:hover {
+	transform: translateY(5px);
+}
+
+.login {
+	max-width: 204px;
+	width: 204px;
+	max-height: 67px;
+	height: 67px;
+	border-radius: 34px;
+}
+// HEADER END
+
+// FOOTER START
+.github-li {
+	display: flex;
+	height: 27px;
+}
+
+.github-logo {
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+
+.nickname {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 26px;
+	color: $mainColor;
+}
+
+.link-on-github {
+	text-decoration: none;
+	display: flex;
+}
+
+.rsslogo {
+	max-width: 305px;
+	max-height: 115px;
+}
+// FOOTER END
+
+.our-benefits {
+	width: 100vw;
+	min-height: 1080px;
+	height: 1px;
+}
+
+.learn-new-words {
+	width: 100vw;
+	min-height: 1080px;
+	height: 1px;
+	background-color: $mainColor;
+}
+
+.our-games {
+	width: 100vw;
+	min-height: 1080px;
+	height: 1px;
+}
+
+.our-team {
+	width: 100vw;
+	min-height: 1080px;
+	height: 1px;
+	background-color: $mainColor;
+}
+
+// MAIN INFORMATION CONTAINER START
+.main-information-container {
+	padding-top: 140px;
+}
+
+.main-text {
+	display: flex;
+	width: auto;
+	flex-direction: column;
+	max-width: 780px;
+	margin: 0 auto;
+	margin-bottom: 65px;
+}
+
+.main-text-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	color: #FFFFFF;
+}
+
+.main-text-subtitle {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 48px;
+	line-height: 61px;
+	color: #FFFFFF;
+}
+// MAIN INFORMATION CONTAINER END
+
+// OUR BENEFITS CONTAINER START
+.our-benefits-container {
+	padding-top: 140px;
+}
+
+.title {
+	display: flex;
+	justify-items: center;
+}
+
+.our-benefits-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	color: $mainColor;
+	display: inline;
+	margin: 0 auto;
+	margin-bottom: 95px;
+}
+
+.our-benefits-box {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 40px;
+	line-height: 51px;
+	color: $mainColor;
+	display: grid;
+	row-gap: 20px;
+}
+
+.bus {
+	position: absolute;
+	top: 2080px;
+	right: 30px;
+}
+// OUR BENEFITS CONTAINER END
+
+// LEARN NEW WORDS CONTAINER START
+.learn-new-words-container {
+	padding-top: 140px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.learn-new-words-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	text-align: center;
+	color: #FFFFFF;
+	margin-bottom: 113px;
+}
+
+.learn-new-words-box {
+	display: inline-grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 140px;
+}
+
+.textbook-box, .vocabulary-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 356px;
+	height: 507px;
+	left: 534px;
+	top: 418px;
+	background: #FFFFFF;
+	border-radius: 20px;
+	padding-top: 25px;
+	transition: .3s;
+}
+
+.textbook-box:hover, .vocabulary-box:hover {
+	box-shadow: 2px 2px 2px 2px $secondColor;
+	cursor: pointer;
+}
+
+.textbook-svg, .vocabulary-svg{
+	width: 251px;
+	height: 251px;
+}
+
+.textbook-title, .vocabulary-title{
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	text-align: center;
+	color: $mainColor;
+}
+
+.textbook-subtitle, .vocabulary-subtitle{
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 38px;
+	text-align: center;
+	color: $mainColor;
+}
+
+.rectangle {
+	position: absolute;
+	width: 199px;
+	height: 199px;
+	left: 5px;
+	top: 3160px;
+}
+.alphabet {
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	left: 124px;
+	top: 2980px;
+}
+// LEARN NEW WORDS CONTAINER END
+
+// OUR GAMES CONTAINER START
+.our-games-container {
+	padding-top: 140px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.our-games-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	text-align: center;
+	color: $mainColor;
+	margin-bottom: 113px;
+}
+
+.our-games-box {
+	display: inline-grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 140px;
+	position: relative;
+}
+
+.first-game-box, .second-game-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 356px;
+	height: 507px;
+	left: 534px;
+	top: 418px;
+	background: $mainColor;
+	border-radius: 20px;
+	padding-top: 25px;
+	transition: .3s;
+}
+
+.first-game-box:hover, .second-game-box:hover {
+	box-shadow: 2px 2px 2px 2px $secondColor;
+	cursor: pointer;
+}
+
+.first-game-svg, .second-game-svg{
+	width: 251px;
+	height: 251px;
+}
+
+.first-game-title, .second-game-title{
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.first-game-subtitle, .second-game-subtitle{
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 38px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.uk-flag {
+	position: absolute;
+	width: 161px;
+	height: 161px;
+	left: -120px;
+	top: -112px;
+}
+// OUR GAMES CONTAINER END
+
+// OUR TEAM CONTAINER START
+
+.our-team-container {
+	padding-top: 140px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.our-team-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 64px;
+	line-height: 82px;
+	color: #FFFFFF;
+}
+
+// OUR TEAM CONTAINER END
+
+
+@media (max-width: 1700px){
+
+.rectangle, .alphabet {
+	display: none;
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// AUTHENTICATION PAGE START
+.authentication-container {
+	width: 100vw;
+	height: calc(100vh - 120px);
+	background-color: $secondColor;
+}
+
+.big-ben {
+	position: absolute;
+	bottom: 0;
+	right: 15%;
+	width: 30%;
+	height: 83.5%;
+}
+
+.ellipse {
+	position: absolute;
+	bottom: -7%;
+	width: 100%;
+	height: 15.2%;
+}
+
+.authentication-box {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 50%;
+	left: 40%;
+	transform: translate(-40%, -50%);
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+}
+
+.auth-title {
+	font-family: 'GilroyHeavy';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 48px;
+	line-height: 61px;
+	color: #000000;
+}
+
+.auth-subtitle {
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 38px;
+	color: #FFFFFF;
+	margin-bottom: 35px;
+}
+
+.text-above-login-btn {
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 24px;
+	color: #FFFFFF;
+	margin-top: 13px;
+}
+
+.login-btn{
+	width: 555px;
+	height: 45px;
+	background: #0B0E1B;
+	border-radius: 8px;
+	margin-top: 46px;
+}
+
+#name, #email, #password {
+	width: 555px;
+	height: 50px;
+	border: 2px solid #0B0E1B;
+	border-radius: 10px;
+	background-color: rgba(0,0,0,0);
+	margin-top: 27px;
+	padding-left: 15px;
+	font-family: 'GilroySemibold';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 29px;
+}
+
+#name::placeholder , #email::placeholder, #password::placeholder {
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 29px;
+	color: #0B0E1B;
+}
+
+#name:focus::placeholder , #email:focus::placeholder, #password:focus::placeholder {
+	color: rgba(0,0,0,0)
+}
+
+.span-change {
+	text-decoration: underline;
+	cursor: pointer;
+	z-index: 2;
+}
+// AUTHENTICATION PAGE END
