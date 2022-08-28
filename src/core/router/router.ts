@@ -1,9 +1,9 @@
-import { IRoute } from '../core/components/interfaces/interface';
-import { Main } from '../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
-import { Authentication } from '../pages/authentication'; 
-import { Header } from '../core/components/header';
-import { Footer } from '../core/components/footer';
-import { authScr } from '../pages/authentication/script';
+import { IRoute } from '../components/interfaces/interface';
+import { Main } from '../../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
+import { Authentication } from '../../pages/authentication'; 
+import { Header } from '../components/header';
+import { Footer } from '../components/footer';
+import { authScr } from '../../pages/authentication/script';
 
 
 const headerInst = new Header();

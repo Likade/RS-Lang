@@ -1,4 +1,4 @@
-import { Router } from '../../router/router';
+import { Router } from "../router/router";
 
 const body = document.querySelector('body');
 const wrapper = document.createElement('div');
