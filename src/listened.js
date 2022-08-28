@@ -7,11 +7,13 @@ parent.addEventListener('click', (event) => {
     itemClear.innerHTML = '';
   if(event.target.classList.contains('nav_group-list-title')) {
     let idGroup = event.target.id;
+    console.log(idGroup);
     for(let i = 0; i < parentItem.length; i++) {
       parentItem[i].classList.remove('active_group');
     }
     event.target.classList.add('active_group');
     getWords(idGroup);
+
   }
 });
 }
@@ -22,7 +24,7 @@ function showItem() {
     event.preventDefault();
     if (event.target.classList.contains('main_word-items')) {
       let idShow = event.target.id;
-      // console.log(idShow);
+      console.log(idShow);
       getWord(idShow);
     }
   })
@@ -49,3 +51,22 @@ function showPaginationGroup() {
 };
 showPaginationGroup();
 
+function showHardWordGroup() {
+  let parent = document.querySelector('.group-range');
+  let parentItem = parent.querySelectorAll('.group-range-title');
+  parent.addEventListener('click', (event) => {
+      event.preventDefault();
+      let itemClear = document.getElementById('main_word-container');
+      itemClear.innerHTML = '';
+    if(event.target.classList.contains('group-range-title')) {
+      // let idGroup = event.target.id;
+      // console.log(idGroup);
+      for(let i = 0; i < parentItem.length; i++) {
+        parentItem[i].classList.remove('active_group');
+      }
+      event.target.classList.add('active_group');
+      getUserWords(userId);
+    }
+  });
+  }
+  showHardWordGroup();
