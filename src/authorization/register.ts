@@ -3,6 +3,7 @@ import { Component } from "../utils/component";
 import { UIInput } from "../utils/input";
 import { UIButton } from "../utils/button";
 import { createUser, dataUser, loginUser } from "./api";
+import { Authorization } from "./authorization";
 
 export class Register extends Component {
     private inputEmail: Component;
@@ -11,6 +12,8 @@ export class Register extends Component {
     private button: UIButton;
     public linkReg: Component;
     public container: HTMLElement;
+    public isAutorised: boolean = false;
+
     constructor(parentNode: HTMLElement) {
         super(parentNode, 'div', ['container-hidden']);
         this.container = this.element;
@@ -65,7 +68,11 @@ export class Register extends Component {
                 loginUser({ 'email': email, 'password': password }).then(async () => {
                   errMessage.element.textContent = '';
                 //   changeBtnEntry(); сделать кнопку выхода
+                  this.isAutorised = true;
                 //  linkToHomePage.click(); ссылка на мэйн страницу
+                const authorization = new Authorization(this.element);
+                authorization.linkToMain.element.click();
+
                 //  await updateUserStatistic(dataUser.userId, wordPerDay);
                 });
               }

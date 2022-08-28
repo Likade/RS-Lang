@@ -2,6 +2,7 @@ import { Component } from "../utils/component";
 import { UIInput } from "../utils/input";
 import { UIButton } from "../utils/button";
 import { loginUser, dataUser } from "./api";
+import { Authorization } from "./authorization";
 
 export class Login extends Component {
     private inputEmail: Component;
@@ -9,6 +10,7 @@ export class Login extends Component {
     private button: UIButton;
     public linkLog: Component;
     public container: HTMLElement;
+    public isAutorised: boolean = false;
     constructor(parentNode: HTMLElement) {
         super(parentNode, 'div', ['container']);
         this.container = this.element;
@@ -34,7 +36,10 @@ export class Login extends Component {
             errMessage.element.textContent = 'Неверный адрес электронной почты или пароль!';
             dataUser.errCode = '';
           } else {
+            this.isAutorised = true;
             //   changeBtnEntry(); сделать кнопку выхода
+            const authorization = new Authorization(this.element);
+            authorization.linkToMain.element.click();
             //  linkToHomePage.click(); ссылка на мэйн страницу
           }
         });

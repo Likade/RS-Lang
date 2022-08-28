@@ -1,5 +1,6 @@
 import { Router } from './router/router';
-import {  Component } from './utils/component'
+import {  Component } from './utils/component';
+import { Header } from './header';
 import './index.scss';
 class App {
     private main;
@@ -7,6 +8,8 @@ class App {
   
     constructor(private rootElement: HTMLElement) {
     //   const header = new Header(this.rootElement); //тут хедер
+      const header = new Header(this.rootElement);
+
       this.main = new Component(this.rootElement, 'main', ['main']);
   
       this.router = new Router(this.main.element);

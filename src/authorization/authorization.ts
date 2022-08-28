@@ -1,12 +1,20 @@
 import { Component } from "../utils/component";
 import { Login } from "./login";
-import { Register } from "./register";
+import { Register } from "./register"; 
 import './authorization.scss'
 
 export class Authorization extends Component {
+
+    public linkToMain: Component;
+
     constructor(parentNode: HTMLElement) {
         super(parentNode, 'div', ['page']);
         const logo = new Component(this.element, 'div', ['logo']);
+
+        this.linkToMain = new Component(this.element, 'a', [], 'To main');
+        this.linkToMain.element.setAttribute('href', '#/')
+
+
         const login = new Login(this.element);
         const register = new Register(this.element);
         logo.element.innerHTML ='<img src="./assets/1d81baaef45fdc778085.svg" alt="лого">';
