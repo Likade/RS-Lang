@@ -41,6 +41,28 @@ export const getWord = async (id:string) => {
 // loginUser({ email: 'hello@user.com', password: 'Gfhjkm_123' });
 // АВТОРИЗАЦИЯ
 
+export const createUserWord = async (userId:string, wordId:string, word: { difficulty: string; }) => fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
+  method: 'POST',
+  // withCredentials: true,
+  headers: {
+    Authorization: `Bearer ${token}`,
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(word),
+});
+
+export const deleteUserWord = async (userId: string, wordId: string) => {
+  await fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export const getUserWord = async (userId:string, wordId:string) => {
   const rawResponse = await fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
     method: 'GET',
@@ -77,8 +99,8 @@ export async function createBook(group = 0, page = 0) {
               <span class="title"><b>${arrWords[i].word}</b></span>
               <span class="title">${arrWords[i].wordTranslate}</span>
               <div class="btn_ctrl">
-                <button class="btn_learned">Выучил</button>
-                <button class="btn_repeat">Сложно</button>
+                <button id="btn_learned" data-learned=${arrWords[i].id}>Выучил</button>
+                <button id="btn_hard" data-hard=${arrWords[i].id}>Сложно</button>
               </div>
            </div>
     `;

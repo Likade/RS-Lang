@@ -1,9 +1,10 @@
 import {
-  createItemHardWord, createBookHardWord, createBook, createItem,
+  createUserWord, createItemHardWord, deleteUserWord, createBookHardWord, createBook, createItem,
 } from './render';
 
 //
 // const userId = '6308cda29b13ae0016217e97';
+createItem('5e9f5ee35eb9e72bc21af4b1');
 //
 
 export function showGroup():void {
@@ -22,7 +23,7 @@ export function showGroup():void {
       target.classList.add('active_group');
       createBook(+idGroup);
       // как получить 1ую карточку выбранной группы?
-      createItem('5e9f5ee35eb9e72bc21af4b1');
+      // createItem('5e9f5ee35eb9e72bc21af4b1');
     }
   });
 }
@@ -80,3 +81,31 @@ export function showHardWordGroup():void {
   });
 }
 
+export function addHardWord():void {
+  const elBtn = document.getElementById('btn_repeat') as HTMLElement;
+  elBtn.addEventListener('click', (event) => {
+    const elem = event.target as HTMLElement;
+    const idCurrentWord = <string>elem.dataset.hard;
+    const idCurrentUser = userId;
+    const currentWord = { difficulty: 'hard' };
+
+    if (elem.classList.contains('btn-hard')) {
+      createUserWord(idCurrentUser, idCurrentWord, currentWord);
+    }
+  });
+}
+
+export function removeHardWord():void {
+  const elBtn = document.getElementById('btn_repeat') as HTMLElement;
+  elBtn.addEventListener('click', (event) => {
+    const elem = event.target as HTMLElement;
+
+    if (elem.classList.contains('btn-learned')) {
+      const idCurrentWord = <string>elem.dataset.learned;
+      const idCurrentUser = userId;
+
+      deleteUserWord(idCurrentUser, idCurrentWord);
+      createBook();
+    }
+  });
+}
