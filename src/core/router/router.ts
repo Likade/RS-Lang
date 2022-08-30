@@ -4,7 +4,11 @@ import { Authentication } from '../../pages/authentication';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
+<<<<<<< HEAD
 import { AudioCall } from '../../pages/audiocall/audiocall';
+=======
+import { AudioCall } from '../../audiocall/audiocall';
+>>>>>>> 2b4ab84214e94a51692729eaa9d288ed9e19938f
 
 
 const headerInst = new Header();
