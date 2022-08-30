@@ -1,14 +1,52 @@
+import { createUser, loginUser, dataUser } from "../../core/api";
+
 export const authScr = () => {
 let isLogin : boolean = true;
 
+function logRegCallback() {
+	event.preventDefault();
+		
+		if(isLogin) {
+			const name = (document.querySelector('[type="name"]') as HTMLInputElement).value;
+			const email = (document.querySelector('[type="email"]') as HTMLInputElement).value;
+			const password = (document.querySelector('[type="password"]') as HTMLInputElement).value;
+
+			createUser({ 'name': name, 'email': email, 'password': password }).then(async () => {
+				if (dataUser.errCode != '') {
+					document.querySelector('p.auth-title').textContent = 'Проверьте корректность введенных Вами данных!';
+					dataUser.errCode == '417' ? document.querySelector('p.auth-title').textContent = 'Пользователь с указанной электронной почтой уже зарегистрирован!' : false;
+					dataUser.errCode = '';
+					
+				} else {
+          changePage(isLogin);
+        }
+			});
+		}
+		if(!isLogin) {
+			const email = (document.querySelector('[type="email"]') as HTMLInputElement).value;
+			const password = (document.querySelector('[type="password"]') as HTMLInputElement).value;
+
+			loginUser({ 'email': email, 'password': password }).then(() => {
+				if (dataUser.errCode != '') {
+					document.querySelector('p.auth-title').textContent = 'Неверный адрес электронной почты или пароль!';
+					dataUser.errCode = '';
+				} else {
+					localStorage.setItem('token', dataUser.token);
+					localStorage.setItem('userId', dataUser.userId);
+					localStorage.setItem('nameUser', dataUser.name);
+					location.href = '#/'
+				}
+			});
+		}
+}
+
 function changePage(bool : boolean = isLogin) {
   const authenticationBox = document.querySelector('.authentication-box');
-  let spanChange = document.querySelector('.span-change');
 
   if (bool === false) {
     authenticationBox.innerHTML = `<p class="auth-title">Ещё не зарегестрированы?</p>
     <p class="auth-subtitle">Создайте аккаунт и начните</br>изучать английский</p>
-    <form class="auth-form" action="./">
+    <form method="post" class="auth-form" action="./">
       <input type="name" name="name" id="name" placeholder="имя">
       <input type="email" name="email" id="email" placeholder="email">
       <input type="password" name="password" id="password" placeholder="password">
@@ -18,8 +56,7 @@ function changePage(bool : boolean = isLogin) {
     <span class="span-change">Войдите</span>
     </p>`;
     isLogin = !isLogin;
-    spanChange = document.querySelector('.span-change');
-    spanChange.addEventListener('click', () => {
+    (document.querySelector('.span-change')).addEventListener('click', () => {
       changePage(isLogin);
     });
   }
@@ -35,11 +72,12 @@ function changePage(bool : boolean = isLogin) {
     <span class="span-change">Зарегестрируйтесь</span>
     </p>`;
     isLogin = !isLogin;
-    spanChange = document.querySelector('.span-change');
-    spanChange.addEventListener('click', () => {
+    (document.querySelector('.span-change')).addEventListener('click', () => {
       changePage(isLogin);
     });
   }
+
+	document.addEventListener('submit', logRegCallback)
 }
 
 changePage(isLogin);

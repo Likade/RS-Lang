@@ -4,6 +4,7 @@ import { Authentication } from '../../pages/authentication';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
+import { headerScript } from '../components/header/script';
 
 
 const headerInst = new Header();
@@ -25,6 +26,7 @@ export class Router {
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
 
           const main = document.createElement('div');
           this.rootElement.append(main);
@@ -40,14 +42,17 @@ export class Router {
       {
         name: '/authentication',
         component: () => {
+					if (localStorage.getItem('nameUser')) {location.href = '#/'; return};
+
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
 
           const authentication = document.createElement('div');
           this.rootElement.append(authentication);
           authentication.outerHTML = authenticationInst.render();
-          
+
           authScr();
 
           document.body.style.overflow = 'hidden';

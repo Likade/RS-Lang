@@ -1,4 +1,4 @@
-export const headerContent = () => `<div class="header">
+export const headerContentNotAuth = () => `<div class="header">
 <div class="header-container container">
 	<a href="#/" class="logo-link">
 		<svg class="logo" width="221" height="82" viewBox="0 0 221 82" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

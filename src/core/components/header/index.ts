@@ -1,4 +1,5 @@
-import { headerContent } from "./header-content";
+import { headerContentNotAuth } from "./header-content-not-auth";
+import { headerContentAuth } from "./header-content-auth";
 
 export class Header {
   private container : HTMLElement;
@@ -6,6 +7,10 @@ export class Header {
   constructor() {}
 
   render(): string {
-    return headerContent();
+		if (localStorage.getItem('nameUser')) {
+			return headerContentAuth();
+		} else {
+			return headerContentNotAuth();
+		}
   }
 };

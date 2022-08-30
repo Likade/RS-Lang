@@ -57,6 +57,14 @@ body {
   background: linear-gradient(180deg, #00c6fb, #005bea);
 }
 
+.ds-none {
+	display: none;
+}
+
+.ds-block {
+	display: block;
+}
+
 .wrapper {
 	width: 100vw;
 	height: 1px;
@@ -80,6 +88,8 @@ body {
 	line-height: 26px;
 	color: #FFFFFF;
 	transition: .5s;
+	border: 0px;
+	cursor: pointer;
 }
 
 .btn:hover {
@@ -145,6 +155,57 @@ body {
 	max-height: 67px;
 	height: 67px;
 	border-radius: 34px;
+}
+
+.login-auth-btn {
+	cursor: pointer;
+	transition: .3s;
+}
+
+.login-auth-container {
+	position: relative;
+}
+
+.login-auth-btn:hover {
+	opacity: 0.9;
+	transform: translateY(5px);
+}
+
+.nav {
+	position: absolute;
+	right: 0;
+	z-index: 1;
+
+	font-family: 'GilroyRegular';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 43px;
+}
+
+.nav-items {
+	position: absolute;
+	list-style-type: none;
+	text-align: right;
+	top: 24px;
+	right: 20px;
+}
+
+.nav-item {
+	margin-bottom: 8px;
+}
+
+.nav-link {
+	text-decoration: none;
+	color: #000000;
+}
+
+.logout-btn {
+	color: #808080;
+	position: absolute;
+	bottom: 13px;
+	right: 20px;
+	cursor: pointer;
 }
 // HEADER END
 
