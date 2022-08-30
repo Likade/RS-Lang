@@ -301,22 +301,26 @@
   margin-top: 62px;
   margin-bottom: 86px;
   list-style: none;
-  a{
-    display: block;
-    padding: 0 24px;
+  li{
+    padding: 0 10px;
+    cursor: pointer;
   }
-  span{
-    display: flex;
-    align-items: center
-  }
-  .current {
-    width: 50px;
-    height: 50px;
-    border-radius: 50px;
-    background: #0295DB;
-    display: flex;
-    align-items: center;
-   }
+  // a{
+  //   display: block;
+  //   padding: 0 24px;
+  // }
+  // span{
+  //   display: flex;
+  //   align-items: center
+  // }
+  // .current {
+  //   width: 50px;
+  //   height: 50px;
+  //   border-radius: 50px;
+  //   background: #0295DB;
+  //   display: flex;
+  //   align-items: center;
+  //  }
  }
 
 .footer {

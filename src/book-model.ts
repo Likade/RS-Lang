@@ -60,7 +60,5 @@ export const bookBody = () => {
   <img class="rsslogo" src="./assets/svg/rsschool-logo.svg" alt="RSSLogo">
 </div>
 </div>
-</div>
-<div class="list" id="list"></div>
-<div class="pagenumbers" id="pagination"></div>`;
+</div>`;
 };
