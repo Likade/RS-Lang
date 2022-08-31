@@ -12,7 +12,7 @@ export const headerScript = () => {
 	function closeNavWindow() {
 		document.body.addEventListener('click', (e) => {
 			console.log((e.target as HTMLElement).classList.contains('main-text-title'), (e.target as HTMLElement).tagName)
-			if(!(e.target as HTMLElement).classList.contains('nav') && !(e.target as HTMLElement).classList.contains('login-auth-btn') && (e.target as HTMLElement).tagName !== 'path' && !(e.target as HTMLElement).classList.contains('.nav-item') && !(e.target as HTMLElement).classList.contains('.nav-items')) document.querySelector('.nav').classList.add('ds-none');
+			if((e.target as HTMLElement).classList.contains('nav') && !(e.target as HTMLElement).classList.contains('login-auth-btn') && (e.target as HTMLElement).tagName !== 'path' && !(e.target as HTMLElement).classList.contains('.nav-item') && !(e.target as HTMLElement).classList.contains('.nav-items')) document.querySelector('.nav').classList.add('ds-none');
 		},{once: true})
 	}
 
