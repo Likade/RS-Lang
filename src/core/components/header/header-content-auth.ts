@@ -27,7 +27,7 @@ export const headerContentAuth = () => `<div class="header">
 				<path fill-rule="evenodd" clip-rule="evenodd" d="M320.569 2.09433C318.575 -0.698113 314.425 -0.69811 312.431 2.09433L304.643 13H15C6.71573 13 0 19.7157 0 28V225C0 233.284 6.71573 240 15 240H327C335.284 240 342 233.284 342 225V28C342 20.1888 336.029 13.7721 328.403 13.0647L320.569 2.09433Z" fill="white"/>
 			</svg>
 			<ul class="nav-items">
-				<li class="nav-item"><a href="#/games" class="nav-link">Игры</a></li>
+				<li class="nav-item"><a href="#part1" class="nav-link">Игры</a></li>
 				<li class="nav-item"><a href="#/textbook" class="nav-link">Учебник</a></li>
 				<li class="nav-item"><a href="#/stats" class="nav-link">Статистика</a></li>
 			</ul>
