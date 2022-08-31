@@ -5,12 +5,13 @@ import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
 import { headerScript } from '../components/header/script';
-
+import { AudioCall } from '../../pages/audiocall/audiocall';
 
 const headerInst = new Header();
 const footerInst = new Footer();
 const mainInst = new Main();
 const authenticationInst = new Authentication();
+const audioCall = new AudioCall();
 
 export class Router {
   private readonly routes: Array<IRoute>;
@@ -56,6 +57,24 @@ export class Router {
           authScr();
 
           document.body.style.overflow = 'hidden';
+        },
+      },
+      {
+        name: '/audiocall',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+
+          const audioGame = document.createElement('div');
+          this.rootElement.append(audioGame);
+          const getLink = async () => {
+            audioGame.outerHTML = await audioCall.render();
+            await audioCall.page_scripts();
+          }
+          getLink();
+
+          document.body.style.overflow = '';
         },
       },
     ];
