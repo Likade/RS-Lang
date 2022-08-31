@@ -6,6 +6,7 @@ import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
 import { headerScript } from '../components/header/script';
 import { AudioCall } from '../../pages/audiocall/audiocall';
+import { sprintScript } from '../../pages/sprint/app';
 
 const headerInst = new Header();
 const footerInst = new Footer();
@@ -73,6 +74,22 @@ export class Router {
             await audioCall.page_scripts();
           }
           getLink();
+
+          document.body.style.overflow = '';
+        },
+      },
+      {
+        name: '/sprint',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+
+          const app = document.createElement('div');
+          app.classList.add('app');
+          this.rootElement.appendChild(app);
+          
+          sprintScript();
 
           document.body.style.overflow = '';
         },
