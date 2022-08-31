@@ -185,3 +185,4 @@ export const deleteUserWord = async (userId: string, wordId: string) => {
 	  },
 	});
   };
+
