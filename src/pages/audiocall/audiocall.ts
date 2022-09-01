@@ -1,12 +1,10 @@
-import { DayStatistic, 
-         getUserStatistic, 
-         updateUserStatistic, 
-         userStatistic, 
-         dataUser, 
+import { getUserStatistic, 
+         updateUserStatistic,  
          createUserWord, 
-         updateUserWord } from './api/api';
+         updateUserWord } from '../../core/components/api/api';
 import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
 import { array, showRightWord, Word } from './utils/utils';
+import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
 
 import './audiocall.scss';
 

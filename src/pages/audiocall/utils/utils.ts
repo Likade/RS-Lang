@@ -1,4 +1,4 @@
-import { getWords} from '../api/api';
+import { getWords} from '../../../core/components/api/api';
 import { answer_number } from '../audiocall';
 import { renderRightWord } from '../audiocall-html';
 
@@ -35,6 +35,7 @@ export function randomInteger(min: number, max: number) {
 
 export let array: Word[] = [];
 export type Word = {
+  truth: boolean;
   id: string,
   group: number,
   page: number,

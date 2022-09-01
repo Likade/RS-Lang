@@ -1,4 +1,5 @@
-import { createUser, loginUser, dataUser } from "../../core/api";
+import { createUser, loginUser } from "../../core/components/api/api";
+import { dataUser } from "../../core/components/interfaces/interface";
 
 export const authScr = () => {
 let isLogin : boolean = true;
