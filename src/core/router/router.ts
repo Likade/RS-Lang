@@ -1,12 +1,20 @@
 import { IRoute } from '../components/interfaces/interface';
 import { Main } from '../../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
+<<<<<<< HEAD
 import { Authentication } from '../../pages/authentication'; 
+=======
+import { Authentication } from '../../pages/authentication';
+>>>>>>> book
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
 import { headerScript } from '../components/header/script';
 import { AudioCall } from '../../pages/audiocall/audiocall';
 import { sprintScript } from '../../pages/sprint/app';
+<<<<<<< HEAD
+=======
+import { Book } from '../../pages/book/index';
+>>>>>>> book
 
 const headerInst = new Header();
 const footerInst = new Footer();
@@ -33,7 +41,11 @@ export class Router {
           const main = document.createElement('div');
           this.rootElement.append(main);
           main.outerHTML = mainInst.render();
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> book
           const footer = document.createElement('div');
           this.rootElement.append(footer);
           footer.outerHTML = footerInst.render();
@@ -88,12 +100,35 @@ export class Router {
           const app = document.createElement('div');
           app.classList.add('app');
           this.rootElement.appendChild(app);
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> book
           sprintScript();
 
           document.body.style.overflow = '';
         },
       },
+<<<<<<< HEAD
+=======
+      {
+        name: '/book',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+
+          const app = document.createElement('div');
+          app.classList.add('app');
+          this.rootElement.appendChild(app);
+
+          Book();
+
+          document.body.style.overflow = '';
+        },
+      },
+>>>>>>> book
     ];
 
     this.defaultRoute = {
