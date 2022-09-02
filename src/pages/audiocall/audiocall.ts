@@ -17,6 +17,7 @@ export let series_of_answers = 0;
 export class AudioCall {
   async render() {
     return audioElement();
+    
   }
 
   async page_scripts() {
@@ -171,28 +172,68 @@ export class AudioCall {
     }
  
     nextButton.addEventListener('click', nextQuestion);
-    
-      document.addEventListener('keydown', (event) => {
-        answers.forEach(async (element) => {
-          if (element.getAttribute('data-number') === event.code) {
-            const auidoButton = document.querySelector('.play-btn') as HTMLElement;
-            const button = ((document.querySelector('.answers__container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
-            const rightAnswer = auidoButton.getAttribute('data-word');
-            const selected = button.getAttribute('data-word');
-            if (selected !== rightAnswer) {
-              series_of_answers = 0;
-              button.classList.add('wrong-answer');
-              array[answer_number].choice = 'wrong';
-              showRightWord();
-            } else {
-              right_answers_counter++;
-              button.classList.add('right-answer');
-              array[answer_number].choice = 'right';
-              showRightWord();
-            }
-          } 
-        });
-      });
+
+   document.addEventListener('keydown', event =>{
+    const auidoButton = document.querySelector('.play-btn') as HTMLElement;
+    const rightAnswer = auidoButton.getAttribute('data-word');
+    const buttons = document.querySelectorAll('.answers')
+    if(event.code == 'Digit1') {
+      if(buttons[0].innerHTML==rightAnswer) {
+        right_answers_counter++;
+        buttons[0].classList.add('right-answer');
+        array[answer_number].choice = 'right';
+        showRightWord();
+      }
+      else {
+        series_of_answers = 0;
+        buttons[0].classList.add('wrong-answer');
+        array[answer_number].choice = 'wrong';
+        showRightWord();
+      }
+    }
+    if(event.code == 'Digit2') {
+      if(buttons[1].innerHTML==rightAnswer) {
+        right_answers_counter++;
+        buttons[1].classList.add('right-answer');
+        array[answer_number].choice = 'right';
+        showRightWord();
+      }
+      else {
+        series_of_answers = 0;
+        buttons[1].classList.add('wrong-answer');
+        array[answer_number].choice = 'wrong';
+        showRightWord();
+      }
+    }
+    if(event.code == 'Digit3') {
+      if(buttons[2].innerHTML==rightAnswer) {
+        right_answers_counter++;
+        buttons[2].classList.add('right-answer');
+        array[answer_number].choice = 'right';
+        showRightWord();
+      }
+      else {
+        series_of_answers = 0;
+        buttons[2].classList.add('wrong-answer');
+        array[answer_number].choice = 'wrong';
+        showRightWord();
+      }
+    }
+    if(event.code == 'Digit4') {
+      if(buttons[3].innerHTML==rightAnswer) {
+        right_answers_counter++;
+        buttons[3].classList.add('right-answer');
+        array[answer_number].choice = 'right';
+        showRightWord();
+      }
+      else {
+        series_of_answers = 0;
+        buttons[3].classList.add('wrong-answer');
+        array[answer_number].choice = 'wrong';
+        showRightWord();
+      }
+    }
+   })
   }
 }
 

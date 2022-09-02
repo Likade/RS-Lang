@@ -11,6 +11,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
+    flex-direction: column;
 }
 
 .button {
@@ -157,4 +158,9 @@
 .game-result {
     font-family: "GilroyRegular";
     font-size: 22px;
+}
+.sprint-table{
+    width: auto;
+    max-height: 450px;
+    overflow: auto;
 }

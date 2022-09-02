@@ -19,15 +19,17 @@ const card = document.createElement('div');
 
 
 const apiURL = 'https://rs-lang-work.herokuapp.com/';
-let secondsForGame = 30;
+let secondsForGame = 10;
 const progressBarWidth = 100 / secondsForGame;
 let wordsArray: Word[];
 let shuffleDictionary: any[] = [];
 let currentWord: Word;
 let userLearningLevel = 1;
-const dictionary: { word: any; wordTranslate: any; truth: string; }[] = [];
+const dictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
 let wordIsTrue = false;
 let rightAnswers = 0;
+
+let answersArray:Word[] = [];
 
 let count = 5;
 
@@ -63,6 +65,7 @@ gameStartButton.classList.add('game-start-button');
 gameStartButton.classList.add('btn');
 gameStartButton.innerText = 'Начать';
 gameStartScreen.append(gameStartButton);
+answersArray =[];
 };
 
 showGameLoadScreen();
@@ -117,6 +120,8 @@ wrapper.innerHTML = '';
 const gameResult = document.createElement('section');
 gameResult.classList.add('game-result');
 const gameResultText = document.createElement('p');
+const resTable = document.createElement('tbody');
+resTable.className = 'table sprint-table';
 
 if (localStorage.rsLangGameSprintScore) {
   const savedScore = localStorage.rsLangGameSprintScore;
@@ -139,6 +144,23 @@ resetLink.innerText = 'Try again!';
 gameResult.append(gameResultText);
 gameResult.append(resetLink);
 wrapper.append(gameResult);
+
+let html = '';
+answersArray.map(word=>{
+  dictionary.map(dword=>{
+    if(word.word==dword.word)
+    html+=`<tr>
+    <td onclick="document.querySelector('#${dword.word}-audio').play()" class="statistic-audio"><audio id="${dword.word}-audio" src="https://rs-lang-work.herokuapp.com/${dword.audio}"></audio></td>
+    <td>${dword.word}</td>
+    <td>${dword.transcription}</td>
+    <td>${dword.wordTranslate}</td>
+    <td class="${word.choice}-choice"></td>
+  </tr>`;
+  });
+});
+
+resTable.innerHTML = html;
+wrapper.append(resTable);
 };
 
 const progressBarChange = (param: number) => {
@@ -174,18 +196,21 @@ currentWord = shuffleDictionary.pop();
 question.innerText = currentWord.word;
 answer.innerText = currentWord.wordTranslate;
 wordIsTrue = currentWord.truth;
+currentWord.choice = 'wrong';
+answersArray.push(currentWord);
 };
 
 const makeDictionary = () => {
 while (wordsArray.length) {
   currentWord = wordsArray.pop();
+  const { audio } = currentWord;
   const { word } = currentWord;
   const { wordTranslate } = currentWord;
-  dictionary.push({ word, wordTranslate, truth: 'true' });
+  const { transcription } = currentWord;
+  dictionary.push({ audio, word, transcription, wordTranslate, truth: 'true' });
 }
 
 // make shuffle true/false dictionary array
-console.log(dictionary);
 const arrayTrue = dictionary.slice(0, Math.floor(dictionary.length / 2));
 let arrayFalse = dictionary.slice(Math.floor(dictionary.length / 2));
 const tempWords: any[] = [];
@@ -197,11 +222,11 @@ arrayFalse.forEach((item) => {
 tempTranslations.unshift(tempTranslations.pop());
 arrayFalse = [];
 for (let i = 0; i < dictionary.length / 2; i += 1) {
-  arrayFalse.push({ word: tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
+  arrayFalse.push({audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
 }
 shuffleDictionary = [...arrayTrue, ...arrayFalse].sort(() => 0.5 - Math.random());
-
-showWord();
+if(dictionary.length>79)
+  showWord();
 };
 
 const getWords = (page: number, group: number) => {
@@ -228,7 +253,7 @@ if ((event.target as Element).classList.contains('game-start-button')) {
     timerStart!.innerHTML = String(count);
     if (count > 0) {
       const audio = new Audio();
-      audio.src = "../../assets/audio/final.mp3"; //помогите подключить файлик
+      audio.src = "final.mp3"; //помогите подключить файлик
       audio.autoplay = true;
     }
     if (count < 0) {
@@ -248,6 +273,7 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
     if ((event.target as HTMLButtonElement).dataset.name === wordIsTrue.toString()) {
       rightAnswers += 1;
       scoreCounter.innerText = `${rightAnswers}`;
+      answersArray[answersArray.length-1].choice = 'right';
       audio.src = "./assets./audio./jg-032316-sfx-elearning-correct-answer-sound-1.mp3"; //помогите подключить файлик
       audio.play();
     } else {
@@ -313,13 +339,20 @@ if (shuffleDictionary.length && secondsForGame > 0) {
     if ((event.code === 'ArrowRight' && (document.querySelector('.disagree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))||(event.code === 'ArrowLeft'&&(document.querySelector('.agree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))) {
       rightAnswers += 1;
       scoreCounter.innerText = `${rightAnswers}`;
-    } else {
+      answersArray[answersArray.length-1].choice = 'right';
+    } else if (event.code === 'ArrowRight' || event.code === 'ArrowLeft'){
       console.log('No! It\'s wrong answer!');
+      showWord();
     }
-    showWord();
   } else {
     console.error('Error: Time is over or no more words!');
   }
 }
+});
+
+document.addEventListener('click', (event) => {
+  if ((event.target as Element).classList.contains('game-reset-button')){
+    location.reload();
+  }   
 });
 };
