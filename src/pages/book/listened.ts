@@ -1,7 +1,8 @@
 import {
-  createUserWord, createItemHardWord, deleteUserWord, createBookHardWord, createBook, createItem,
+  createItemHardWord, createBookHardWord, createBook, createItem,
 } from './render';
-
+import {createUserWord, deleteUserWord} from '../../core/components/api/api';
+import { dataUser, DayStatistic  } from "../../core/components/interfaces/interface";
 //
 // const userId = '6308cda29b13ae0016217e97';
 createItem('5e9f5ee35eb9e72bc21af4b1');
@@ -29,7 +30,8 @@ export function showGroup():void {
 }
 
 export function showItem():void {
-  document.body.addEventListener('click', (event) => {
+    const el =   document.getElementById('main_word-container') as HTMLElement;
+    el.addEventListener('click', (event) => {
     event.preventDefault();
     const itemClear = document.getElementById('main_word-review') as HTMLElement;
     itemClear.innerHTML = '';
@@ -56,7 +58,7 @@ export function showPaginationGroup():void {
     const target = event.target as HTMLElement;
     if (target.classList.contains('page')) {
       const page = +target.innerHTML - 1;
-      createBook(+groupActive, page);
+      createBook(page, +groupActive);
       // карточка при пагинации пуста, при включении createItem дублируется
       // createItem('5e9f5ee35eb9e72bc21af4b1');
     }
@@ -76,7 +78,7 @@ export function showHardWordGroup():void {
         parentItem[i].classList.remove('active_group');
       }
       target.classList.add('active_group');
-      createBookHardWord(userId);
+      createBookHardWord(dataUser.userId);
     }
   });
 }
@@ -86,7 +88,7 @@ export function addHardWord():void {
   elBtn.addEventListener('click', (event) => {
     const elem = event.target as HTMLElement;
     const idCurrentWord = <string>elem.dataset.hard;
-    const idCurrentUser = userId;
+    const idCurrentUser = dataUser.userId;
     const currentWord = { difficulty: 'hard' };
 
     if (elem.classList.contains('btn-hard')) {
@@ -102,7 +104,7 @@ export function removeHardWord():void {
 
     if (elem.classList.contains('btn-learned')) {
       const idCurrentWord = <string>elem.dataset.learned;
-      const idCurrentUser = userId;
+      const idCurrentUser = dataUser.userId;
 
       deleteUserWord(idCurrentUser, idCurrentWord);
       createBook();
