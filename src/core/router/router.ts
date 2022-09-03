@@ -1,18 +1,20 @@
 import { IRoute } from '../components/interfaces/interface';
-import { Main } from '../../pages/main';
-import { TextBook } from '../../pages/textbook';
-import { Authentication } from '../../pages/authentication'; 
+import { Main } from '../../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
+import { Authentication } from '../../pages/authentication';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
 import { headerScript } from '../components/header/script';
-
+import { AudioCall } from '../../pages/audiocall/audiocall';
+import { sprintScript } from '../../pages/sprint/app';
+import { Book } from '../../pages/book/index';
+import { loginUser } from '../components/api/api';
 
 const headerInst = new Header();
 const footerInst = new Footer();
 const mainInst = new Main();
-const textBookInst = new TextBook();
 const authenticationInst = new Authentication();
+const audioCall = new AudioCall();
 
 export class Router {
   private readonly routes: Array<IRoute>;
@@ -33,7 +35,7 @@ export class Router {
           const main = document.createElement('div');
           this.rootElement.append(main);
           main.outerHTML = mainInst.render();
-          
+
           const footer = document.createElement('div');
           this.rootElement.append(footer);
           footer.outerHTML = footerInst.render();
@@ -61,18 +63,56 @@ export class Router {
         },
       },
       {
-        name: '/textbook',
+        name: '/audiocall',
         component: () => {
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
 					if (localStorage.getItem('nameUser')) headerScript();
 
-          const textBook = document.createElement('div');
-          this.rootElement.append(textBook);
-          textBook.outerHTML = textBookInst.render();
+          const audioGame = document.createElement('div');
+          this.rootElement.append(audioGame);
+          const getLink = async () => {
+            audioGame.outerHTML = await audioCall.render();
+            await audioCall.page_scripts();
+          }
+          getLink();
 
-					const footer = document.createElement('div');
+          document.body.style.overflow = '';
+        },
+      },
+      {
+        name: '/sprint',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
+
+          const app = document.createElement('div');
+          app.classList.add('app');
+          this.rootElement.appendChild(app);
+
+          sprintScript();
+
+          document.body.style.overflow = '';
+        },
+      },
+      {
+        name: '/book',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
+
+          const app = document.createElement('div');
+          app.classList.add('book-app');
+          this.rootElement.appendChild(app);
+
+          Book();
+
+          const footer = document.createElement('div');
           this.rootElement.append(footer);
           footer.outerHTML = footerInst.render();
 
@@ -87,6 +127,8 @@ export class Router {
         this.rootElement.innerHTML = 'Default Page';
       },
     };
+
+    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
   }
 
   updateRouter(): void {

@@ -4,6 +4,12 @@
 	margin: 0;
 }
 
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+
 @font-face {
 	font-family: "GilroyBold";  
 	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype"); 
@@ -119,9 +125,9 @@ body {
 	align-items: center;
 }
 
-.main-container {
+// .main-container {
 
-}
+// }
 
 .footer-container {
 	display: flex;
@@ -270,6 +276,13 @@ body {
 // MAIN INFORMATION CONTAINER START
 .main-information-container {
 	padding-top: 140px;
+}
+
+.main-information-container p,
+.our-benefits-container p,
+.learn-new-words-title, .our-games-title,
+.our-team-title {
+	margin-top: 20px;
 }
 
 .main-text {
@@ -479,7 +492,7 @@ body {
 	font-family: 'GilroyHeavy';
 	font-style: normal;
 	font-weight: 900;
-	font-size: 64px;
+	font-size: 58px;
 	line-height: 82px;
 	text-align: center;
 	color: #FFFFFF;
