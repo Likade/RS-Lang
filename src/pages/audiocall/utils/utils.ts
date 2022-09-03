@@ -52,15 +52,15 @@ export type Word = {
 };
 
 export const infoBook = {
-  group: 1,
-  page: 1,
+  group: 0,
+  page: 0,
   isFromBook: false
 }
 
 
 export async function generateWords(group: number) {
   if (infoBook.isFromBook) {
-    array = await getWords(infoBook.page - 1, infoBook.group - 1);
+    array = await getWords(infoBook.page, infoBook.group);
   }
     else{for (let numberOfWord = 1; numberOfWord <= COUNT_OF_WORDS; numberOfWord++) {
       const numberOfActualWord = randomInteger(0,19);

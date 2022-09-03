@@ -59,7 +59,7 @@ export class AudioCall {
           while (answersBody.firstChild) {
             answersBody.removeChild(answersBody.firstChild);
           }
-          await renderLevel(infoBook.group - 1);
+          await renderLevel(infoBook.group);
           (document.querySelector('.audiocall-round') as HTMLElement).classList.remove('hide');
         });
       }

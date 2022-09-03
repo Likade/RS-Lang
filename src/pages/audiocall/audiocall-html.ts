@@ -104,8 +104,7 @@ export const audioElement = () => `
         </div>
         <div class="audiocall-description-frombook hide">
           <h1 class="audiocall-title">Аудиовызов</h1>
-          <div class="audiocall-text">Выберите из вариантов ответа правильный перевод слова, который услышите. 
-            Можно использовать клавиши 1, 2, 3, 4 для ответа и Enter для перехода к следующему вопросу.
+          <div class="audiocall-text">Добро пожаловать!<br>В этой игре вам нужно будет слушать произношение слова и выбирать его перевод из предложенных вариантов.<br>Удачи!
           </div>
           <button class="audiocall-start">Начать</button>
         </div>   
