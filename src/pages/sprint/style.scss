@@ -9,9 +9,9 @@
     margin: auto;
     background-color: #2f2f2f;
     display: flex;
-    justify-content: center;
     align-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 .button {
@@ -62,7 +62,9 @@
     height: 50px;
     width: 50px;
     text-align: center;
-    padding: 2.2% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 100px;
     font-family: "GilroyBold";
     font-size: 20px;
@@ -158,9 +160,13 @@
 .game-result {
     font-family: "GilroyRegular";
     font-size: 22px;
+    min-height: 215px;
 }
 .sprint-table{
     width: auto;
-    max-height: 450px;
+    max-height: 350px;
     overflow: auto;
+}
+.hidden {
+    display: none;
 }
