@@ -149,7 +149,6 @@ $secondColor: #0295DB;
 .main{
   width: 100%;
   height: auto;
-  background: #0B0E1B;
 
   &-inner{
     display: flex;
@@ -335,6 +334,10 @@ $secondColor: #0295DB;
       }
 }
 
+.main-book{
+  background-color: #0B0E1B;
+}
+
   .btn_ctrl{
   }
   .btn_learned{
@@ -425,4 +428,17 @@ $secondColor: #0295DB;
     max-width: 305px;
     max-height: 115px;
   }
+}
+
+.games-btns {
+  display: block;
+  width: 160px;
+  height: 40px;
+  border-radius: 10px;
+  transition: all 0.5s ease;
+  font-size: 20px;
+}
+
+.sprint-btn{
+
 }

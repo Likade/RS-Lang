@@ -26,6 +26,8 @@ function logRegCallback() {
 		if(!isLogin) {
 			const email = (document.querySelector('[type="email"]') as HTMLInputElement).value;
 			const password = (document.querySelector('[type="password"]') as HTMLInputElement).value;
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
 
 			loginUser({ 'email': email, 'password': password }).then(() => {
 				if (dataUser.errCode != '') {

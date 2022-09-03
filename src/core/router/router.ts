@@ -8,6 +8,7 @@ import { headerScript } from '../components/header/script';
 import { AudioCall } from '../../pages/audiocall/audiocall';
 import { sprintScript } from '../../pages/sprint/app';
 import { Book } from '../../pages/book/index';
+import { loginUser } from '../components/api/api';
 
 const headerInst = new Header();
 const footerInst = new Footer();
@@ -103,10 +104,14 @@ export class Router {
           header.outerHTML = headerInst.render();
 
           const app = document.createElement('div');
-          app.classList.add('app');
+          app.classList.add('book-app');
           this.rootElement.appendChild(app);
 
           Book();
+
+          const footer = document.createElement('div');
+          this.rootElement.append(footer);
+          footer.outerHTML = footerInst.render();
 
           document.body.style.overflow = '';
         },
@@ -119,6 +124,8 @@ export class Router {
         this.rootElement.innerHTML = 'Default Page';
       },
     };
+
+    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
   }
 
   updateRouter(): void {

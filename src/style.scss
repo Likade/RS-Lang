@@ -4,6 +4,7 @@
 	margin: 0;
 }
 
+
 @font-face {
 	font-family: "GilroyBold";  
 	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype"); 
@@ -270,6 +271,13 @@ body {
 // MAIN INFORMATION CONTAINER START
 .main-information-container {
 	padding-top: 140px;
+}
+
+.main-information-container p,
+.our-benefits-container p,
+.learn-new-words-title, .our-games-title,
+.our-team-title {
+	margin-top: 20px;
 }
 
 .main-text {

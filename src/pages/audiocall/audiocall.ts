@@ -1,7 +1,8 @@
 import { getUserStatistic, 
          updateUserStatistic,  
          createUserWord, 
-         updateUserWord } from '../../core/components/api/api';
+         updateUserWord,
+        loginUser } from '../../core/components/api/api';
 import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
 import { array, showRightWord, Word } from './utils/utils';
 import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
@@ -16,11 +17,13 @@ export let series_of_answers = 0;
 
 export class AudioCall {
   async render() {
+    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
     return audioElement();
     
   }
 
   async page_scripts() {
+    console.log(dataUser.userId)
     if (dataUser.userId !== '') {
       const statisticStorage: DayStatistic= await getUserStatistic();     
       userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;

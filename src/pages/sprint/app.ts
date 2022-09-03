@@ -342,8 +342,8 @@ if (shuffleDictionary.length && secondsForGame > 0) {
       answersArray[answersArray.length-1].choice = 'right';
     } else if (event.code === 'ArrowRight' || event.code === 'ArrowLeft'){
       console.log('No! It\'s wrong answer!');
-      showWord();
     }
+    showWord();
   } else {
     console.error('Error: Time is over or no more words!');
   }
