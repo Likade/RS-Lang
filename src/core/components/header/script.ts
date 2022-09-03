@@ -17,11 +17,11 @@ export const headerScript = () => {
 	}
 
 	document.querySelector('.logout-btn').addEventListener('click', () => {
-		localStorage.setItem('token', '');
-		localStorage.setItem('userId', '');
-		localStorage.setItem('nameUser', '');
-		localStorage.setItem('login', '');
-		localStorage.setItem('password', '');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		localStorage.removeItem('nameUser');
+		localStorage.removeItem('email');
+		localStorage.removeItem('password');
 		
 		document.location.href = '#/';
 	})

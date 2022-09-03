@@ -95,17 +95,17 @@ export class AudioCall {
           const selected = target.value;
           const currentWord = { "difficulty": "hard" };
          
-          userStatistic.wordInAudiocall[array[answer_number].id] = {
+          if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id] = {
             audiocall: {
               guessed: 0,
               unguessed: 0,
               guessedInARow: 0,
             }
-          }
+          }}
           
           if (selected !== rightAnswer) {
-            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
-            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed + 1;
+            if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
+            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed + 1;}
             series_of_answers = 0;
             target.style.background = 'red';
             array[answer_number].choice = 'wrong';
@@ -113,14 +113,14 @@ export class AudioCall {
             await createUserWord(dataUser.userId, array[answer_number].id, currentWord);
           } 
           else {
-            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
-            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;
+            if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
+            userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;}
             right_answers_counter++;
             series_of_answers++;
             target.style.background = 'green';
             array[answer_number].choice = 'right';
             showRightWord();
-            if (userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
+            if (dataUser.userId !== '' && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
               await updateUserWord(dataUser.userId, array[answer_number].id, { "difficulty": "learned" });
             }
           }
@@ -141,14 +141,14 @@ export class AudioCall {
       if (answer_number === 19) {
         await renderAuidoCallStatistic();
         array_of_results.map(async (element: Word) => {
-          if (userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+          if (dataUser.userId !== '' && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
           else {
-            userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
+            if (dataUser.userId !== '') {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
             userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
             userStatistic.wordsInQuiestions.push(element.word);
             if (series_of_answers > userStatistic.audiocallSeries) {
               userStatistic.audiocallSeries = series_of_answers;
-            } 
+            }} 
           }
         })
         if (dataUser.userId !== '') {
