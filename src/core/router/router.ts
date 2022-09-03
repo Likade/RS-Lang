@@ -1,6 +1,7 @@
 import { IRoute } from '../components/interfaces/interface';
 import { Main } from '../../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
 import { Authentication } from '../../pages/authentication';
+import { Stats } from '../../pages/stats';
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
 import { authScr } from '../../pages/authentication/script';
@@ -13,6 +14,7 @@ import { loginUser } from '../components/api/api';
 const headerInst = new Header();
 const footerInst = new Footer();
 const mainInst = new Main();
+const statsInst = new Stats();
 const authenticationInst = new Authentication();
 const audioCall = new AudioCall();
 
@@ -60,6 +62,29 @@ export class Router {
           authScr();
 
           document.body.style.overflow = 'hidden';
+        },
+      },
+			{
+        name: '/stats',
+        component: () => {
+					if (!localStorage.getItem('nameUser')) {location.href = '#/'; return};
+
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
+
+          const stats = document.createElement('div');
+          this.rootElement.append(stats);
+          stats.outerHTML = statsInst.render();
+
+          //authScr();
+
+					const footer = document.createElement('div');
+          this.rootElement.append(footer);
+          footer.outerHTML = footerInst.render();
+
+          document.body.style.overflow = '';
         },
       },
       {
