@@ -1,5 +1,6 @@
 import { IRoute } from '../components/interfaces/interface';
-import { Main } from '../../pages/main'; // сюда подключите мэйн страницу !!!ОБЯЗАТЕЛЬНО!!!
+import { Main } from '../../pages/main';
+import { TextBook } from '../../pages/textbook';
 import { Authentication } from '../../pages/authentication'; 
 import { Header } from '../components/header';
 import { Footer } from '../components/footer';
@@ -10,6 +11,7 @@ import { headerScript } from '../components/header/script';
 const headerInst = new Header();
 const footerInst = new Footer();
 const mainInst = new Main();
+const textBookInst = new TextBook();
 const authenticationInst = new Authentication();
 
 export class Router {
@@ -56,6 +58,25 @@ export class Router {
           authScr();
 
           document.body.style.overflow = 'hidden';
+        },
+      },
+      {
+        name: '/textbook',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
+
+          const textBook = document.createElement('div');
+          this.rootElement.append(textBook);
+          textBook.outerHTML = textBookInst.render();
+
+					const footer = document.createElement('div');
+          this.rootElement.append(footer);
+          footer.outerHTML = footerInst.render();
+
+          document.body.style.overflow = '';
         },
       },
     ];
