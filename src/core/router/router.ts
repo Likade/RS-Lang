@@ -68,6 +68,7 @@ export class Router {
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
 
           const audioGame = document.createElement('div');
           this.rootElement.append(audioGame);
@@ -86,6 +87,7 @@ export class Router {
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
 
           const app = document.createElement('div');
           app.classList.add('app');
@@ -102,6 +104,7 @@ export class Router {
           const header = document.createElement('div');
           this.rootElement.append(header);
           header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
 
           const app = document.createElement('div');
           app.classList.add('book-app');
