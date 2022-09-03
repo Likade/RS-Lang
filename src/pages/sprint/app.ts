@@ -19,7 +19,7 @@ const card = document.createElement('div');
 
 
 const apiURL = 'https://rs-lang-work.herokuapp.com/';
-let secondsForGame = 10;
+let secondsForGame = 30;
 const progressBarWidth = 100 / secondsForGame;
 let wordsArray: Word[];
 let shuffleDictionary: any[] = [];

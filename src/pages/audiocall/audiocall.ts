@@ -172,6 +172,28 @@ export class AudioCall {
     }
  
     nextButton.addEventListener('click', nextQuestion);
+    
+      document.addEventListener('keydown', (event) => {
+        answers.forEach(async (element) => {
+          if (element.getAttribute('data-number') === event.code) {
+            const auidoButton = document.querySelector('.play-btn') as HTMLElement;
+            const button = ((document.querySelector('.answers__container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
+            const rightAnswer = auidoButton.getAttribute('data-word');
+            const selected = button.getAttribute('data-word');
+            if (selected !== rightAnswer) {
+              series_of_answers = 0;
+              button.classList.add('wrong-answer');
+              array[answer_number].choice = 'wrong';
+              showRightWord();
+            } else {
+              right_answers_counter++;
+              button.classList.add('right-answer');
+              array[answer_number].choice = 'right';
+              showRightWord();
+            }
+          } 
+        });
+      });
 
    document.addEventListener('keydown', event =>{
     const auidoButton = document.querySelector('.play-btn') as HTMLElement;
