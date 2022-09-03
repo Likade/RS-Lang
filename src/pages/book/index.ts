@@ -21,7 +21,7 @@ showPaginationGroup();
 showHardWordGroup();
 
 document.addEventListener('click', event=>{
-  if((event.target as HTMLElement).classList.contains('audiocall-btn')) {
+  if((event.target as HTMLElement).classList.contains('audiocall-btn') || (event.target as HTMLElement).classList.contains('sprint-btn')) {
     infoBook.isFromBook = true;
   }
 })

@@ -1,5 +1,6 @@
 import { Word } from "../audiocall/utils/utils";
 import './style.scss'
+import { infoBook } from "../audiocall/utils/utils";
 
 export const sprintScript = () => {
 
@@ -28,6 +29,8 @@ let userLearningLevel = 1;
 const dictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
 let wordIsTrue = false;
 let rightAnswers = 0;
+let bookCount = 1;
+let bookDictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
 
 let answersArray:Word[] = [];
 
@@ -48,16 +51,19 @@ gameStartScreen.append(gameTitle);
 
 const gameDescription = document.createElement('p');
 gameDescription.classList.add('game-description');
-gameDescription.innerHTML = 'Добро пожаловать!<br>В этой игре вам нужно будет быстро определять правильность соответствия слова и его перевода за ограниченный промежуток времени. Удачи! <br>Выберите уровень сложности';
+if(infoBook.isFromBook) gameDescription.innerHTML = 'Добро пожаловать!<br>В этой игре вам нужно будет быстро определять правильность соответствия слова и его перевода за ограниченный промежуток времени. Удачи!';
+else gameDescription.innerHTML = 'Добро пожаловать!<br>В этой игре вам нужно будет быстро определять правильность соответствия слова и его перевода за ограниченный промежуток времени. Удачи! <br>Выберите уровень сложности';
 gameStartScreen.append(gameDescription);
 
-const level = document.createElement('select');
-for(let i = 0; i<6; i++) {
-  let elem = document.createElement('option');
-  elem.innerHTML = `${i+1}`;
-  level.append(elem);
+if(!infoBook.isFromBook){
+  const level = document.createElement('select');
+  for(let i = 0; i<6; i++) {
+    let elem = document.createElement('option');
+    elem.innerHTML = `${i+1}`;
+    level.append(elem);
+    gameStartScreen.append(level);}
  }
-gameStartScreen.append(level);
+
 
 const gameStartButton = document.createElement('button');
 gameStartButton.classList.add('button');
@@ -145,9 +151,23 @@ gameResult.append(gameResultText);
 gameResult.append(resetLink);
 wrapper.append(gameResult);
 
+
+
 let html = '';
 answersArray.map(word=>{
-  dictionary.map(dword=>{
+  if(infoBook.isFromBook){
+    bookDictionary.map(dword=>{
+      if(word.word==dword.word)
+      html+=`<tr>
+      <td onclick="document.querySelector('#${dword.word}-audio').play()" class="statistic-audio"><audio id="${dword.word}-audio" src="https://rs-lang-work.herokuapp.com/${dword.audio}"></audio></td>
+      <td>${dword.word}</td>
+      <td>${dword.transcription}</td>
+      <td>${dword.wordTranslate}</td>
+      <td class="${word.choice}-choice"></td>
+    </tr>`;
+    });
+  }
+  else{dictionary.map(dword=>{
     if(word.word==dword.word)
     html+=`<tr>
     <td onclick="document.querySelector('#${dword.word}-audio').play()" class="statistic-audio"><audio id="${dword.word}-audio" src="https://rs-lang-work.herokuapp.com/${dword.audio}"></audio></td>
@@ -156,7 +176,7 @@ answersArray.map(word=>{
     <td>${dword.wordTranslate}</td>
     <td class="${word.choice}-choice"></td>
   </tr>`;
-  });
+  });}
 });
 
 resTable.innerHTML = html;
@@ -198,6 +218,30 @@ answer.innerText = currentWord.wordTranslate;
 wordIsTrue = currentWord.truth;
 currentWord.choice = 'wrong';
 answersArray.push(currentWord);
+if(infoBook.isFromBook && shuffleDictionary.length<2) {
+  dictionary.length = 0;
+  if(infoBook.page ==0){
+    infoBook.page=29;
+    infoBook.group--;
+    bookCount=0;
+  }
+  getWords(infoBook.group, infoBook.page-bookCount);
+  bookCount++;
+  const arrayTrue = dictionary.slice(0, Math.floor(dictionary.length / 2));
+  let arrayFalse = dictionary.slice(Math.floor(dictionary.length / 2));
+  const tempWords: any[] = [];
+  const tempTranslations: any[] = [];
+  arrayFalse.forEach((item) => {
+    tempWords.push(item.word);
+    tempTranslations.push(item.wordTranslate);
+  });
+  tempTranslations.unshift(tempTranslations.pop());
+  arrayFalse = [];
+  for (let i = 0; i < dictionary.length / 2; i += 1) {
+    arrayFalse.push({audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
+  }
+  shuffleDictionary = [...arrayTrue, ...arrayFalse].sort(() => 0.5 - Math.random());
+}
 };
 
 const makeDictionary = () => {
@@ -208,6 +252,7 @@ while (wordsArray.length) {
   const { wordTranslate } = currentWord;
   const { transcription } = currentWord;
   dictionary.push({ audio, word, transcription, wordTranslate, truth: 'true' });
+  bookDictionary.push(dictionary[dictionary.length-1]);
 }
 
 // make shuffle true/false dictionary array
@@ -225,7 +270,7 @@ for (let i = 0; i < dictionary.length / 2; i += 1) {
   arrayFalse.push({audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
 }
 shuffleDictionary = [...arrayTrue, ...arrayFalse].sort(() => 0.5 - Math.random());
-if(dictionary.length>79)
+if(dictionary.length>79 || infoBook.isFromBook)
   showWord();
 };
 
@@ -241,8 +286,13 @@ fetch(`${apiURL}words?page=${page}&group=${group}`)
 
 app.addEventListener('click', (event) => {
 if ((event.target as Element).classList.contains('game-start-button')) {
-  userLearningLevel = Number(document.querySelector('select').value);
-  for(let i =0; i<4; i++) getWords(Math.random() * 29, Math.floor(Math.random() * userLearningLevel));
+  if(infoBook.isFromBook){
+    getWords(infoBook.page, infoBook.group);
+  }
+  else {
+    userLearningLevel = Number(document.querySelector('select').value);
+    for(let i =0; i<4; i++) getWords(Math.random() * 29, Math.floor(Math.random() * userLearningLevel));
+  }
   wrapper.innerHTML = '';
   const timerStart = document.createElement('div');
   timerStart.className = 'timer-start';
@@ -352,7 +402,10 @@ if (shuffleDictionary.length && secondsForGame > 0) {
 
 document.addEventListener('click', (event) => {
   if ((event.target as Element).classList.contains('game-reset-button')){
-    location.reload();
+    if(infoBook.isFromBook)
+    {infoBook.isFromBook = true;
+    console.log(infoBook)}
+    else location.reload();
   }   
 });
 };
