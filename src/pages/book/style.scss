@@ -437,8 +437,28 @@ $secondColor: #0295DB;
   border-radius: 10px;
   transition: all 0.5s ease;
   font-size: 20px;
+  height: 80px;
+  
+}
+
+.main-book .buttons {
+  flex-direction:row;
+  justify-content: space-between;
+  margin: 0;
+  padding-bottom: 20px;
+  filter: invert(1);
 }
 
 .sprint-btn{
+ margin-right: 20px;
+}
 
+.audiocall-btn {
+  margin-left: 20px;
+}
+
+.buttons {
+  font-family: "GilroyHeavy";
+  font-size: 25px;
+  line-height: 80px;
 }

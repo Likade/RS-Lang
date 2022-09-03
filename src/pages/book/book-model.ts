@@ -32,8 +32,11 @@ export const bookBody = () => {
     <ul id="pagination" class="pagination"></ul>
   </div>
 </div>
-<button class='btn games-btns'>Аудиовызов</button>
-<button class="btn games-btns sprint-btn">спринт</button>
+<div class = 'buttons'>
+<a href='#/audiocall'><button class='btn games-btns audiocall-btn'>Аудиовызов</button></a>
+Попробуйте поиграть, чтобы лучше запомнить слова
+<a href = '#/sprint'><button class="btn games-btns sprint-btn">спринт</button></a>
+</div>
 </div>
 `;
 };
