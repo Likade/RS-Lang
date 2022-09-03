@@ -34,6 +34,19 @@
   color: white;
   text-shadow: 1px 1px 3px #000;
 }
+.audiocall-description-frombook {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+  min-height: 250px;
+  background-color: orange;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .audiocall-start {
   margin: 0 auto;
   width: 160px;

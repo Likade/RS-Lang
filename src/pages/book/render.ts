@@ -4,6 +4,7 @@ import {getWord} from '../../core/components/api/api';
 // import {deleteUserWord} from '../../core/components/api/api';
 // import {getUserWord} from '../../core/components/api/api';
 import {getUserWords} from '../../core/components/api/api';
+import { infoBook } from '../audiocall/utils/utils';
 
 
 // export const getWords = async (group:number, page = 0) => {
@@ -113,6 +114,9 @@ export async function createBook(page = 0, group = 0) {
            </div>
     `;
   }
+  infoBook.group = arrWords[0].group;
+  infoBook.page = arrWords[0].page;
+  console.log(infoBook)
 }
 
 export async function createItem(id:string) {
@@ -142,6 +146,10 @@ export async function createItem(id:string) {
      </div>
      </div>
     `;
+    infoBook.group = data.group;
+    infoBook.page = data.page;
+    console.log(infoBook)
+    console.log(data)
 }
 
 export async function createBookHardWord(userId: string) {
@@ -184,4 +192,8 @@ export async function createItemHardWord(wordId:string) {
      </div>
      </div>
     `;
+    infoBook.group = data.group;
+    infoBook.page = data.page;
+    console.log(infoBook)
+    console.log(data)
 }

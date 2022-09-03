@@ -51,15 +51,25 @@ export type Word = {
   textExample: string,
 };
 
+export const infoBook = {
+  group: 1,
+  page: 1,
+  isFromBook: false
+}
+
+
 export async function generateWords(group: number) {
-    for (let numberOfWord = 1; numberOfWord <= COUNT_OF_WORDS; numberOfWord++) {
+  if (infoBook.isFromBook) {
+    array = await getWords(infoBook.page - 1, infoBook.group - 1);
+  }
+    else{for (let numberOfWord = 1; numberOfWord <= COUNT_OF_WORDS; numberOfWord++) {
       const numberOfActualWord = randomInteger(0,19);
       const words = await getWords(randomInteger(0,29), group);
       let newWord: Word;
       
       newWord = (words.slice(numberOfActualWord, numberOfActualWord+ 1)).flat();
       array.push(words[numberOfActualWord]);
-    }
+    }}
   return array;
 }
 document.body.addEventListener('click', (event) => {

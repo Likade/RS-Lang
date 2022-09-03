@@ -21,7 +21,6 @@ export const renderLevel = async (group: number) => {
   `;
   (document.querySelector('.answers__body') as HTMLElement).innerHTML = html;
   (document.querySelector('.play-btn') as HTMLElement).addEventListener('click', () => {
-  document.querySelector('audio').play();
   });
   shuffleAnswers();
 };
@@ -103,6 +102,13 @@ export const audioElement = () => `
             <button value="5" class="levels">6</button>
           </div>
         </div>
+        <div class="audiocall-description-frombook hide">
+          <h1 class="audiocall-title">Аудиовызов</h1>
+          <div class="audiocall-text">Выберите из вариантов ответа правильный перевод слова, который услышите. 
+            Можно использовать клавиши 1, 2, 3, 4 для ответа и Enter для перехода к следующему вопросу.
+          </div>
+          <button class="audiocall-start">Начать</button>
+        </div>   
       </div>
     </div>
     <div class="audiocall-round hide">

@@ -4,7 +4,7 @@ import { getUserStatistic,
          updateUserWord,
         loginUser } from '../../core/components/api/api';
 import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
-import { array, showRightWord, Word } from './utils/utils';
+import { array, showRightWord, Word, infoBook } from './utils/utils';
 import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
 
 import './audiocall.scss';
@@ -23,6 +23,10 @@ export class AudioCall {
   }
 
   async page_scripts() {
+    if (infoBook.isFromBook) {
+      (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
+      (document.querySelector('.audiocall-description-frombook') as HTMLElement).classList.remove('hide');
+    }
     console.log(dataUser.userId)
     if (dataUser.userId !== '') {
       const statisticStorage: DayStatistic= await getUserStatistic();     
@@ -47,7 +51,20 @@ export class AudioCall {
     const answers = document.querySelectorAll('.answers');
 
     function showLevels() {
-        audioCall.addEventListener('click', async (event) => {
+      if (infoBook.isFromBook) {
+        (document.querySelector('.audiocall-start') as HTMLButtonElement).addEventListener('click', async () => {
+          array_of_results = [];
+          (document.querySelector('.audiocall .container') as HTMLElement).classList.add('hide');
+          answer_number = 0;
+          while (answersBody.firstChild) {
+            answersBody.removeChild(answersBody.firstChild);
+          }
+          await renderLevel(infoBook.group - 1);
+          (document.querySelector('.audiocall-round') as HTMLElement).classList.remove('hide');
+        });
+      }
+          else {
+            audioCall.addEventListener('click', async (event) => {
           const target = event.target as HTMLButtonElement;
           if (target.classList.contains('levels')) {
             array_of_results = [];
@@ -60,7 +77,7 @@ export class AudioCall {
             await renderLevel(+target.value);
             audiocallRound.classList.remove('hide');
           }
-        }); 
+        }); }
     }
     showLevels();
 
