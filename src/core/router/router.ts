@@ -153,7 +153,7 @@ export class Router {
       },
     };
 
-    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
+    if(localStorage.getItem('email')!='') loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
   }
 
   updateRouter(): void {

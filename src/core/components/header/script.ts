@@ -20,6 +20,9 @@ export const headerScript = () => {
 		localStorage.setItem('token', '');
 		localStorage.setItem('userId', '');
 		localStorage.setItem('nameUser', '');
+		localStorage.setItem('login', '');
+		localStorage.setItem('password', '');
+		
 		document.location.href = '#/';
 	})
 }
