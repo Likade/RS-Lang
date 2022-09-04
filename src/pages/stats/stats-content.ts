@@ -1,6 +1,7 @@
 import { userStatistic } from './script';
 
-export const statsContent = () => `<div class="stats">
+export const statsContent = () => {
+	let html = `<div class="stats">
 <div class="stats-container container">
 	<div class="title">
 		<p class="stats-title">Статистика</p>
@@ -86,5 +87,5 @@ export const statsContent = () => `<div class="stats">
 		</div>
 	</div>
 </div>
-</div>`;
-console.log(userStatistic)
+</div>`
+return html};

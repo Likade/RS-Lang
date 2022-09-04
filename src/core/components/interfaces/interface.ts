@@ -36,6 +36,7 @@ export type DayStatistic = {
 	  totalPercent: number,
 	  wordInGames: {},
 	  wordInAudiocall: {},
+	  wordInSprint: {},
 	}
 }
 	  
@@ -54,6 +55,7 @@ export const userStatistic: any =  {
 	sprintSeries: 0,
 	wordInGames: {},
 	wordInAudiocall: {},
+	wordInSprint: {},
 	learnedWordsFromBook: 0
 }
 

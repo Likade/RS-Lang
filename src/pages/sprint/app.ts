@@ -1,10 +1,26 @@
 import { Word } from "../audiocall/utils/utils";
 import './style.scss'
 import { infoBook } from "../audiocall/utils/utils";
+import { dataUser, userStatistic, DayStatistic } from "../../core/components/interfaces/interface";
+import { createUserWord, getUserStatistic, updateUserStatistic, updateUserWord } from "../../core/components/api/api";
 
 export const sprintScript = () => {
 
-  
+  async function getapi(){if (dataUser.userId !== '') {
+    const statisticStorage: DayStatistic= await getUserStatistic();     
+    userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;
+    userStatistic.audiocallwordsPerDay = statisticStorage.optional.audiocallwordsPerDay;
+    userStatistic.audiocallPercent = String(statisticStorage.optional.audiocallPercent).substr(0, 4);
+    userStatistic.audiocallRounds = statisticStorage.optional.audiocallRounds;
+    userStatistic.allRounds = statisticStorage.optional.allRounds;
+    userStatistic.totalPercent = String(statisticStorage.optional.totalPercent).substr(0, 4);
+    userStatistic.audiocallSeries = statisticStorage.optional.audiocallSeries;
+    userStatistic.wordInSprint = statisticStorage.optional.wordInSprint;
+    userStatistic.wordInGames = statisticStorage.optional.wordInGames;
+    console.log(statisticStorage);
+  }}
+  getapi();
+
 const app = document.querySelector('.app');
 
 const wrapper = document.createElement('div');
@@ -26,11 +42,12 @@ let wordsArray: Word[];
 let shuffleDictionary: any[] = [];
 let currentWord: Word;
 let userLearningLevel = 1;
-const dictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
+const dictionary: {id: string, audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
 let wordIsTrue = false;
 let rightAnswers = 0;
-let bookCount = 1;
+let maxAnswers = 0;
 let bookDictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
+let allRightAnswers = 0;
 
 let answersArray:Word[] = [];
 
@@ -131,14 +148,15 @@ resTable.className = 'table sprint-table';
 
 if (localStorage.rsLangGameSprintScore) {
   const savedScore = localStorage.rsLangGameSprintScore;
-  if (savedScore > rightAnswers) {
-    gameResultText.innerText = `Ваш счёт ${rightAnswers}. Не плохо, но сможете ли вы побить предыдущий рекорд: ${savedScore}`;
+  if (savedScore > maxAnswers) {
+    gameResultText.innerText = `Ваш счёт ${maxAnswers}. Не плохо, но сможете ли вы побить предыдущий рекорд: ${savedScore}`;
   } else {
-    gameResultText.innerText = `Поздравляем! Ваш счёт - ${rightAnswers}. Вы побили свой!`;
-    localStorage.rsLangGameSprintScore = rightAnswers;
+    gameResultText.innerText = `Поздравляем! Ваш счёт - ${maxAnswers}. Вы побили свой!`;
+    localStorage.rsLangGameSprintScore = maxAnswers;
   }
 } else {
-  localStorage.rsLangGameSprintScore = rightAnswers;
+  gameResultText.innerText = `Поздравляем! Ваш счёт - ${maxAnswers}.`
+  localStorage.rsLangGameSprintScore = maxAnswers;
 }
 const resetLink = document.createElement('a');
 resetLink.classList.add('button');
@@ -177,7 +195,48 @@ answersArray.map(word=>{
     <td class="${word.choice}-choice"></td>
   </tr>`;
   });}
+
+  answersArray.map(async (element: Word) => {
+    if (dataUser.userId !== '' && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+    else {
+      if (dataUser.userId !== '') {userStatistic.sprintwordsPerDay = userStatistic.sprintwordsPerDay + 1;
+      userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
+      userStatistic.wordsInQuiestions.push(element.word);
+      if (maxAnswers > userStatistic.sprintSeries) {
+        userStatistic.sprintSeries = maxAnswers;
+      }} 
+    }
+  })
+  if (dataUser.userId !== '') {
+    userStatistic.sprintRounds = userStatistic.audiocallRounds + 1;
+    userStatistic.allRounds = userStatistic.allRounds + 1;
+    userStatistic.sprintPercent = (Number(userStatistic.sprintPercent) + Number(((allRightAnswers / 20) * 100))) / userStatistic.sprintRounds;
+    userStatistic.totalPercent = (Number(userStatistic.totalPercent) + Number(((allRightAnswers / 20) * 100))) / userStatistic.allRounds;
+    
+    const wordPerDay = {
+      learnedWords: 0,
+      optional: {
+        wordsPerDay: userStatistic.wordsPerDay,
+        audiocallwordsPerDay: userStatistic.audiocallwordsPerDay,
+        audiocallRounds: userStatistic.audiocallRounds,
+        audiocallPercent: userStatistic.audiocallPercent,
+        sprintwordsPerDay: userStatistic.sprintwordsPerDay,
+        sprintRounds: userStatistic.sprintRounds,
+        sprintPercent: userStatistic.sprintPercent,
+        allRounds: userStatistic.allRounds,
+        totalPercent: userStatistic.totalPercent,
+        audiocallSeries: userStatistic.audiocallSeries,
+        sprintSeries: userStatistic.sprintSeries,
+        wordInGames: userStatistic.wordInGames,
+        wordInAudiocall: userStatistic.wordInAudiocall,
+        wordInSprint: userStatistic.wordInSprint,
+      }
+    }
+    async function update(){await updateUserStatistic(dataUser.userId, wordPerDay);}
+    update();
+  }
 });
+
 
 resTable.innerHTML = html;
 wrapper.append(resTable);
@@ -218,40 +277,24 @@ answer.innerText = currentWord.wordTranslate;
 wordIsTrue = currentWord.truth;
 currentWord.choice = 'wrong';
 answersArray.push(currentWord);
-if(infoBook.isFromBook && shuffleDictionary.length<2) {
-  dictionary.length = 0;
-  if(infoBook.page ==0){
-    infoBook.page=29;
-    infoBook.group--;
-    bookCount=0;
+if (dataUser.userId !== '') {userStatistic.wordInAudiocall[currentWord.id] = {
+  audiocall: {
+    guessed: 0,
+    unguessed: 0,
+    guessedInARow: 0,
   }
-  getWords(infoBook.group, infoBook.page-bookCount);
-  bookCount++;
-  const arrayTrue = dictionary.slice(0, Math.floor(dictionary.length / 2));
-  let arrayFalse = dictionary.slice(Math.floor(dictionary.length / 2));
-  const tempWords: any[] = [];
-  const tempTranslations: any[] = [];
-  arrayFalse.forEach((item) => {
-    tempWords.push(item.word);
-    tempTranslations.push(item.wordTranslate);
-  });
-  tempTranslations.unshift(tempTranslations.pop());
-  arrayFalse = [];
-  for (let i = 0; i < dictionary.length / 2; i += 1) {
-    arrayFalse.push({audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
-  }
-  shuffleDictionary = [...arrayTrue, ...arrayFalse].sort(() => 0.5 - Math.random());
-}
+}}
 };
 
 const makeDictionary = () => {
 while (wordsArray.length) {
   currentWord = wordsArray.pop();
+  const { id } = currentWord;
   const { audio } = currentWord;
   const { word } = currentWord;
   const { wordTranslate } = currentWord;
   const { transcription } = currentWord;
-  dictionary.push({ audio, word, transcription, wordTranslate, truth: 'true' });
+  dictionary.push({id, audio, word, transcription, wordTranslate, truth: 'true' });
   bookDictionary.push(dictionary[dictionary.length-1]);
 }
 
@@ -267,7 +310,7 @@ arrayFalse.forEach((item) => {
 tempTranslations.unshift(tempTranslations.pop());
 arrayFalse = [];
 for (let i = 0; i < dictionary.length / 2; i += 1) {
-  arrayFalse.push({audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
+  arrayFalse.push({id: tempWords[i], audio: tempWords[i], word: tempWords[i], transcription:tempWords[i], wordTranslate: tempTranslations[i], truth: 'false' });
 }
 shuffleDictionary = [...arrayTrue, ...arrayFalse].sort(() => 0.5 - Math.random());
 if(dictionary.length>79 || infoBook.isFromBook)
@@ -321,16 +364,25 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
   const audio = new Audio();
   if (shuffleDictionary.length && secondsForGame > 0) {
     if ((event.target as HTMLButtonElement).dataset.name === wordIsTrue.toString()) {
+      allRightAnswers++;
       rightAnswers += 1;
-      scoreCounter.innerText = `${rightAnswers}`;
+      if(rightAnswers>maxAnswers)maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
-      audio.src = "./assets./audio./jg-032316-sfx-elearning-correct-answer-sound-1.mp3"; //помогите подключить файлик
-      audio.play();
+      if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
+        userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed = userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed + 1;}
+        if (dataUser.userId !== '' && userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow > 2) {
+          async function create(){await updateUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "learned" });}
+          create();
+        }
     } else {
+      rightAnswers=0;
       console.log('No! It\'s wrong answer!');
-      audio.src = "./assets./audio./zvukovoy-effekt-nepravilnogo-otveta-wrong-buzzer-sound-effect.mp3"; //помогите подключить файлик
-      audio.play();
+      if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow = 0;
+        userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed + 1;}
+        async function create(){await createUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "hard" });}
+        create();
     }
+    scoreCounter.innerText = `${rightAnswers}`;
     showWord();
   } else {
     console.error('Error: Time is over or no more words!');
@@ -388,11 +440,24 @@ if (shuffleDictionary.length && secondsForGame > 0) {
   if (shuffleDictionary.length && secondsForGame > 0) {
     if ((event.code === 'ArrowRight' && (document.querySelector('.disagree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))||(event.code === 'ArrowLeft'&&(document.querySelector('.agree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))) {
       rightAnswers += 1;
-      scoreCounter.innerText = `${rightAnswers}`;
+      allRightAnswers++;
+      if(rightAnswers>maxAnswers) maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
+      if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
+        userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed = userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed + 1;}
+        if (dataUser.userId !== '' && userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow > 2) {
+          async function create(){await updateUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "learned" });}
+          create();
+        }
     } else if (event.code === 'ArrowRight' || event.code === 'ArrowLeft'){
+      rightAnswers=0;
       console.log('No! It\'s wrong answer!');
+      if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow = 0;
+        userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed + 1;}
+        async function create(){await createUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "hard" });}
+        create();
     }
+    scoreCounter.innerText = `${rightAnswers}`;
     showWord();
   } else {
     console.error('Error: Time is over or no more words!');

@@ -31,14 +31,15 @@ export class AudioCall {
     if (dataUser.userId !== '') {
       const statisticStorage: DayStatistic= await getUserStatistic();     
       userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;
-      userStatistic.audiocallwordsPerDay = statisticStorage.optional.audiocallwordsPerDay;
-      userStatistic.audiocallPercent = String(statisticStorage.optional.audiocallPercent).substr(0, 4);
-      userStatistic.audiocallRounds = statisticStorage.optional.audiocallRounds;
+      userStatistic.sprintwordsPerDay = statisticStorage.optional.sprintwordsPerDay;
+      userStatistic.sprintPercent = String(statisticStorage.optional.sprintPercent);
+      userStatistic.sprintRounds = statisticStorage.optional.sprintRounds;
       userStatistic.allRounds = statisticStorage.optional.allRounds;
-      userStatistic.totalPercent = String(statisticStorage.optional.totalPercent).substr(0, 4);
-      userStatistic.audiocallSeries = statisticStorage.optional.audiocallSeries;
-      userStatistic.wordInAudiocall = statisticStorage.optional.wordInAudiocall;
+      userStatistic.totalPercent = String(statisticStorage.optional.totalPercent);
+      userStatistic.sprintSeries = statisticStorage.optional.sprintSeries;
+      userStatistic.wordin = statisticStorage.optional.wordInAudiocall;
       userStatistic.wordInGames = statisticStorage.optional.wordInGames;
+      console.log(statisticStorage);
     }
     
     const answersBody = document.querySelector('.answers__body') as HTMLElement;
@@ -173,6 +174,7 @@ export class AudioCall {
               sprintSeries: userStatistic.sprintSeries,
               wordInGames: userStatistic.wordInGames,
               wordInAudiocall: userStatistic.wordInAudiocall,
+              wordInSprint: userStatistic.wordInSprint,
             }
           }
           await updateUserStatistic(dataUser.userId, wordPerDay);
