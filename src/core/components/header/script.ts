@@ -1,3 +1,5 @@
+import { infoBook } from "../../../pages/audiocall/utils/utils";
+
 export const headerScript = () => {
 	document.querySelector('.login-auth-btn').addEventListener('mouseup', (e) => {
 		document.querySelector('.nav').classList.toggle('ds-none');

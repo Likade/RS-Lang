@@ -366,6 +366,8 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
     if ((event.target as HTMLButtonElement).dataset.name === wordIsTrue.toString()) {
       allRightAnswers++;
       rightAnswers += 1;
+      showWord();
+      scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers)maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
       if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
@@ -377,13 +379,13 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
     } else {
       rightAnswers=0;
       console.log('No! It\'s wrong answer!');
+      showWord();
+      scoreCounter.innerText = `${rightAnswers}`;
       if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow = 0;
         userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed + 1;}
         async function create(){await createUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "hard" });}
         create();
     }
-    scoreCounter.innerText = `${rightAnswers}`;
-    showWord();
   } else {
     console.error('Error: Time is over or no more words!');
     showGameResults();
@@ -420,7 +422,7 @@ if (shuffleDictionary.length && secondsForGame > 0) {
       scoreCounter.classList.add('card-true');
     else scoreCounter.classList.add('card-false');
   }
-
+  scoreCounter.innerText = `${rightAnswers}`;
 } else {
   showGameResults();
 }
@@ -441,6 +443,8 @@ if (shuffleDictionary.length && secondsForGame > 0) {
     if ((event.code === 'ArrowRight' && (document.querySelector('.disagree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))||(event.code === 'ArrowLeft'&&(document.querySelector('.agree') as HTMLElement).innerHTML.includes(String(wordIsTrue)))) {
       rightAnswers += 1;
       allRightAnswers++;
+      showWord();
+      scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers) maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
       if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
@@ -450,15 +454,15 @@ if (shuffleDictionary.length && secondsForGame > 0) {
           create();
         }
     } else if (event.code === 'ArrowRight' || event.code === 'ArrowLeft'){
+      showWord();
       rightAnswers=0;
+      scoreCounter.innerText = `${rightAnswers}`;
       console.log('No! It\'s wrong answer!');
       if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow = 0;
         userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.unguessed + 1;}
         async function create(){await createUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "hard" });}
         create();
     }
-    scoreCounter.innerText = `${rightAnswers}`;
-    showWord();
   } else {
     console.error('Error: Time is over or no more words!');
   }
