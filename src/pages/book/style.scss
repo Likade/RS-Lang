@@ -24,6 +24,7 @@
   }
   .nav_group-list {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     justify-content: space-around;
     padding: 0px;
@@ -31,13 +32,18 @@
   .nav_group-list-title {
     width: 163px;
     height: 163px;
-    padding: 37.5px;
+    padding: 30px;
     background: #B1A3F9;
     border-radius: 30px;
     font-weight: 400;
     font-size: 96px;
     line-height: 115px;
-    margin: 0 7px;
+    margin: 0 5px;
+    &:hover{
+      cursor: pointer;
+      opacity: 0.9;
+      transform: translateY(5px);
+	}
   }
   .nav_group-list-title:first-child{
     background: #B1A3F9;
@@ -51,14 +57,28 @@
   .nav_group-list-title:nth-child(4){
     background: #F49838;
   }
-  .nav_group-list-title:last-child{
+  .nav_group-list-title:nth-child(5){
     background: #E870D6;
+  }
+  .nav_group-list-title:last-child{
+    width: 1048px;
+    height: 120px;
+    display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  margin-top: 15px;
+	  margin-bottom: 60px;
+    background: #EE161F;
+    color: #000000;
+    border-radius: 30px;
+    text-align: center;
+
   }
 
   .group-range {
     display: flex;
-    flex-wrap: wrap;
-    justify-content:center;
+    // flex-wrap: wrap;
+    // justify-content:center;
   }
   .group-range-title {
     font-weight: 900;
@@ -71,18 +91,10 @@
   .group-range-title:nth-child(2){
     color: #BABABA;
   }
-  .group-range-title:nth-child(3){
+  .group-range-title:last-child {
     color: #959495;
   }
-  .group-range-title:last-child {
-    width: 1048px;
-    height: 120px;
-    background: #EE161F;
-    color: #000000;
-    border-radius: 30px;
-    text-align: center;
-    margin: 0 auto;
-  }
+
   &-word-block{
 
   }
@@ -191,9 +203,10 @@
   background-color: #0B0E1B;
 }
 
-  .btn_ctrl{
+  .btn{
+    cursor: pointer;
   }
-  .btn_learned{
+  .btn-learned_word{
     width: 72px;
     height: 28px;
     background: #008D39;
@@ -203,8 +216,23 @@
     line-height: 20px;
     color: #FFFFFF;
   }
-  .btn_repeat{
+  .btn-hard_word{
     width: 72px;
+    height: 28px;
+    background: #FF0744;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 20px;
+    color: #FFFFFF;
+  }
+  .btn-hard_word:disabled,{
+    background: #73CEF5;
+    cursor: not-allowed;
+  }
+
+  .btn-hard-restore{
+    width: 120px;
     height: 28px;
     background: #FF0744;
     border-radius: 10px;
@@ -221,12 +249,18 @@
 .pagination {
 	display: flex;
   align-items: center;
+
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+
   color: #FFFFFF;
   margin-top: 62px;
   margin-bottom: 86px;
   list-style: none;
   li{
-    padding: 0 10px;
+    padding: 0 5px;
     cursor: pointer;
   }
   // a{
@@ -291,7 +325,7 @@
   transition: all 0.5s ease;
   font-size: 20px;
   height: 80px;
-  
+
 }
 
 .main-book .buttons {

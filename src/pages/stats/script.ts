@@ -1,39 +1,41 @@
 import { dataUser  } from "../../core/components/interfaces/interface";
  
 export const userStatistic: any =  {
-  wordsPerDay: 0,
-  audiocallwordsPerDay: 0,
-  sprintwordsPerDay: 0,
-  wordsInQuiestions: [],
-  totalPercent: 0,
-  audiocallPercent: 0,
-  sprintPercent: 0,
-  allRounds: 0,
-  audiocallRounds: 0,
-  sprintRounds: 0,
-  audiocallSeries: 0,
-  sprintSeries: 0,
-  wordInGames: {},
-  wordInAudiocall: {},
-  learnedWordsFromBook: 0
+	wordsPerDay: 0,
+	audiocallwordsPerDay: 0,
+	sprintwordsPerDay: 0,
+	wordsInQuiestions: [],
+	totalPercent: 0,
+	audiocallPercent: 0,
+	sprintPercent: 0,
+	allRounds: 0,
+	audiocallRounds: 0,
+	sprintRounds: 0,
+	audiocallSeries: 0,
+	sprintSeries: 0,
+	wordInGames: {},
+	wordInAudiocall: {},
+	wordInSprint: {},
+	learnedWordsFromBook: 0
 }
 
 export type DayStatistic = {
-  learnedWords: number,
-  optional: {
-    wordsPerDay: number,
-    audiocallwordsPerDay: number,
-    audiocallRounds: number,
-    audiocallPercent: number,
-    audiocallSeries: number,
-    sprintwordsPerDay: number,
-    sprintRounds: number,
-    sprintPercent: number,
-    sprintSeries: number,
-    allRounds: number,
-    totalPercent: number,
-    wordInGames: {},
-    wordInAudiocall: {},
+	learnedWords: number,
+	optional: {
+	  wordsPerDay: number,
+	  audiocallwordsPerDay: number,
+	  audiocallRounds: number,
+	  audiocallPercent: number,
+	  audiocallSeries: number,
+	  sprintwordsPerDay: number,
+	  sprintRounds: number,
+	  sprintPercent: number,
+	  sprintSeries: number,
+	  allRounds: number,
+	  totalPercent: number,
+	  wordInGames: {},
+	  wordInAudiocall: {},
+	  wordInSprint: {},
   }
 }
 
@@ -86,6 +88,8 @@ function getLocalStorageStatistic() {
   userStatistic.wordsInQuiestions = localStorage.getItem('words')?.split(',');
 }
 window.addEventListener('load', getLocalStorageStatistic);
+
+
 
 
 

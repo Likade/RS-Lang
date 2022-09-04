@@ -1,3 +1,5 @@
+import { infoBook } from "../../../pages/audiocall/utils/utils";
+
 export const headerScript = () => {
 	document.querySelector('.login-auth-btn').addEventListener('mouseup', (e) => {
 		document.querySelector('.nav').classList.toggle('ds-none');
@@ -17,9 +19,12 @@ export const headerScript = () => {
 	}
 
 	document.querySelector('.logout-btn').addEventListener('click', () => {
-		localStorage.setItem('token', '');
-		localStorage.setItem('userId', '');
-		localStorage.setItem('nameUser', '');
+		localStorage.removeItem('token');
+		localStorage.removeItem('userId');
+		localStorage.removeItem('nameUser');
+		localStorage.removeItem('email');
+		localStorage.removeItem('password');
+		
 		document.location.href = '#/';
 	})
 }

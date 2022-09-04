@@ -10,6 +10,7 @@ import { AudioCall } from '../../pages/audiocall/audiocall';
 import { sprintScript } from '../../pages/sprint/app';
 import { Book } from '../../pages/book/index';
 import { loginUser } from '../components/api/api';
+import { infoBook } from '../../pages/audiocall/utils/utils';
 
 const headerInst = new Header();
 const footerInst = new Footer();
@@ -43,6 +44,7 @@ export class Router {
           footer.outerHTML = footerInst.render();
 
           document.body.style.overflow = '';
+          infoBook.isFromBook = false;
         },
       },
       {
@@ -62,6 +64,7 @@ export class Router {
           authScr();
 
           document.body.style.overflow = 'hidden';
+          infoBook.isFromBook = false;
         },
       },
 			{
@@ -90,6 +93,7 @@ export class Router {
           footer.outerHTML = footerInst.render();
 
           document.body.style.overflow = '';
+          infoBook.isFromBook = false;
         },
       },
       {
@@ -158,7 +162,7 @@ export class Router {
       },
     };
 
-    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
+    if(localStorage.getItem('email')!='') loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
   }
 
   updateRouter(): void {
