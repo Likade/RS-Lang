@@ -66,7 +66,7 @@ export async function generateWords(group: number) {
       const numberOfActualWord = randomInteger(0,19);
       const words = await getWords(randomInteger(0,29), group);
       let newWord: Word;
-      
+
       newWord = (words.slice(numberOfActualWord, numberOfActualWord+ 1)).flat();
       array.push(words[numberOfActualWord]);
     }}

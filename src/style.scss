@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-	user-select: none; 
+	user-select: none;
 	margin: 0;
 }
 
@@ -11,33 +11,33 @@ a {
 
 
 @font-face {
-	font-family: "GilroyBold";  
-	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype"); 
-	font-style: normal; 
+	font-family: "GilroyBold";
+	src: url("./assets/fonts/Gilroy-Bold.ttf") format("truetype");
+	font-style: normal;
 	font-weight: normal;
 }
 @font-face {
-	font-family: "GilroyHeavy";  
-	src: url("./assets/fonts/Gilroy-Heavy.ttf") format("truetype"); 
-	font-style: normal; 
+	font-family: "GilroyHeavy";
+	src: url("./assets/fonts/Gilroy-Heavy.ttf") format("truetype");
+	font-style: normal;
 	font-weight: normal;
 }
 @font-face {
-	font-family: "GilroyMedium";  
-	src: url("./assets/fonts/Gilroy-Medium.ttf") format("truetype"); 
-	font-style: normal; 
+	font-family: "GilroyMedium";
+	src: url("./assets/fonts/Gilroy-Medium.ttf") format("truetype");
+	font-style: normal;
 	font-weight: normal;
 }
 @font-face {
-	font-family: "GilroyRegular";  
-	src: url("./assets/fonts/Gilroy-Regular.ttf") format("truetype"); 
-	font-style: normal; 
+	font-family: "GilroyRegular";
+	src: url("./assets/fonts/Gilroy-Regular.ttf") format("truetype");
+	font-style: normal;
 	font-weight: normal;
 }
 @font-face {
-	font-family: "GilroySemibold";  
-	src: url("./assets/fonts/Gilroy-Semibold.ttf") format("truetype"); 
-	font-style: normal; 
+	font-family: "GilroySemibold";
+	src: url("./assets/fonts/Gilroy-Semibold.ttf") format("truetype");
+	font-style: normal;
 	font-weight: normal;
 }
 
@@ -761,28 +761,28 @@ body {
 	padding: 0 13px;
 }
 
-.group-range-title:last-child {
-	font-family: 'GilroyRegular';
-	font-style: normal;
-	font-weight: 400;
-	font-size: 96px;
-	line-height: 115px;
-	color: #000000;
-}
+// .group-range-title:last-child {
+// 	font-family: 'GilroyRegular';
+// 	font-style: normal;
+// 	font-weight: 400;
+// 	font-size: 96px;
+// 	line-height: 115px;
+// 	color: #000000;
+// }
 
-#hard-word {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 15px;
-	margin-bottom: 60px;
+// #hard-word {
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: center;
+// 	margin-top: 15px;
+// 	margin-bottom: 60px;
 
-	&:hover{
-		cursor: pointer;
-		opacity: 0.9;
-		transform: translateY(5px);
-	}
-}
+// 	&:hover{
+// 		cursor: pointer;
+// 		opacity: 0.9;
+// 		transform: translateY(5px);
+// 	}
+// }
 
 
 .group-range-title:nth-child(2){
@@ -791,15 +791,15 @@ body {
 .group-range-title:nth-child(3){
 	color: #959495;
 }
-.group-range-title:last-child {
-	width: 1048px;
-	height: 120px;
-	background: #EE161F;
-	color: #000000;
-	border-radius: 30px;
-	text-align: center;
-	margin: 0 auto;
-}
+// .group-range-title:last-child {
+// 	width: 1048px;
+// 	height: 120px;
+// 	background: #EE161F;
+// 	color: #000000;
+// 	border-radius: 30px;
+// 	text-align: center;
+// 	margin: 0 auto;
+// }
 .main-word-block{
 
 }
@@ -1026,7 +1026,7 @@ body {
 }
 
 .stats-box {
-	
+
 }
 
 .audiocall-box, .sprint-box, .general-stats-box {

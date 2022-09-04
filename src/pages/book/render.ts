@@ -1,122 +1,12 @@
 import {getWords} from '../../core/components/api/api';
 import {getWord} from '../../core/components/api/api';
-// import {createUserWord} from '../../core/components/api/api';
-// import {deleteUserWord} from '../../core/components/api/api';
-// import {getUserWord} from '../../core/components/api/api';
 import {getUserWords} from '../../core/components/api/api';
 import { infoBook } from '../audiocall/utils/utils';
+import { dataUser } from '../../core/components/interfaces/interface';
 
-
-// export const getWords = async (group:number, page = 0) => {
-//   const response = await fetch(`https://rs-lang-work.herokuapp.com/words?page=${page}&group=${group}`, {
-//     method: 'GET',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//   });
-//   const content = await response.json();
-//   return content;
-// };
-
-// export const getWord = async (id:string) => {
-//   const response = await fetch(`https://rs-lang-work.herokuapp.com/words/${id}`);
-//   const data = await response.json();
-//   return data;
-// };
-
-// АВТОРИЗАЦИЯ
-// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDhjZGEyOWIxM2FlMDAxNjIxN2U5NyIsImlhdCI6MTY2MTg2ODc1NSwiZXhwIjoxNjYxODgzMTU1fQ.6Sy11dSv9Fpmi603oc3NFs2kXijpCSmj8ngg2nlr9k4';
-// export type User = {
-//   name: string,
-//   userId: string,
-//   token: string,
-//   refreshToken: string,
-//   errCode: string,
-//   message: string
-// };
-// const loginUser = async (user: { email: string; password: string; }) => {
-//   const rawResponse = await fetch('https://rs-lang-work.herokuapp.com/signin', {
-//     method: 'POST',
-//     headers: {
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(user),
-//   });
-//   const content = await rawResponse.json();
-//   return content;
-// };
-// loginUser({ email: 'hello@user.com', password: 'Gfhjkm_123' });
-// АВТОРИЗАЦИЯ
-
-// export const createUserWord = async (userId:string, wordId:string, word: { difficulty: string; }) => fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
-//   method: 'POST',
-//   // withCredentials: true,
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(word),
-// });
-
-// export const deleteUserWord = async (userId: string, wordId: string) => {
-//   await fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
-//     method: 'DELETE',
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       Accept: 'application/json',
-//       'Content-Type': 'application/json',
-//     },
-//   });
-// };
-
-// export const getUserWord = async (userId:string, wordId:string) => {
-//   const rawResponse = await fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words/${wordId}`, {
-//     method: 'GET',
-//     // withCredentials: true,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       Accept: 'application/json',
-//     },
-//   });
-//   const content = await rawResponse.json();
-//   return content;
-// };
-
-// export const getUserWords = async (userId: string) => {
-//   const response = await fetch(`https://rs-lang-work.herokuapp.com/users/${userId}/words`, {
-//     method: 'GET',
-//     // withCredentials: true,
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       Accept: 'application/json',
-//     },
-//   });
-//   const data = await response.json();
-//   return data;
-// };
-
-export async function createBook(page = 0, group = 0) {
-  const arrWords = await getWords(page, group);
-  const containerWords = <HTMLElement>document.querySelector('#main_word-container');
-  containerWords.innerHTML = '';
-  for (let i = 0; i < arrWords.length; i++) {
-    containerWords.innerHTML += `
-      <div class="main_word-items" id="${arrWords[i].id}">
-              <span class="title"><b>${arrWords[i].word}</b></span>
-              <span class="title">${arrWords[i].wordTranslate}</span>
-              <div class="btn_ctrl">
-                <button id="btn_learned" data-learned=${arrWords[i].id}>Выучил</button>
-                <button id="btn_hard" data-hard=${arrWords[i].id}>Сложно</button>
-              </div>
-           </div>
-    `;
-  }
-  infoBook.group = arrWords[0].group;
-  infoBook.page = arrWords[0].page;
-  console.log(infoBook)
+export type WordType = {
+  wordId: string,
+  difficulty: string
 }
 
 export async function createItem(id:string) {
@@ -152,19 +42,6 @@ export async function createItem(id:string) {
     console.log(data)
 }
 
-export async function createBookHardWord(userId: string) {
-  const arrHardWords = await getUserWords(userId);
-  const containerWords = <HTMLElement>document.querySelector('#main_word-container');
-  containerWords.innerHTML = '';
-  for (let i = 0; i < arrHardWords.length; i++) {
-    containerWords.innerHTML += `
-    <div class="main_word-items" id="${arrHardWords[i].wordId}">
-      <span class="title">${arrHardWords[i].difficulty}</span>
-     </div>
-  `;
-  }
-}
-
 export async function createItemHardWord(wordId:string) {
   const data = await getWord(wordId);
   const wordContainer = <HTMLElement>document.querySelector('#main_word-review');
@@ -196,4 +73,76 @@ export async function createItemHardWord(wordId:string) {
     infoBook.page = data.page;
     console.log(infoBook)
     console.log(data)
+}
+
+export async function createBook() {
+  let arrWords;
+
+  const containerWords = <HTMLElement>document.querySelector('#main_word-container');
+  if (infoBook.group === 6 && dataUser.userId != '') {
+    arrWords = await getArrHardWords();
+  } else {
+    arrWords = await getWords(infoBook.page, infoBook.group);
+  }
+
+  containerWords.innerHTML = '';
+  for (let i = 0; i < arrWords.length; i++) {
+    containerWords.innerHTML += `
+    <div class="main_word-items" id="${arrWords[i].id}">
+      <span class="title"><b>${arrWords[i].word}</b></span>
+      <span class="title">${arrWords[i].wordTranslate}</span>
+      <div id="extra-${arrWords[i].id}">
+        <button class="btn btn-learned_word" data-learned=${arrWords[i].id}>Выучил</button>
+        <button class="btn btn-hard_word" data-hard=${arrWords[i].id}>Сложно</button>
+      </div>
+      <div id="extraUser-${arrWords[i].id}">
+        <button class="btn btn-hard-restore" data-restore=${arrWords[i].id}>Восстановить</button>
+        <!--<button class="btn btn-statistics_word" data-statistics=${arrWords[i].id}>Статистика</button>-->
+      </div>
+    </div>
+    `;
+    const btnsExtra = <HTMLDivElement>document.getElementById(`extra-${arrWords[i].id}`);
+    const btnsExtraUser = <HTMLDivElement>document.getElementById(`extraUser-${arrWords[i].id}`);
+    if (dataUser.token !== '' && infoBook.group < 6) {
+      btnsExtra.style.display = '';
+      btnsExtraUser.style.display = 'none';
+      checkHardLearnedWord(arrWords[i].id);
+    }
+    if (dataUser.token !== '' && infoBook.group == 6) {
+      btnsExtra.style.display = 'none';
+      btnsExtraUser.style.display = '';
+    }
+  }
+}
+
+async function checkHardLearnedWord(idCurrentWord: string) {
+  const arrHardAndLearnedWords = await getUserWords(dataUser.userId);
+  arrHardAndLearnedWords.forEach((oneWord: WordType) => {
+      if (oneWord.wordId == idCurrentWord && oneWord.difficulty == 'hard') {
+          const btnHard = <HTMLElement>document.querySelector(`button[data-hard='${idCurrentWord}']`);
+          btnHard.classList.add('hard_word-select');
+          btnHard.setAttribute('disabled', 'true');
+      }
+      if (oneWord.wordId == idCurrentWord && oneWord.difficulty == 'learned') {
+        const btnLearned = <HTMLElement>document.querySelector(`button[data-learned='${idCurrentWord}']`);
+        const btnHard = <HTMLElement>document.querySelector(`button[data-hard='${idCurrentWord}']`);
+        btnLearned.classList.add('learned_word-select');
+        btnHard.setAttribute('disabled', 'true');
+        btnLearned.setAttribute('disabled', 'true');
+      }
+    });
+}
+
+export async function getArrHardWords() {
+  const arrHardWords: object[] = [];
+  await getUserWords(dataUser.userId).then(async (arrHardAndLearnedWords) => {
+    for (let oneWord of arrHardAndLearnedWords) {
+       if (oneWord.difficulty == 'hard') {
+        await getWord(oneWord.wordId).then( (elem) => {
+          arrHardWords.push(elem);
+        });
+      }
+    }
+  });
+  return arrHardWords;
 }
