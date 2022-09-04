@@ -1,6 +1,13 @@
-import { userStatistic } from './script';
+import { userStatistic, getUserStatistic } from './script';
+import { dataUser  } from "../../core/components/interfaces/interface";
 
-export const statsContent = () => `<div class="stats">
+export const statsContent = async (userId: string) => {
+	console.log(userId, 'в контенте');
+	const newUserStats = (await getUserStatistic(userId)).optional;
+	console.log(newUserStats);
+	console.log(await getUserStatistic(userId));
+	
+	return `<div class="stats">
 <div class="stats-container container">
 	<div class="title">
 		<p class="stats-title">Статистика</p>
@@ -31,15 +38,15 @@ export const statsContent = () => `<div class="stats">
 				<div class="audiocall-information-box">
 					<div class="row">
 						<div class="text-information">Количество новых слов:</div>
-						<div class="value-information aud-count-nw">${userStatistic.audiocallwordsPerDay}</div>
+						<div class="value-information aud-count-nw">${newUserStats.audiocallwordsPerDay}</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Правильных ответов (%):</div>
-						<div class="value-information aud-correct-ans">${userStatistic.audiocallPercent}</div>
+						<div class="value-information aud-correct-ans">${newUserStats.audiocallPercent}</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Самая длинная серия правильных ответов:</div>
-						<div class="value-information aud-most-leng">${userStatistic.audiocallSeries}</div>
+						<div class="value-information aud-most-leng">${newUserStats.audiocallSeries}</div>
 					</div>
 				</div>
 
@@ -51,15 +58,15 @@ export const statsContent = () => `<div class="stats">
 				<div class="sprint-information-box">
 					<div class="row">
 						<div class="text-information">Количество новых слов:</div>
-						<div class="value-information spr-count-nw">${userStatistic.sprintwordsPerDay}</div>
+						<div class="value-information spr-count-nw">${newUserStats.sprintwordsPerDay}</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Правильных ответов (%):</div>
-						<div class="value-information spr-correct-ans">${userStatistic.sprintPercent}</div>
+						<div class="value-information spr-correct-ans">${newUserStats.sprintPercent}</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Самая длинная серия правильных ответов:</div>
-						<div class="value-information spr-most-leng">${userStatistic.sprintSeries}</div>
+						<div class="value-information spr-most-leng">${newUserStats.sprintSeries}</div>
 					</div>
 				</div>
 
@@ -71,20 +78,19 @@ export const statsContent = () => `<div class="stats">
 			<div class="general-stats-information-box">
 				<div class="row">
 					<div class="text-information">Количество новых слов:</div>
-					<div class="value-information gs-count-nw">${userStatistic.wordsPerDay}</div>
+					<div class="value-information gs-count-nw">${newUserStats.wordsPerDay}</div>
 				</div>
 				<div class="row">
 					<div class="text-information">Количество изученных слов:</div>
-					<div class="value-information gs-count-lw">${userStatistic.learnedWordsFromBook}</div>
+					<div class="value-information gs-count-lw">${newUserStats.learnedWordsFromBook}</div>
 				</div>
 				<div class="row">
 					<div class="text-information">Правильных ответов (%):</div>
-					<div class="value-information gs-correct-ans">${userStatistic.totalPercent}</div>
+					<div class="value-information gs-correct-ans">${newUserStats.totalPercent}</div>
 				</div>
 			</div>
 
 		</div>
 	</div>
 </div>
-</div>`;
-console.log(userStatistic)
+</div>`;}

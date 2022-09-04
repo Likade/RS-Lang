@@ -76,7 +76,12 @@ export class Router {
 
           const stats = document.createElement('div');
           this.rootElement.append(stats);
-          stats.outerHTML = statsInst.render();
+          
+					const getLink = async () => {
+						await statsInst.loginUser();
+            stats.outerHTML = await statsInst.render();
+          }
+          getLink();
 
           //authScr();
 

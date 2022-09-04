@@ -72,12 +72,12 @@ import { dataUser, DayStatistic  } from "../interfaces/interface";
 			return rawResponse.json();
 		};
 
-	function setLocalStorageUser() {
-		localStorage.setItem('token', dataUser.token);
-		localStorage.setItem('userId', dataUser.userId);
-		localStorage.setItem('nameUser', dataUser.name);
-	}
-	window.addEventListener('beforeunload', setLocalStorageUser);
+	// function setLocalStorageUser() {
+	// 	localStorage.setItem('token', dataUser.token);
+	// 	localStorage.setItem('userId', dataUser.userId);
+	// 	localStorage.setItem('nameUser', dataUser.name);
+	// }
+	// window.addEventListener('beforeunload', setLocalStorageUser);
 
 	function getLocalStorageUser() {
 		if (localStorage.getItem('nameUser')) {

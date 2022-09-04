@@ -27,6 +27,7 @@ export class AudioCall {
       (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
       (document.querySelector('.audiocall-description-frombook') as HTMLElement).classList.remove('hide');
     }
+    console.log(dataUser)
     console.log(dataUser.userId)
     if (dataUser.userId !== '') {
       const statisticStorage: DayStatistic= await getUserStatistic();     

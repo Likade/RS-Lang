@@ -42,14 +42,14 @@ export type LearnedWords = {
 }
 
 export async function getWords(page: number, group: number) {
-  const response = await fetch(`https://rs-lang25.herokuapp.com/words?page=${page}&group=${group}`);
+  const response = await fetch(`https://rs-lang-work.herokuapp.com/words?page=${page}&group=${group}`);
   const words = await response.json();
   return words;
 }
 
 
 export const getUserStatistic = async(id = dataUser.userId) => {
-  const rawResponse = await fetch(`https://rs-lang25.herokuapp.com/users/${id}/statistics`, {
+  const rawResponse = await fetch(`https://rs-lang-work.herokuapp.com/users/${id}/statistics`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${dataUser.token}`,
@@ -62,7 +62,7 @@ export const getUserStatistic = async(id = dataUser.userId) => {
 }
 
 export const updateUserStatistic = async(id = dataUser.userId, body: DayStatistic) => {
-  const rawResponse = await fetch(`https://rs-lang25.herokuapp.com/users/${id}/statistics`, {
+  const rawResponse = await fetch(`https://rs-lang-work.herokuapp.com/users/${id}/statistics`, {
     method: 'PUT',
     headers: {
       'Authorization': `Bearer ${dataUser.token}`,
