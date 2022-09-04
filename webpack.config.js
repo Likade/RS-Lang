@@ -19,7 +19,7 @@ module.exports = ({ development }) => ({
   mode: development ? 'development' : 'production',
   devtool: development ? 'inline-source-map' : false,
   entry: {
-    main: '../src/index.ts',
+    main: './src/index.ts',
   },
   output: {
     filename: '[name].[contenthash].js',
