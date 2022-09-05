@@ -102,6 +102,6 @@ export function showDictionary () {
   setTimeout(function(){
         let myElement = document.querySelector('.dictionary') as HTMLElement;
         myElement.click()
-    }, 0)
+    }, 5000)
 })
 }
