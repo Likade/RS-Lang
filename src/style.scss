@@ -325,6 +325,8 @@ body {
 .title {
 	display: flex;
 	justify-items: center;
+	flex-direction: column;
+    align-items: center;
 }
 
 .our-benefits-title {
@@ -350,6 +352,55 @@ body {
 	row-gap: 20px;
 }
 
+.participant-container {
+	display: flex;
+	flex: auto;
+	flex-direction: column;
+    height: 935px;
+	font-family: 'GilroyBold';
+}
+
+.participant{
+	display: flex;
+	min-height: 200px;
+	background-color: white;
+	border-radius: 20px;
+    flex: 1;
+    padding: 15px;
+    margin-bottom: 15px;
+
+}
+.participant-img {
+  border-radius: 30px;
+}
+.participant-inner-container {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+	margin: 15px;
+}
+.participant-work {
+	margin-top: 20px;
+    font-family: 'GilroyRegular';
+	padding: 0 40px;
+	text-align: center;
+}
+.participant-name-role{
+	font-size: 25px;
+	border-bottom: 2px dashed #0063eb7a;
+    width: 100%;
+    text-align: center;
+}
+.images img{
+    width: 125px;
+    flex: 1 1;
+    padding: 25px 65px 0;
+}
+.images {
+	display: flex;
+    width: 100%;
+}
 .bus {
 	position: absolute;
 	top: 2080px;
@@ -524,7 +575,6 @@ body {
 // OUR TEAM CONTAINER START
 
 .our-team-container {
-	padding-top: 140px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
