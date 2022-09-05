@@ -18,7 +18,6 @@ export class AudioCall {
   async render() {
     if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
     return audioElement();
-    
   }
 
   async page_scripts() {

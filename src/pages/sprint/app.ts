@@ -64,7 +64,7 @@ let check: boolean;
 
 const showGameLoadScreen = () => {
   check=true;
-document.body.classList.add('loading-screen');
+app.classList.add('loading-screen');
 
 const gameStartScreen = document.createElement('div');
 gameStartScreen.classList.add('game-start-screen');
