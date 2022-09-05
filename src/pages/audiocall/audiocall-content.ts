@@ -97,7 +97,7 @@ export const audioElement = () => `
           <button class="button game-start-button btn">Начать</button>
           </div>
         </div>
-        <div class="audiocall-description-frombook hide">
+        <div class="audiocall-description-B hide">
           <h1 class="audiocall-title">Аудиовызов</h1>
           <div class="audiocall-text">Добро пожаловать!<br>В этой игре вам нужно будет слушать произношение слова и выбирать его перевод из предложенных вариантов.<br>Удачи!
           </div>

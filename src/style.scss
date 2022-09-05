@@ -171,6 +171,13 @@ body {
 .login-auth-container {
 	position: relative;
 }
+.login-auth-container span {
+	color: white;
+    font-family: 'gilroybold';
+    position: relative;
+    bottom: 18px;
+	right: 5px;
+}
 
 .login-auth-btn:hover {
 	opacity: 0.9;

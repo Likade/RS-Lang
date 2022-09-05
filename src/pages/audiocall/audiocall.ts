@@ -16,7 +16,7 @@ export let series_of_answers = 0;
 
 export class AudioCall {
   async render() {
-    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
+    if(localStorage.getItem('email')!=null) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
     return audioElement();
     
   }
@@ -29,7 +29,8 @@ export class AudioCall {
       (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
       (document.querySelector('.audiocall-description-B') as HTMLElement).classList.remove('hide');
     }
-    if (localStorage.getItem('userId') !== '') {
+    console.log(localStorage.getItem('userId'))
+    if (localStorage.getItem('userId') !== '' &&  localStorage.getItem('userId') !==null) {
       console.log('hello')
       const statisticStorage: DayStatistic= await getUserStatistic(localStorage.getItem('userId'));  
       userStatistic.learnedWords = statisticStorage.learnedWords;
@@ -103,7 +104,7 @@ export class AudioCall {
           const selected = target.value;
           const currentWord = { "difficulty": "hard" };
          
-          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id] = {
+          if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInAudiocall[array[answer_number].id] = {
             audiocall: {
               guessed: 0,
               unguessed: 0,
@@ -112,7 +113,7 @@ export class AudioCall {
           }}
           
           if (selected !== rightAnswer) {
-            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
+            if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed + 1;}
             series_of_answers = 0;
             target.style.background = 'red';
@@ -121,7 +122,7 @@ export class AudioCall {
             await createUserWord(localStorage.getItem('userId'), (array[answer_number]).id, currentWord);
           } 
           else {
-            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
+            if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;}
             right_answers_counter++;
             series_of_answers++;
@@ -129,7 +130,7 @@ export class AudioCall {
             target.style.background = 'green';
             array[answer_number].choice = 'right';
             showRightWord();
-            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
+            if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
               await updateUserWord(localStorage.getItem('userId'), array[answer_number].id, { "difficulty": "learned" });
             }
           }
@@ -150,9 +151,9 @@ export class AudioCall {
       if (answer_number === 19) {
         await renderAuidoCallStatistic();
         array_of_results.map(async (element: Word) => {
-          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+          if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
           else {
-            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
+            if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
             userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
             userStatistic.wordsInQuiestions.push(element.word);
             if (maxSeries > userStatistic.audiocallSeries) {
@@ -160,7 +161,7 @@ export class AudioCall {
             }} 
           }
         })
-        if(check){if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {
+        if(check){if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {
           userStatistic.audiocallRounds = userStatistic.audiocallRounds + 1;
           userStatistic.allRounds = userStatistic.allRounds + 1;
           userStatistic.audiocallPercent = (Number(userStatistic.audiocallPercent) + Number(((right_answers_counter / 20) * 100))) / userStatistic.audiocallRounds;
