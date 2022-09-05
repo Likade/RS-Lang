@@ -50,7 +50,7 @@
 ## Скриншот:
 <details><summary><b>Развернуть</b></summary>
 
-[![rslang]()]()
+[![rslang](https://github.com/Likade/RS-Lang/blob/develop/src/assets/image/main-page.png?raw=true)]()
 
 </details>
 
