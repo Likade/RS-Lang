@@ -3,7 +3,7 @@ import './style.scss';
 import './';
 import { createBook, createItem } from './render';
 import {
-  showGroup, showItem, showPaginationGroup, ManipulateItem
+  showGroup, showItem, showPaginationGroup, ManipulateItem, showDictionary
 } from './listened';
 import { Pagination } from './pagination';
 import { infoBook } from '../audiocall/utils/utils';
@@ -38,7 +38,7 @@ export const Dictionary = () => {
   showItem();
   showPaginationGroup();
   ManipulateItem();
-
+  showDictionary ();
 
 
   document.addEventListener('click', event=>{
@@ -46,14 +46,6 @@ export const Dictionary = () => {
       infoBook.isFromBook = true;
     }
   })
-
-  document.addEventListener('DOMContentLoaded', function(e){
-    setTimeout(function(){
-          let myElement = document.querySelector('.dictionary') as HTMLElement;
-          myElement.click()
-      }, 1000)
-  })
-
   }
 
 
