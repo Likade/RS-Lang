@@ -243,8 +243,22 @@ export const mainContent = () => `<div class="main">
         </div>
         </div>
       </div>
+			
       <div class = 'participant'>
         <div class = 'participant-img2'></div>
+        <div class = 'participant-inner-container'>
+        <span class = 'participant-name-role'>Денис(<a href = 'https://github.com/Zixail28'>Zixail28</a>), разработчик</span>
+        <span class = 'participant-work zixail-work'>Разработка UI/UX дизайна, макета Figma. Верстка Header, Footer, (Main, Authentication, Stats) страниц. Система авторизации, статистики. Настройка прелоудера.</span><br>
+        <div class='images'>
+        <div class='pic-1'></div>
+        <div class='pic-2'></div>
+        <div class='pic-3'></div>
+        </div>
+        </div>
+      </div>
+
+			<div class = 'participant'>
+        <div class = 'participant-img3'></div>
         <div class = 'participant-inner-container'>
         <span class = 'participant-name-role'>Ринат(<a href = 'https://github.com/varenik40000'>varenik40000</a>), разработчик</span>
         <span class = 'participant-work'>Учебник, словарь</span><br>
@@ -255,13 +269,7 @@ export const mainContent = () => `<div class="main">
         </div>
         </div>
       </div>
-      <div class = 'participant'>
-        <img class = 'participant-img' src = ''>
-        <div class = 'participant-inner-container'>
-        <span class = 'participant-name-role'></span>
-        <span class = 'participant-work'></span>
-        </div>
-      </div>
+
       </div>
     </div>
 
