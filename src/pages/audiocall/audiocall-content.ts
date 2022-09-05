@@ -12,14 +12,14 @@ export const renderLevel = async (group: number) => {
     <div "onclick="document.getElementById('${array[answer_number].audio}-audio').play()" data-word="${array[answer_number].wordTranslate}" class="play-btn">
       <audio autoplay id="${array[answer_number].audio}-audio" src="https://rs-lang-work.herokuapp.com/${array[answer_number].audio}"></audio>
     </div>
-    <div class="answers__container">
+    <div class="answers-container">
       <button data-number="Digit1" data-word="${array[answer_number].wordTranslate}" value="${array[answer_number].wordTranslate}" id="${array[answer_number].id}" class="btn answers answer1">${array[answer_number].wordTranslate}</button>
       <button data-number="Digit2" data-word="${array[arrayOfRandomNumbers[0]].wordTranslate}" value="${array[arrayOfRandomNumbers[0]].wordTranslate}" id="${array[arrayOfRandomNumbers[0]].id}" class="btn answers answer2">${array[arrayOfRandomNumbers[0]].wordTranslate}</button>
       <button data-number="Digit3" data-word="${array[arrayOfRandomNumbers[1]].wordTranslate}" value="${array[arrayOfRandomNumbers[1]].wordTranslate} id="${array[arrayOfRandomNumbers[1]].id}" class="btn answers answer3">${array[arrayOfRandomNumbers[1]].wordTranslate}</button>
       <button data-number="Digit4" data-word="${array[arrayOfRandomNumbers[2]].wordTranslate}" value="${array[arrayOfRandomNumbers[2]].wordTranslate} id="${array[arrayOfRandomNumbers[2]].id}" class="btn answers answer4">${array[arrayOfRandomNumbers[2]].wordTranslate}</button>
     </div>
   `;
-  (document.querySelector('.answers__body') as HTMLElement).innerHTML = html;
+  (document.querySelector('.answers-wrapper') as HTMLElement).innerHTML = html;
   (document.querySelector('.play-btn') as HTMLElement).addEventListener('click', () => {
   });
   shuffleAnswers();
@@ -33,14 +33,14 @@ export function updateLevel() {
     <div onclick="document.getElementById('${array[answer_number].audio}-audio').play()" data-word="${array[answer_number].wordTranslate}" class="play-btn">
       <audio autoplay id="${array[answer_number].audio}-audio" src="https://rs-lang-work.herokuapp.com/${array[answer_number].audio}"></audio>
     </div>
-    <div class="answers__container">
+    <div class="answers-container">
       <button data-number="Digit1" data-word="${array[answer_number].wordTranslate}" value="${array[answer_number].wordTranslate}" id="${array[answer_number].id}" class="btn answers answer1">${array[answer_number].wordTranslate}</button>
       <button data-number="Digit2" data-word="${array[arrayOfRandomNumbers[0]].wordTranslate}" value="${array[arrayOfRandomNumbers[0]].wordTranslate}" id="${array[arrayOfRandomNumbers[0]].id}" class="btn answers answer2">${array[arrayOfRandomNumbers[0]].wordTranslate}</button>
       <button data-number="Digit3" data-word="${array[arrayOfRandomNumbers[1]].wordTranslate}" value="${array[arrayOfRandomNumbers[1]].wordTranslate} id="${array[arrayOfRandomNumbers[1]].id}" class="btn answers answer3">${array[arrayOfRandomNumbers[1]].wordTranslate}</button>
       <button data-number="Digit4" data-word="${array[arrayOfRandomNumbers[2]].wordTranslate}" value="${array[arrayOfRandomNumbers[2]].wordTranslate}id="${array[arrayOfRandomNumbers[2]].id}" class="btn answers answer4">${array[arrayOfRandomNumbers[2]].wordTranslate}</button>
     </div>
   `;
-  (document.querySelector('.answers__body') as HTMLElement).innerHTML = html;
+  (document.querySelector('.answers-wrapper') as HTMLElement).innerHTML = html;
   renderResultsTable();
   shuffleAnswers();
 }
@@ -79,7 +79,6 @@ export const renderResultsTable = () => `
 
 export const renderAuidoCallStatistic = () => {
   const html = `<table class="table">
-        <caption>Результаты</caption>
           ${renderResultsTable()}
         </table>
   `;
@@ -89,17 +88,13 @@ export const renderAuidoCallStatistic = () => {
 export const audioElement = () => `
   <section class="audiocall">
     <div class="container">
-      <div class="audiocall__body">
+      <div class="audiocall-wrapper">
         <div class="audiocall-description">
           <h1 class="audiocall-title-text">Аудиовызов</h1>
           <div class="audiocall-text">Добро пожаловать!<br>В этой игре вам нужно будет слушать произношение слова и выбирать его перевод из предложенных вариантов. Для начала игры выберите уровень сложности.</div>
           <div class="audiocall-levels">
-            <button value="0" class="levels">1</button>
-            <button value="1" class="levels">2</button>
-            <button value="2" class="levels">3</button>
-            <button value="3" class="levels">4</button>
-            <button value="4" class="levels">5</button>
-            <button value="5" class="levels">6</button>
+          <select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+          <button class="button game-start-button btn">Начать</button>
           </div>
         </div>
         <div class="audiocall-description-frombook hide">
@@ -110,9 +105,9 @@ export const audioElement = () => `
         </div>   
       </div>
     </div>
-    <div class="audiocall-round hide">
+    <div class="audiocall-game hide">
       <div class="container">
-        <div class="answers__body"></div>
+        <div class="answers-wrapper"></div>
         <div class="next-button">
           <button class="next btn">Next</buuton>
         </div>

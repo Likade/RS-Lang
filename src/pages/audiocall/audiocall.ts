@@ -3,7 +3,7 @@ import { getUserStatistic,
          createUserWord, 
          updateUserWord,
         loginUser } from '../../core/components/api/api';
-import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
+import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-content';
 import { array, showRightWord, Word, infoBook } from './utils/utils';
 import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
 
@@ -27,7 +27,7 @@ export class AudioCall {
 
     if (infoBook.isFromBook) {
       (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
-      (document.querySelector('.audiocall-description-frombook') as HTMLElement).classList.remove('hide');
+      (document.querySelector('.audiocall-description-B') as HTMLElement).classList.remove('hide');
     }
     if (localStorage.getItem('userId') !== '') {
       console.log('hello')
@@ -48,12 +48,12 @@ export class AudioCall {
       console.log(statisticStorage);
     }
     
-    const answersBody = document.querySelector('.answers__body') as HTMLElement;
+    const answersBody = document.querySelector('.answers-wrapper') as HTMLElement;
     const repeatButton = (document.querySelector('.repeat') as HTMLButtonElement);
     const nextButton = (document.querySelector('.next') as HTMLButtonElement);
     const audioCall = document.querySelector('.audiocall') as HTMLElement;
     const audiocallContainer = document.querySelector('.audiocall .container') as HTMLElement;
-    const audiocallRound = document.querySelector('.audiocall-round') as HTMLElement;
+    const audiocallRound = document.querySelector('.audiocall-game') as HTMLElement;
     const audiocallStat = document.querySelector('.audiocall-statistic') as HTMLElement;
     const answers = document.querySelectorAll('.answers');
 
@@ -68,13 +68,13 @@ export class AudioCall {
             answersBody.removeChild(answersBody.firstChild);
           }
           await renderLevel(infoBook.group);
-          (document.querySelector('.audiocall-round') as HTMLElement).classList.remove('hide');
+          (document.querySelector('.audiocall-game') as HTMLElement).classList.remove('hide');
         });
       }
           else {
             audioCall.addEventListener('click', async (event) => {
-          const target = event.target as HTMLButtonElement;
-          if (target.classList.contains('levels')) {
+          const target = document.querySelector('select');
+          if ((event.target as HTMLButtonElement).classList.contains('game-start-button')) {
             array_of_results = [];
             audiocallContainer.classList.add('hide');
             answer_number = 0;
@@ -210,7 +210,7 @@ export class AudioCall {
         answers.forEach(async (element) => {
           if (element.getAttribute('data-number') === event.code) {
             const auidoButton = document.querySelector('.play-btn') as HTMLElement;
-            const button = ((document.querySelector('.answers__container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
+            const button = ((document.querySelector('.answers-container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
             const rightAnswer = auidoButton.getAttribute('data-word');
             const selected = button.getAttribute('data-word');
             if (selected !== rightAnswer) {
