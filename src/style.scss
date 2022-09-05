@@ -171,6 +171,13 @@ body {
 .login-auth-container {
 	position: relative;
 }
+.login-auth-container span {
+	color: white;
+    font-family: 'gilroybold';
+    position: relative;
+    bottom: 18px;
+	right: 5px;
+}
 
 .login-auth-btn:hover {
 	opacity: 0.9;
@@ -370,6 +377,13 @@ body {
   background-size: 268px;
   width: 35%;
 }
+.participant-img2 {
+  border-radius: 30px;
+  background-image: url(./assets/png/v40000.jpg);
+  background-repeat: no-repeat;
+  background-size: 268px;
+  width: 35%;
+}
 .pic1{
 	background: url(./assets/svg/router-svgrepo-com.svg);
 	background-repeat: no-repeat;
@@ -382,6 +396,21 @@ body {
 }
 .pic3{
 	background: url(./assets/svg/team-svgrepo-com.svg);
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+.pic_1{
+	background: url(./assets/png/book.png);
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+.pic_2{
+	background: url(./assets/png/dictionary.png);
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+.pic_3{
+	background: url(./assets/png/programmer.png);
 	background-repeat: no-repeat;
 	background-size: 150px;
 }

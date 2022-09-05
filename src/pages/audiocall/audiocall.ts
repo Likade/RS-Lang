@@ -3,7 +3,7 @@ import { getUserStatistic,
          createUserWord, 
          updateUserWord,
         loginUser } from '../../core/components/api/api';
-import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
+import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-content';
 import { array, showRightWord, Word, infoBook } from './utils/utils';
 import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
 import { waitRender } from '../../core/components/waitRender';
@@ -17,7 +17,7 @@ export let series_of_answers = 0;
 
 export class AudioCall {
   async render() {
-    if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
+    if(localStorage.getItem('email')!=null) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
     return audioElement();
   }
 
@@ -27,9 +27,10 @@ export class AudioCall {
 
     if (infoBook.isFromBook) {
       (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
-      (document.querySelector('.audiocall-description-frombook') as HTMLElement).classList.remove('hide');
+      (document.querySelector('.audiocall-description-B') as HTMLElement).classList.remove('hide');
     }
-    if (localStorage.getItem('userId') !== '') {
+    console.log(localStorage.getItem('userId'))
+    if (localStorage.getItem('userId') !== '' &&  localStorage.getItem('userId') !==null) {
       console.log('hello')
       const statisticStorage: DayStatistic= await getUserStatistic(localStorage.getItem('userId'));  
       userStatistic.learnedWords = statisticStorage.learnedWords;
@@ -48,12 +49,12 @@ export class AudioCall {
       console.log(statisticStorage);
     }
     
-    const answersBody = document.querySelector('.answers__body') as HTMLElement;
+    const answersBody = document.querySelector('.answers-wrapper') as HTMLElement;
     const repeatButton = (document.querySelector('.repeat') as HTMLButtonElement);
     const nextButton = (document.querySelector('.next') as HTMLButtonElement);
     const audioCall = document.querySelector('.audiocall') as HTMLElement;
     const audiocallContainer = document.querySelector('.audiocall .container') as HTMLElement;
-    const audiocallRound = document.querySelector('.audiocall-round') as HTMLElement;
+    const audiocallRound = document.querySelector('.audiocall-game') as HTMLElement;
     const audiocallStat = document.querySelector('.audiocall-statistic') as HTMLElement;
     const answers = document.querySelectorAll('.answers');
 
@@ -75,13 +76,13 @@ export class AudioCall {
 
 
           await renderLevel(infoBook.group);
-          (document.querySelector('.audiocall-round') as HTMLElement).classList.remove('hide');
+          (document.querySelector('.audiocall-game') as HTMLElement).classList.remove('hide');
         });
       }
           else {
             audioCall.addEventListener('click', async (event) => {
-          const target = event.target as HTMLButtonElement;
-          if (target.classList.contains('levels')) {
+          const target = document.querySelector('select');
+          if ((event.target as HTMLButtonElement).classList.contains('game-start-button')) {
             array_of_results = [];
             audiocallContainer.classList.add('hide');
             answer_number = 0;
@@ -117,7 +118,7 @@ export class AudioCall {
           const selected = target.value;
           const currentWord = { "difficulty": "hard" };
          
-          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id] = {
+          if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInAudiocall[array[answer_number].id] = {
             audiocall: {
               guessed: 0,
               unguessed: 0,
@@ -126,7 +127,7 @@ export class AudioCall {
           }}
           
           if (selected !== rightAnswer) {
-            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
+            if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed + 1;}
             series_of_answers = 0;
             target.style.background = 'red';
@@ -135,7 +136,7 @@ export class AudioCall {
             await createUserWord(localStorage.getItem('userId'), (array[answer_number]).id, currentWord);
           } 
           else {
-            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
+            if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;}
             right_answers_counter++;
             series_of_answers++;
@@ -143,7 +144,7 @@ export class AudioCall {
             target.style.background = 'green';
             array[answer_number].choice = 'right';
             showRightWord();
-            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
+            if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
               await updateUserWord(localStorage.getItem('userId'), array[answer_number].id, { "difficulty": "learned" });
             }
           }
@@ -164,9 +165,9 @@ export class AudioCall {
       if (answer_number === 19) {
         await renderAuidoCallStatistic();
         array_of_results.map(async (element: Word) => {
-          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+          if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
           else {
-            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
+            if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
             userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
             userStatistic.wordsInQuiestions.push(element.word);
             if (maxSeries > userStatistic.audiocallSeries) {
@@ -174,7 +175,7 @@ export class AudioCall {
             }} 
           }
         })
-        if(check){if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {
+        if(check){if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {
           userStatistic.audiocallRounds = userStatistic.audiocallRounds + 1;
           userStatistic.allRounds = userStatistic.allRounds + 1;
           userStatistic.audiocallPercent = (Number(userStatistic.audiocallPercent) + Number(((right_answers_counter / 20) * 100))) / userStatistic.audiocallRounds;
@@ -224,7 +225,7 @@ export class AudioCall {
         answers.forEach(async (element) => {
           if (element.getAttribute('data-number') === event.code) {
             const auidoButton = document.querySelector('.play-btn') as HTMLElement;
-            const button = ((document.querySelector('.answers__container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
+            const button = ((document.querySelector('.answers-container') as HTMLElement)?.children[Number(`${event.code.split('')[5]}`) - 1]);
             const rightAnswer = auidoButton.getAttribute('data-word');
             const selected = button.getAttribute('data-word');
             if (selected !== rightAnswer) {

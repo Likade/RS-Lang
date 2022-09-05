@@ -1,6 +1,6 @@
 import { getWords} from '../../../core/components/api/api';
 import { answer_number } from '../audiocall';
-import { renderRightWord } from '../audiocall-html';
+import { renderRightWord } from '../audiocall-content';
 
 const COUNT_OF_WORDS = 20;
 export let arrayOfRandomNumbers: number[] = [];
@@ -10,10 +10,10 @@ export function shuffleAnswers() {
   let div = new Array(4);
   for (let buttons = 0; buttons < 4; buttons++) {
     div[buttons] = document.querySelector(`.answer${buttons + 1}`);
-    (document.querySelector('.answers__container') as HTMLElement).removeChild(div[buttons]);
+    (document.querySelector('.answers-container') as HTMLElement).removeChild(div[buttons]);
   }
   while (div.length > 0) {
-    (document.querySelector('.answers__container') as HTMLElement).appendChild(div.splice(Math.floor(Math.random() * div.length),1)[0]);
+    (document.querySelector('.answers-container') as HTMLElement).appendChild(div.splice(Math.floor(Math.random() * div.length),1)[0]);
   }
 }
 

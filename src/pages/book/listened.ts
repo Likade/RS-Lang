@@ -24,8 +24,7 @@ export function showGroup():void {
       infoBook.page = 0;
       getWords(infoBook.page, infoBook.group );
       createBook();
-      let firstEl = parent.firstElementChild;
-      console.log(`MOE`+ firstEl.id)
+
     }
   });
 }
@@ -57,11 +56,11 @@ export function showPaginationGroup():void {
 
     const activeGroup = <HTMLElement>document.querySelector('.active_group');
     infoBook.group = +activeGroup.id;
-    console.log(`группа` + infoBook.group)
+
     const target = event.target as HTMLElement;
     if (target.classList.contains('page')) {
       infoBook.page = +target.innerHTML -1 ;
-      console.log(`cтраница `+ infoBook.page)
+
       getWords(infoBook.page, infoBook.group);
       createBook();
     }
@@ -73,15 +72,15 @@ export function ManipulateItem():void {
   const containerWords = <HTMLElement>document.querySelector('#main_word-container');
   containerWords.addEventListener('click', async (e) => {
   const elem = e.target as HTMLElement;
-    console.log(elem)
+
 
   if (elem.classList.contains('btn-hard_word')) {
     const idCurrentWord = <string>elem.dataset.hard;
-    console.log(idCurrentWord)
+
     const idCurrentUser = dataUser.userId;
-    console.log(idCurrentUser)
+
     const currentWord = { "difficulty": "hard" };
-    console.log(currentWord)
+
     const btnHard = <HTMLElement>document.querySelector(`button[data-hard='${idCurrentWord}']`);
     btnHard.classList.add('hard_word-select');
     btnHard.setAttribute('disabled', 'true');
@@ -95,4 +94,13 @@ export function ManipulateItem():void {
     createBook();
   }
 });
+}
+
+export function showDictionary () {
+  document.addEventListener('DOMContentLoaded', function(e){
+  setTimeout(function(){
+        let myElement = document.querySelector('.dictionary') as HTMLElement;
+        myElement.click()
+    }, 5000)
+})
 }

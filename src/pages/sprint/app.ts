@@ -6,7 +6,7 @@ import { createUserWord, getUserStatistic, updateUserStatistic, updateUserWord }
 
 export const sprintScript = () => {
 
-  async function getapi(){if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) { 
+  async function getapi(){if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) { 
     const statisticStorage: DayStatistic= await getUserStatistic(localStorage.getItem('userId'));  
     userStatistic.learnedWords = statisticStorage.learnedWords;
     userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;
@@ -206,9 +206,9 @@ answersArray.map(word=>{
 });
 
   answersArray.map(async (element: Word) => {
-    if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+    if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordsInQuiestions.includes(element.word) && dataUser.userId === '') return;
     else {
-      if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.sprintwordsPerDay = userStatistic.sprintwordsPerDay + 1;
+      if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.sprintwordsPerDay = userStatistic.sprintwordsPerDay + 1;
       userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
       userStatistic.wordsInQuiestions.push(element.word);
       if (maxAnswers > userStatistic.sprintSeries) {
@@ -220,7 +220,7 @@ answersArray.map(word=>{
 resTable.innerHTML = html;
 wrapper.append(resTable);
 if(check) {
-  if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {
+  if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {
     userStatistic.sprintRounds = userStatistic.sprintRounds + 1;
     userStatistic.allRounds = userStatistic.allRounds + 1;
     userStatistic.sprintPercent = (Number(userStatistic.sprintPercent) + Number(((allRightAnswers / answersArray.length) * 100))) / userStatistic.sprintRounds;
@@ -291,7 +291,7 @@ dictionary.map(word=>{
   if(word.word == currentWord.word) currId = word.id;
 })
 
-// if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInSprint[currentWord.id] = {
+// if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInSprint[currentWord.id] = {
 //   sprint: {
 //     guessed: 0,
 //     unguessed: 0,
@@ -384,9 +384,9 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
       scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers)maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
-      // if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInSprint[currId].sprint.guessedInARow++;
+      // if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInSprint[currId].sprint.guessedInARow++;
       //   userStatistic.wordInSprint[currId].sprint.guessed = userStatistic.wordInSprint[currId].sprint.guessed + 1;}
-      //   if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordInSprint[currId].sprint.guessedInARow > 2) {
+      //   if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordInSprint[currId].sprint.guessedInARow > 2) {
       //     async function create(){await updateUserWord(localStorage.getItem('userId'), currId, { "difficulty": "learned" });}
       //     create();
       //   }
@@ -395,7 +395,7 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
       console.log('No! It\'s wrong answer!');
       showWord();
       scoreCounter.innerText = `${rightAnswers}`;
-      // if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInSprint[currId].sprint.guessedInARow = 0;
+      // if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInSprint[currId].sprint.guessedInARow = 0;
       //   userStatistic.wordInSprint[currId].sprint.unguessed = userStatistic.wordInSprint[currId].sprint.unguessed + 1;}
       //   async function create(){await createUserWord(localStorage.getItem('userId'), currId, { "difficulty": "hard" });}
       //   create();
@@ -461,9 +461,9 @@ if (shuffleDictionary.length && secondsForGame > 0) {
       scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers) maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
-      // if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.wordInSprint[currId].sprint.guessedInARow++;
+      // if (localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) {userStatistic.wordInSprint[currId].sprint.guessedInARow++;
       //   userStatistic.wordInSprint[currId].sprint.guessed = userStatistic.wordInSprint[currId].sprint.guessed + 1;}
-      //   if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordInSprint[currId].sprint.guessedInARow > 2) {
+      //   if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null) && userStatistic.wordInSprint[currId].sprint.guessedInARow > 2) {
       //     async function create(){await updateUserWord(localStorage.getItem('userId'), currId, { "difficulty": "learned" });}
       //     create();
       //   }
@@ -472,7 +472,7 @@ if (shuffleDictionary.length && secondsForGame > 0) {
       rightAnswers=0;
       scoreCounter.innerText = `${rightAnswers}`;
       // console.log('No! It\'s wrong answer!');
-      // if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInSprint[currId].sprint.guessedInARow = 0;
+      // if ((localStorage.getItem('userId') !== '' && localStorage.getItem('userId') !== null)) {userStatistic.wordInSprint[currId].sprint.guessedInARow = 0;
       //   userStatistic.wordInSprint[currId].sprint.unguessed = userStatistic.wordInSprint[currId].sprint.unguessed + 1;}
       //   async function create(){await createUserWord(localStorage.getItem('userId'), currId, { "difficulty": "hard" });}
       //   create();

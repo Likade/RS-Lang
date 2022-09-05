@@ -8,7 +8,7 @@ import { authScr } from '../../pages/authentication/script';
 import { headerScript } from '../components/header/script';
 import { AudioCall } from '../../pages/audiocall/audiocall';
 import { sprintScript } from '../../pages/sprint/app';
-import { Book } from '../../pages/book/index';
+import { Book, Dictionary } from '../../pages/book/index';
 import { loginUser } from '../components/api/api';
 import { infoBook } from '../../pages/audiocall/utils/utils';
 
@@ -79,8 +79,6 @@ export class Router {
 
           const stats = document.createElement('div');
           this.rootElement.append(stats);
-          
-						
 					const getLink = async () => {
 						await statsInst.loginUser();
             stats.outerHTML = await statsInst.render();
@@ -147,6 +145,27 @@ export class Router {
           this.rootElement.appendChild(app);
 
           Book();
+
+          const footer = document.createElement('div');
+          this.rootElement.append(footer);
+          footer.outerHTML = footerInst.render();
+
+          document.body.style.overflow = '';
+        },
+      },
+      {
+        name: '/dictionary',
+        component: () => {
+          const header = document.createElement('div');
+          this.rootElement.append(header);
+          header.outerHTML = headerInst.render();
+					if (localStorage.getItem('nameUser')) headerScript();
+
+          const app = document.createElement('div');
+          app.classList.add('book-app');
+          this.rootElement.appendChild(app);
+
+          Dictionary();
 
           const footer = document.createElement('div');
           this.rootElement.append(footer);

@@ -7,7 +7,7 @@ import { dataUser } from '../../core/components/interfaces/interface';
 export type WordType = {
   wordId: string,
   difficulty: string
-}
+};
 
 export async function createItem(id:string) {
   const data = await getWord(id);
