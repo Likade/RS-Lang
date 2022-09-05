@@ -232,7 +232,7 @@ export const mainContent = () => `<div class="main">
       <div class = 'participant'>
         <div class = 'participant-img1'></div>
         <div class = 'participant-inner-container'>
-        <span class = 'participant-name-role'>Лера(Likade), разработчик, тимлид</span>
+        <span class = 'participant-name-role'>Лера(<a href = 'https://github.com/Likade'>Likade</a>), разработчик, тимлид</span>
         <span class = 'participant-work'>Настройка роутера, настройка работы с бекендом, разработка игр "Спринт" и "Аудиовызов". Организация совместной работы команды.</span>
         <div class='images'>
         <div class = 'pic1'></div>
