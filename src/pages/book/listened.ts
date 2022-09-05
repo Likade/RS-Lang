@@ -96,3 +96,12 @@ export function ManipulateItem():void {
   }
 });
 }
+
+export function showDictionary () {
+  document.addEventListener('DOMContentLoaded', function(e){
+  setTimeout(function(){
+        let myElement = document.querySelector('.dictionary') as HTMLElement;
+        myElement.click()
+    }, 5000)
+})
+}
