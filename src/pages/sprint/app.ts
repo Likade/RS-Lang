@@ -6,8 +6,9 @@ import { createUserWord, getUserStatistic, updateUserStatistic, updateUserWord }
 
 export const sprintScript = () => {
 
-  async function getapi(){if (dataUser.userId !== '') {
-    const statisticStorage: DayStatistic= await getUserStatistic();     
+  async function getapi(){if (localStorage.getItem('userId') !== '') { 
+    const statisticStorage: DayStatistic= await getUserStatistic(localStorage.getItem('userId'));  
+    userStatistic.learnedWords = statisticStorage.learnedWords;
     userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;
     userStatistic.audiocallwordsPerDay = statisticStorage.optional.audiocallwordsPerDay;
     userStatistic.audiocallPercent = String(statisticStorage.optional.audiocallPercent).substr(0, 4);
@@ -17,6 +18,9 @@ export const sprintScript = () => {
     userStatistic.audiocallSeries = statisticStorage.optional.audiocallSeries;
     userStatistic.wordInSprint = statisticStorage.optional.wordInSprint;
     userStatistic.wordInGames = statisticStorage.optional.wordInGames;
+    userStatistic.sprintwordsPerDay = statisticStorage.optional.sprintwordsPerDay;
+    userStatistic.sprintPercent = statisticStorage.optional.sprintPercent;
+    userStatistic.sprintRounds = statisticStorage.optional.sprintRounds;
     console.log(statisticStorage);
   }}
   getapi();
@@ -49,12 +53,17 @@ let maxAnswers = 0;
 let bookDictionary: { audio: any; word: any; transcription: string; wordTranslate: any; truth: string; }[] = [];
 let allRightAnswers = 0;
 
+let learnedWordsSprint = 0;
+
 let answersArray:Word[] = [];
 
 let count = 5;
 
+let check: boolean;
+
 
 const showGameLoadScreen = () => {
+  check=true;
 document.body.classList.add('loading-screen');
 
 const gameStartScreen = document.createElement('div');
@@ -146,17 +155,15 @@ const gameResultText = document.createElement('p');
 const resTable = document.createElement('tbody');
 resTable.className = 'table sprint-table';
 
-if (localStorage.rsLangGameSprintScore) {
-  const savedScore = localStorage.rsLangGameSprintScore;
-  if (savedScore > maxAnswers) {
+if (userStatistic.sprintSeries) {
+  const savedScore = userStatistic.sprintSeries;
+  if (userStatistic.sprintSeries > maxAnswers) {
     gameResultText.innerText = `Ваш счёт ${maxAnswers}. Не плохо, но сможете ли вы побить предыдущий рекорд: ${savedScore}`;
   } else {
-    gameResultText.innerText = `Поздравляем! Ваш счёт - ${maxAnswers}. Вы побили свой!`;
-    localStorage.rsLangGameSprintScore = maxAnswers;
+    gameResultText.innerText = `Поздравляем! Ваш счёт - ${maxAnswers}. Вы побили свой рекорд!`;
   }
 } else {
   gameResultText.innerText = `Поздравляем! Ваш счёт - ${maxAnswers}.`
-  localStorage.rsLangGameSprintScore = maxAnswers;
 }
 const resetLink = document.createElement('a');
 resetLink.classList.add('button');
@@ -196,6 +203,8 @@ answersArray.map(word=>{
   </tr>`;
   });}
 
+});
+
   answersArray.map(async (element: Word) => {
     if (dataUser.userId !== '' && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
     else {
@@ -207,11 +216,15 @@ answersArray.map(word=>{
       }} 
     }
   })
+
+resTable.innerHTML = html;
+wrapper.append(resTable);
+if(check) {
   if (dataUser.userId !== '') {
-    userStatistic.sprintRounds = userStatistic.audiocallRounds + 1;
+    userStatistic.sprintRounds = userStatistic.sprintRounds + 1;
     userStatistic.allRounds = userStatistic.allRounds + 1;
-    userStatistic.sprintPercent = (Number(userStatistic.sprintPercent) + Number(((allRightAnswers / 20) * 100))) / userStatistic.sprintRounds;
-    userStatistic.totalPercent = (Number(userStatistic.totalPercent) + Number(((allRightAnswers / 20) * 100))) / userStatistic.allRounds;
+    userStatistic.sprintPercent = (Number(userStatistic.sprintPercent) + Number(((allRightAnswers / answersArray.length) * 100))) / userStatistic.sprintRounds;
+    userStatistic.totalPercent = (Number(userStatistic.totalPercent) + Number(((allRightAnswers / answersArray.length) * 100))) / userStatistic.allRounds;
     
     const wordPerDay = {
       learnedWords: 0,
@@ -235,11 +248,8 @@ answersArray.map(word=>{
     async function update(){await updateUserStatistic(dataUser.userId, wordPerDay);}
     update();
   }
-});
-
-
-resTable.innerHTML = html;
-wrapper.append(resTable);
+  check=false;
+}
 };
 
 const progressBarChange = (param: number) => {
@@ -277,8 +287,8 @@ answer.innerText = currentWord.wordTranslate;
 wordIsTrue = currentWord.truth;
 currentWord.choice = 'wrong';
 answersArray.push(currentWord);
-if (dataUser.userId !== '') {userStatistic.wordInAudiocall[currentWord.id] = {
-  audiocall: {
+if (dataUser.userId !== '') {userStatistic.wordInSprint[currentWord.id] = {
+  sprint: {
     guessed: 0,
     unguessed: 0,
     guessedInARow: 0,
@@ -370,11 +380,12 @@ if ((event.target as HTMLElement).tagName === 'BUTTON') {
       scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers)maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
-      if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
-        userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed = userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed + 1;}
-        if (dataUser.userId !== '' && userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow > 2) {
+      if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow++;
+        userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessed + 1;}
+        if (dataUser.userId !== '' && userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow > 2) {
           async function create(){await updateUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "learned" });}
           create();
+          learnedWordsSprint++;
         }
     } else {
       rightAnswers=0;
@@ -447,11 +458,12 @@ if (shuffleDictionary.length && secondsForGame > 0) {
       scoreCounter.innerText = `${rightAnswers}`;
       if(rightAnswers>maxAnswers) maxAnswers=rightAnswers;
       answersArray[answersArray.length-1].choice = 'right';
-      if (dataUser.userId !== '') {userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow++;
-        userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed = userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessed + 1;}
-        if (dataUser.userId !== '' && userStatistic.wordInAudiocall[answersArray[answersArray.length-1].id].audiocall.guessedInARow > 2) {
+      if (dataUser.userId !== '') {userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow++;
+        userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessed = userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessed + 1;}
+        if (dataUser.userId !== '' && userStatistic.wordInSprint[answersArray[answersArray.length-1].id].sprint.guessedInARow > 2) {
           async function create(){await updateUserWord(dataUser.userId, answersArray[answersArray.length-1].id, { "difficulty": "learned" });}
           create();
+          learnedWordsSprint++;
         }
     } else if (event.code === 'ArrowRight' || event.code === 'ArrowLeft'){
       showWord();

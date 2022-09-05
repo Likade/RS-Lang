@@ -59,6 +59,29 @@ export const getUserStatistic = async(id = dataUser.userId) => {
       
     }
   });
+  if(rawResponse.status == 404) {
+	const wordPerDay = {
+		learnedWords: 0,
+		optional: {
+			wordsPerDay: userStatistic.wordsPerDay,
+			audiocallwordsPerDay: userStatistic.audiocallwordsPerDay,
+			audiocallRounds: userStatistic.audiocallRounds,
+			audiocallPercent: userStatistic.audiocallPercent,
+			sprintwordsPerDay: userStatistic.sprintwordsPerDay,
+			sprintRounds: userStatistic.sprintRounds,
+			sprintPercent: userStatistic.sprintPercent,
+			allRounds: userStatistic.allRounds,
+			totalPercent: userStatistic.totalPercent,
+			audiocallSeries: userStatistic.audiocallSeries,
+			sprintSeries: userStatistic.sprintSeries,
+			wordInGames: userStatistic.wordInGames,
+			wordInAudiocall: userStatistic.wordInAudiocall,
+			wordInSprint: userStatistic.wordInSprint,
+		}
+	  }
+	  await updateUserStatistic(dataUser.userId, wordPerDay);
+	  location.reload;
+}
   const settings = await rawResponse.json();
   return settings;
 }

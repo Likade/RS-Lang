@@ -1,12 +1,23 @@
 import { userStatistic, getUserStatistic } from './script';
 import { dataUser  } from "../../core/components/interfaces/interface";
+import { getUserWords } from '../../core/components/api/api';
 
 export const statsContent = async (userId: string) => {
+	const userWords = await getUserWords(userId)
+	let counter=0;
+	userWords.map((word: { difficulty: string; })=>{
+		if (word.difficulty == 'learned') counter++;
+	})
+
+
 	console.log(userId, 'в контенте');
 	const newUserStats = (await getUserStatistic(userId)).optional;
 	console.log(newUserStats);
 	console.log(await getUserStatistic(userId));
-	
+	let totalP  = 0;
+	if(!newUserStats.sprintPercent && newUserStats.audiocallPercent) totalP = newUserStats.audiocallPercent;
+	else if(newUserStats.sprintPercent && !newUserStats.audiocallPercent) totalP = newUserStats.sprintPercent;
+	else if(newUserStats.sprintPercent && newUserStats.audiocallPercent) totalP = (newUserStats.audiocallPercent + newUserStats.sprintPercent)/2;
 	return `<div class="stats">
 <div class="stats-container container">
 	<div class="title">
@@ -78,15 +89,15 @@ export const statsContent = async (userId: string) => {
 			<div class="general-stats-information-box">
 				<div class="row">
 					<div class="text-information">Количество новых слов:</div>
-					<div class="value-information gs-count-nw">${newUserStats.wordsPerDay}</div>
+					<div class="value-information gs-count-nw">${newUserStats.audiocallwordsPerDay+newUserStats.sprintwordsPerDay}</div>
 				</div>
 				<div class="row">
 					<div class="text-information">Количество изученных слов:</div>
-					<div class="value-information gs-count-lw">${newUserStats.learnedWordsFromBook}</div>
+					<div class="value-information gs-count-lw">${counter}</div>
 				</div>
 				<div class="row">
 					<div class="text-information">Правильных ответов (%):</div>
-					<div class="value-information gs-correct-ans">${newUserStats.totalPercent}</div>
+					<div class="value-information gs-correct-ans">${totalP}</div>
 				</div>
 			</div>
 

@@ -14,7 +14,6 @@ export let array_of_results: Word[] = [];
 export let right_answers_counter = 0;
 export let series_of_answers = 0;
 
-
 export class AudioCall {
   async render() {
     if(localStorage.getItem('email')!=undefined) loginUser({'email': localStorage.getItem('email'), 'password': localStorage.getItem('password')})
@@ -23,23 +22,29 @@ export class AudioCall {
   }
 
   async page_scripts() {
+    let check: boolean = false;
+    let maxSeries = 0;
+
     if (infoBook.isFromBook) {
       (document.querySelector('.audiocall-description') as HTMLElement).classList.add('hide');
       (document.querySelector('.audiocall-description-frombook') as HTMLElement).classList.remove('hide');
     }
-    console.log(dataUser)
-    console.log(dataUser.userId)
-    if (dataUser.userId !== '') {
-      const statisticStorage: DayStatistic= await getUserStatistic();     
+    if (localStorage.getItem('userId') !== '') {
+      console.log('hello')
+      const statisticStorage: DayStatistic= await getUserStatistic(localStorage.getItem('userId'));  
+      userStatistic.learnedWords = statisticStorage.learnedWords;
       userStatistic.wordsPerDay = statisticStorage.optional.wordsPerDay;
-      userStatistic.sprintwordsPerDay = statisticStorage.optional.sprintwordsPerDay;
-      userStatistic.sprintPercent = String(statisticStorage.optional.sprintPercent);
-      userStatistic.sprintRounds = statisticStorage.optional.sprintRounds;
+      userStatistic.audiocallwordsPerDay = statisticStorage.optional.audiocallwordsPerDay;
+      userStatistic.audiocallPercent = String(statisticStorage.optional.audiocallPercent).substr(0, 4);
+      userStatistic.audiocallRounds = statisticStorage.optional.audiocallRounds;
       userStatistic.allRounds = statisticStorage.optional.allRounds;
-      userStatistic.totalPercent = String(statisticStorage.optional.totalPercent);
-      userStatistic.sprintSeries = statisticStorage.optional.sprintSeries;
-      userStatistic.wordin = statisticStorage.optional.wordInAudiocall;
+      userStatistic.totalPercent = String(statisticStorage.optional.totalPercent).substr(0, 4);
+      userStatistic.audiocallSeries = statisticStorage.optional.audiocallSeries;
+      userStatistic.wordInSprint = statisticStorage.optional.wordInSprint;
       userStatistic.wordInGames = statisticStorage.optional.wordInGames;
+      userStatistic.sprintwordsPerDay = statisticStorage.optional.sprintwordsPerDay;
+      userStatistic.sprintPercent = statisticStorage.optional.sprintPercent;
+      userStatistic.sprintRounds = statisticStorage.optional.sprintRounds;
       console.log(statisticStorage);
     }
     
@@ -53,6 +58,7 @@ export class AudioCall {
     const answers = document.querySelectorAll('.answers');
 
     function showLevels() {
+      check = true;
       if (infoBook.isFromBook) {
         (document.querySelector('.audiocall-start') as HTMLButtonElement).addEventListener('click', async () => {
           array_of_results = [];
@@ -112,13 +118,14 @@ export class AudioCall {
             target.style.background = 'red';
             array[answer_number].choice = 'wrong';
             showRightWord();
-            await createUserWord(dataUser.userId, array[answer_number].id, currentWord);
+            await createUserWord(dataUser.userId, (array[answer_number]).id, currentWord);
           } 
           else {
             if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;}
             right_answers_counter++;
             series_of_answers++;
+            if(series_of_answers>maxSeries) maxSeries=series_of_answers;
             target.style.background = 'green';
             array[answer_number].choice = 'right';
             showRightWord();
@@ -148,17 +155,17 @@ export class AudioCall {
             if (dataUser.userId !== '') {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
             userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
             userStatistic.wordsInQuiestions.push(element.word);
-            if (series_of_answers > userStatistic.audiocallSeries) {
-              userStatistic.audiocallSeries = series_of_answers;
+            if (maxSeries > userStatistic.audiocallSeries) {
+              userStatistic.audiocallSeries = maxSeries;
             }} 
           }
         })
-        if (dataUser.userId !== '') {
+        if(check){if (dataUser.userId !== '') {
           userStatistic.audiocallRounds = userStatistic.audiocallRounds + 1;
           userStatistic.allRounds = userStatistic.allRounds + 1;
           userStatistic.audiocallPercent = (Number(userStatistic.audiocallPercent) + Number(((right_answers_counter / 20) * 100))) / userStatistic.audiocallRounds;
           userStatistic.totalPercent = (Number(userStatistic.totalPercent) + Number(((right_answers_counter / 20) * 100))) / userStatistic.allRounds;
-          
+          userStatistic.audiocallSeries = maxSeries;
           const wordPerDay = {
             learnedWords: 0,
             optional: {
@@ -178,8 +185,11 @@ export class AudioCall {
               wordInSprint: userStatistic.wordInSprint,
             }
           }
+          console.log(wordPerDay)
           await updateUserStatistic(dataUser.userId, wordPerDay);
         }
+        check=false;
+      }
         
         while (answersBody.firstChild) {
           answersBody.removeChild(answersBody.firstChild);
@@ -227,6 +237,8 @@ export class AudioCall {
         right_answers_counter++;
         buttons[0].classList.add('right-answer');
         array[answer_number].choice = 'right';
+        series_of_answers++;
+        if(series_of_answers>maxSeries) maxSeries=series_of_answers;
         showRightWord();
       }
       else {
@@ -241,6 +253,8 @@ export class AudioCall {
         right_answers_counter++;
         buttons[1].classList.add('right-answer');
         array[answer_number].choice = 'right';
+        series_of_answers++;
+        if(series_of_answers>maxSeries) maxSeries=series_of_answers;
         showRightWord();
       }
       else {
@@ -255,6 +269,8 @@ export class AudioCall {
         right_answers_counter++;
         buttons[2].classList.add('right-answer');
         array[answer_number].choice = 'right';
+        series_of_answers++;
+        if(series_of_answers>maxSeries) maxSeries=series_of_answers;
         showRightWord();
       }
       else {
@@ -269,6 +285,8 @@ export class AudioCall {
         right_answers_counter++;
         buttons[3].classList.add('right-answer');
         array[answer_number].choice = 'right';
+        series_of_answers++;
+        if(series_of_answers>maxSeries) maxSeries=series_of_answers;
         showRightWord();
       }
       else {

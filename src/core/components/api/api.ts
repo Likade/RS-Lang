@@ -1,4 +1,4 @@
-import { dataUser, DayStatistic  } from "../interfaces/interface";
+import { dataUser, DayStatistic, userStatistic  } from "../interfaces/interface";
 	// регистрация нового пользователя
 	export const createUser = async (user: object) => {
 		try {
@@ -115,6 +115,28 @@ import { dataUser, DayStatistic  } from "../interfaces/interface";
 
 		  }
 		});
+		if(rawResponse.status == 404) {
+			const wordPerDay = {
+				learnedWords: 0,
+				optional: {
+					wordsPerDay: userStatistic.wordsPerDay,
+					audiocallwordsPerDay: userStatistic.audiocallwordsPerDay,
+					audiocallRounds: userStatistic.audiocallRounds,
+					audiocallPercent: userStatistic.audiocallPercent,
+					sprintwordsPerDay: userStatistic.sprintwordsPerDay,
+					sprintRounds: userStatistic.sprintRounds,
+					sprintPercent: userStatistic.sprintPercent,
+					allRounds: userStatistic.allRounds,
+					totalPercent: userStatistic.totalPercent,
+					audiocallSeries: userStatistic.audiocallSeries,
+					sprintSeries: userStatistic.sprintSeries,
+					wordInGames: userStatistic.wordInGames,
+					wordInAudiocall: userStatistic.wordInAudiocall,
+					wordInSprint: userStatistic.wordInSprint,
+				}
+			  }
+			  await updateUserStatistic(dataUser.userId, wordPerDay);
+		}
 		const settings = await rawResponse.json();
 		return settings;
 	  }

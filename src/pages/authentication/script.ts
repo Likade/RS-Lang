@@ -1,4 +1,4 @@
-import { createUser, loginUser } from "../../core/components/api/api";
+import { createUser, getUserStatistic, loginUser, updateUserStatistic } from "../../core/components/api/api";
 import { dataUser } from "../../core/components/interfaces/interface";
 
 export const authScr = () => {
@@ -17,7 +17,6 @@ function logRegCallback() {
 					document.querySelector('p.auth-title').textContent = 'Проверьте корректность введенных Вами данных!';
 					dataUser.errCode == '417' ? document.querySelector('p.auth-title').textContent = 'Пользователь с указанной электронной почтой уже зарегистрирован!' : false;
 					dataUser.errCode = '';
-					
 				} else {
           changePage(isLogin);
         }
