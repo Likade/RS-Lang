@@ -230,14 +230,14 @@ export const mainContent = () => `<div class="main">
       <p class="our-team-title">Наша команда</p>
       <div class = 'participant-container'>
       <div class = 'participant'>
-        <img class = 'participant-img' src = 'assets/4c6548f5f9b5ad35b42d.jpg'>
+        <div class = 'participant-img1'></div>
         <div class = 'participant-inner-container'>
         <span class = 'participant-name-role'>Лера(Likade), разработчик, тимлид</span>
         <span class = 'participant-work'>Настройка роутера, настройка работы с бекендом, разработка игр "Спринт" и "Аудиовызов". Организация совместной работы команды.</span>
         <div class='images'>
-        <img src = './assets/ae12107e21f7016f8851.svg'>
-        <img src = './assets/50fb7c921ca45b9b3170.svg'>
-        <img src = './assets/ecca570146a073862e6e.svg'>
+        <div class = 'pic1'></div>
+        <div class='pic2'></div>
+        <div class='pic3'></div>
         </div>
         </div>
       </div>
