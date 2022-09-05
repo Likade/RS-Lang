@@ -244,10 +244,15 @@ export const mainContent = () => `<div class="main">
         </div>
       </div>
       <div class = 'participant'>
-        <img class = 'participant-img' src = ''>
+        <div class = 'participant-img2'></div>
         <div class = 'participant-inner-container'>
-        <span class = 'participant-name-role'></span>
-        <span class = 'participant-work'></span>
+        <span class = 'participant-name-role'>Ринат(<a href = 'https://github.com/varenik40000'>varenik40000</a>), разработчик</span>
+        <span class = 'participant-work'>Учебник, словарь</span><br>
+        <div class='images'>
+        <div class='pic_1'></div>
+        <div class='pic_2'></div>
+        <div class='pic_3'></div>
+        </div>
         </div>
       </div>
       <div class = 'participant'>
