@@ -370,8 +370,27 @@ body {
     margin-bottom: 15px;
 
 }
-.participant-img {
+.participant-img1 {
   border-radius: 30px;
+  background-image: url(./assets/png/2D6z6Rq74UE.jpg);
+  background-repeat: no-repeat;
+  background-size: 268px;
+  width: 35%;
+}
+.pic1{
+	background: url(./assets/svg/router-svgrepo-com.svg);
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+.pic2{
+	background: url(./assets/svg/gamepad-svgrepo-com.svg);
+	background-repeat: no-repeat;
+	background-size: 150px;
+}
+.pic3{
+	background: url(./assets/svg/team-svgrepo-com.svg);
+	background-repeat: no-repeat;
+	background-size: 150px;
 }
 .participant-inner-container {
 	display: flex;
@@ -392,7 +411,7 @@ body {
     width: 100%;
     text-align: center;
 }
-.images img{
+.images div{
     width: 125px;
     flex: 1 1;
     padding: 25px 65px 0;
@@ -400,6 +419,8 @@ body {
 .images {
 	display: flex;
     width: 100%;
+    height: 100%;
+    padding-left: 20px;
 }
 .bus {
 	position: absolute;
