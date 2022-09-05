@@ -6,6 +6,7 @@ import { getUserStatistic,
 import { audioElement, renderAuidoCallStatistic, renderLevel, updateLevel } from './audiocall-html';
 import { array, showRightWord, Word, infoBook } from './utils/utils';
 import { DayStatistic, userStatistic, dataUser } from '../../core/components/interfaces/interface';
+import { waitRender } from '../../core/components/waitRender';
 
 import './audiocall.scss';
 
@@ -66,6 +67,13 @@ export class AudioCall {
           while (answersBody.firstChild) {
             answersBody.removeChild(answersBody.firstChild);
           }
+
+
+					const preloader = document.createElement('div');
+					(document.querySelector('.audiocall') as HTMLElement).append(preloader);
+					preloader.innerHTML = waitRender();
+
+
           await renderLevel(infoBook.group);
           (document.querySelector('.audiocall-round') as HTMLElement).classList.remove('hide');
         });
@@ -81,6 +89,13 @@ export class AudioCall {
               answersBody.removeChild(answersBody.firstChild);
             }
             repeatButton.value = target.value;
+
+						
+						const preloader = document.createElement('div');
+						(document.querySelector('.audiocall') as HTMLElement).append(preloader);
+						preloader.innerHTML = waitRender();
+
+
             await renderLevel(+target.value);
             audiocallRound.classList.remove('hide');
           }

@@ -1,4 +1,5 @@
 import { statsContent } from "./stats-content";
+import { waitRender } from "../../core/components/waitRender";
 import { updateUserStatistic,  
 	createUserWord, 
 	updateUserWord,
@@ -12,6 +13,10 @@ export class Stats {
 	private userId: string;
 
 	constructor() {}
+
+	waitRender() {
+		return waitRender();
+	}
 
 	async render() {
 		return statsContent(this.userId);

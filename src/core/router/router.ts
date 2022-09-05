@@ -80,10 +80,12 @@ export class Router {
           const stats = document.createElement('div');
           this.rootElement.append(stats);
           
+						
 					const getLink = async () => {
 						await statsInst.loginUser();
             stats.outerHTML = await statsInst.render();
           }
+					stats.innerHTML = statsInst.waitRender()
           getLink();
 
           //authScr();
