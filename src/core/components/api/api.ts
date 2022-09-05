@@ -151,6 +151,7 @@ import { dataUser, DayStatistic, userStatistic  } from "../interfaces/interface"
 		  },
 		  body: JSON.stringify(body)
 		});
+		
 		const setting = await rawResponse.json();
 		return setting;
 	  }
