@@ -27,3 +27,33 @@ document.addEventListener('click', event=>{
   }
 })
 }
+
+
+export const Dictionary = () => {
+  bookBody();
+  createItem('5e9f5ee35eb9e72bc21af4b1');
+  createBook();
+  Pagination();
+  showGroup();
+  showItem();
+  showPaginationGroup();
+  ManipulateItem();
+
+
+
+  document.addEventListener('click', event=>{
+    if((event.target as HTMLElement).classList.contains('audiocall-btn') || (event.target as HTMLElement).classList.contains('sprint-btn')) {
+      infoBook.isFromBook = true;
+    }
+  })
+
+  document.addEventListener('DOMContentLoaded', function(e){
+    setTimeout(function(){
+          let myElement = document.querySelector('.dictionary') as HTMLElement;
+          myElement.click()
+      }, 1000)
+  })
+
+  }
+
+

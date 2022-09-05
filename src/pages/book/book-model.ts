@@ -19,7 +19,7 @@ export const bookBody = () => {
           <li class="nav_group-list-title" id="3">B2</li>
           <li class="nav_group-list-title" id="4">C1</li>
           <li class="nav_group-list-title" id="5">C2</li>
-          <li class="nav_group-list-title" id="6">Сложные слова</li>
+          <li class="nav_group-list-title dictionary" id="6">Сложные слова</li>
         </ul>
 
       </div>
