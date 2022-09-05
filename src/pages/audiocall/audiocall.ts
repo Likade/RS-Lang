@@ -103,7 +103,7 @@ export class AudioCall {
           const selected = target.value;
           const currentWord = { "difficulty": "hard" };
          
-          if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id] = {
+          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id] = {
             audiocall: {
               guessed: 0,
               unguessed: 0,
@@ -112,16 +112,16 @@ export class AudioCall {
           }}
           
           if (selected !== rightAnswer) {
-            if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
+            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined)) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow = 0;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.unguessed + 1;}
             series_of_answers = 0;
             target.style.background = 'red';
             array[answer_number].choice = 'wrong';
             showRightWord();
-            await createUserWord(dataUser.userId, (array[answer_number]).id, currentWord);
+            await createUserWord(localStorage.getItem('userId'), (array[answer_number]).id, currentWord);
           } 
           else {
-            if (dataUser.userId !== '') {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
+            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow++;
             userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed = userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessed + 1;}
             right_answers_counter++;
             series_of_answers++;
@@ -129,8 +129,8 @@ export class AudioCall {
             target.style.background = 'green';
             array[answer_number].choice = 'right';
             showRightWord();
-            if (dataUser.userId !== '' && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
-              await updateUserWord(dataUser.userId, array[answer_number].id, { "difficulty": "learned" });
+            if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordInAudiocall[array[answer_number].id].audiocall.guessedInARow > 2) {
+              await updateUserWord(localStorage.getItem('userId'), array[answer_number].id, { "difficulty": "learned" });
             }
           }
         }
@@ -150,9 +150,9 @@ export class AudioCall {
       if (answer_number === 19) {
         await renderAuidoCallStatistic();
         array_of_results.map(async (element: Word) => {
-          if (dataUser.userId !== '' && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
+          if ((localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) && userStatistic.wordsInQuiestions.includes(element.word) || dataUser.userId === '') return;
           else {
-            if (dataUser.userId !== '') {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
+            if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {userStatistic.audiocallwordsPerDay = userStatistic.audiocallwordsPerDay + 1;
             userStatistic.wordsPerDay = userStatistic.wordsPerDay + 1;
             userStatistic.wordsInQuiestions.push(element.word);
             if (maxSeries > userStatistic.audiocallSeries) {
@@ -160,7 +160,7 @@ export class AudioCall {
             }} 
           }
         })
-        if(check){if (dataUser.userId !== '') {
+        if(check){if (localStorage.getItem('userId') !== '' || localStorage.getItem('userId') !== undefined) {
           userStatistic.audiocallRounds = userStatistic.audiocallRounds + 1;
           userStatistic.allRounds = userStatistic.allRounds + 1;
           userStatistic.audiocallPercent = (Number(userStatistic.audiocallPercent) + Number(((right_answers_counter / 20) * 100))) / userStatistic.audiocallRounds;
@@ -186,7 +186,7 @@ export class AudioCall {
             }
           }
           console.log(wordPerDay)
-          await updateUserStatistic(dataUser.userId, wordPerDay);
+          await updateUserStatistic(localStorage.getItem('userId'), wordPerDay);
         }
         check=false;
       }
