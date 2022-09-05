@@ -273,20 +273,13 @@ body {
 .our-team {
 	width: 100vw;
 	min-height: 1080px;
-	height: 1px;
 	background-color: $mainColor;
+	padding-bottom: 100px;
 }
 
 // MAIN INFORMATION CONTAINER START
 .main-information-container {
 	padding-top: 140px;
-}
-
-.main-information-container p,
-.our-benefits-container p,
-.learn-new-words-title, .our-games-title,
-.our-team-title {
-	margin-top: 20px;
 }
 
 .main-text {
@@ -599,6 +592,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding-top: 140px;
 }
 
 .our-team-title {

@@ -9,15 +9,13 @@ export const statsContent = async (userId: string) => {
 		if (word.difficulty == 'learned') counter++;
 	})
 
-
-	console.log(userId, 'в контенте');
 	const newUserStats = (await getUserStatistic(userId)).optional;
 	console.log(newUserStats);
 	console.log(await getUserStatistic(userId));
 	let totalP  = 0;
 	if(!newUserStats.sprintPercent && newUserStats.audiocallPercent) totalP = newUserStats.audiocallPercent;
 	else if(newUserStats.sprintPercent && !newUserStats.audiocallPercent) totalP = newUserStats.sprintPercent;
-	else if(newUserStats.sprintPercent && newUserStats.audiocallPercent) totalP = (newUserStats.audiocallPercent + newUserStats.sprintPercent)/2;
+	else if(newUserStats.sprintPercent && newUserStats.audiocallPercent) totalP = (+newUserStats.audiocallPercent + +newUserStats.sprintPercent)/2;
 	return `<div class="stats">
 <div class="stats-container container">
 	<div class="title">
@@ -52,8 +50,8 @@ export const statsContent = async (userId: string) => {
 						<div class="value-information aud-count-nw">${newUserStats.audiocallwordsPerDay}</div>
 					</div>
 					<div class="row">
-						<div class="text-information">Правильных ответов (%):</div>
-						<div class="value-information aud-correct-ans">${newUserStats.audiocallPercent}</div>
+						<div class="text-information">Процент правильных ответов:</div>
+						<div class="value-information aud-correct-ans">${newUserStats.audiocallPercent} %</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Самая длинная серия правильных ответов:</div>
@@ -72,8 +70,8 @@ export const statsContent = async (userId: string) => {
 						<div class="value-information spr-count-nw">${newUserStats.sprintwordsPerDay}</div>
 					</div>
 					<div class="row">
-						<div class="text-information">Правильных ответов (%):</div>
-						<div class="value-information spr-correct-ans">${newUserStats.sprintPercent}</div>
+						<div class="text-information">Процент правильных ответов:</div>
+						<div class="value-information spr-correct-ans">${newUserStats.sprintPercent} %</div>
 					</div>
 					<div class="row">
 						<div class="text-information">Самая длинная серия правильных ответов:</div>
@@ -96,8 +94,8 @@ export const statsContent = async (userId: string) => {
 					<div class="value-information gs-count-lw">${counter}</div>
 				</div>
 				<div class="row">
-					<div class="text-information">Правильных ответов (%):</div>
-					<div class="value-information gs-correct-ans">${totalP}</div>
+					<div class="text-information">Процент правильных ответов:</div>
+					<div class="value-information gs-correct-ans">${totalP} %</div>
 				</div>
 			</div>
 
